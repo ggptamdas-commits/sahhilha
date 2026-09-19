@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ar-SA" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حاسبة هندسة المنيو وتكاليف الأطباق للمطاعم | سهّلها</title>
+  <meta name="description" content="تحليل ربحية وشعبية قائمة طعام المطاعم والكافيهات.">
+  <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/responsive.css">
+  <style>
+    .tool-layout {
+      max-width: 900px;
+      margin: 2.5rem auto 4rem;
+      padding: 0 1.25rem;
+    }
+    .tool-card-box {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .tool-header-section {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 1.5rem;
+    }
+    .tool-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background-color: var(--background);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: var(--transition);
+      outline: none;
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-tint);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .tool-card-box { padding: 1.5rem 1.25rem; }
+    }
+    .result-box {
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--surface-alt) 100%);
+      border: 1px solid var(--primary-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      margin-top: 2rem;
+      display: none;
+    }
+    .result-box.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .result-value {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.2;
+    }
+    [data-theme="dark"] .result-value {
+      color: var(--primary);
+    }
+    .info-article {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+    .info-article h2 {
+      color: var(--text);
+      margin: 1.5rem 0 0.75rem;
+      font-size: 1.35rem;
+    }
+    .info-article h2:first-child {
+      margin-top: 0;
+    }
+    .info-article p {
+      margin-bottom: 1rem;
+    }
+    .info-article ul {
+      list-style: disc;
+      margin-right: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-container">
+      <div class="brand-logo">
+        <a href="/" aria-label="سهّلها - الصفحة الرئيسية" style="display:flex; align-items:center; gap:0.75rem;">
+          <div class="brand-symbol" aria-hidden="true">س</div>
+          <div class="brand-text">
+            <span class="brand-name">سهّلها</span>
+            <span class="brand-tagline">أدوات مجانية تجعل حياتك أسهل</span>
+          </div>
+        </a>
+      </div>
+      <nav class="nav-desktop" aria-label="القائمة الرئيسية">
+        <a href="/" class="nav-link">الرئيسية</a>
+        <a href="/#featured-tools" class="nav-link active">جميع الأدوات</a>
+        <a href="/about.html" class="nav-link">من نحن</a>
+        <a href="/contact.html" class="nav-link">اتصل بنا</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="btn-icon" id="theme-toggle-btn" aria-label="التبديل بين الوضع الداكن والفاتح">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="tool-layout" id="main-content" style="max-width: 1000px;">
+    <nav class="breadcrumb" aria-label="مسار التنقل">
+      <a href="/">الرئيسية</a>
+      <span>/</span>
+      <a href="/#categories">أدوات المطاعم</a>
+      <span>/</span>
+      <span>حاسبة هندسة المنيو وتحليل الأرباح</span>
+    </nav>
+
+    <div class="tool-card-box">
+      <div class="tool-header-section">
+        <span class="tool-badge-pill">إدارة ربحية المطاعم والمقاهي (Menu Engineering Matrix)</span>
+        <h1>حاسبة هندسة المنيو وتصنيف الأطباق</h1>
+        <p>حلل ربحية وشعبية كل صنف في قائمتك لتصنيفه إلى (نجوم، أحصنة عمل، ألغاز، أعباء) واتخاذ قرارات تسعير وتطوير ذكية.</p>
+      </div>
+
+      <div style="overflow-x: auto; margin-bottom: 1.5rem;">
+        <table id="menu-table" style="width: 100%; border-collapse: collapse; text-align: right;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--border); font-size: 0.9rem; color: var(--text);">
+              <th style="padding: 0.75rem;">اسم الطبق</th>
+              <th style="padding: 0.75rem;">تكلفة التحضير (ر.س)</th>
+              <th style="padding: 0.75rem;">سعر البيع (ر.س)</th>
+              <th style="padding: 0.75rem;">الكمية المباعة</th>
+              <th style="padding: 0.75rem; text-align: center;">إجراء</th>
+            </tr>
+          </thead>
+          <tbody id="items-tbody"></tbody>
+        </table>
+      </div>
+
+      <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+        <button type="button" class="btn btn-secondary" onclick="addRow()">+ إضافة صنف جديد</button>
+        <button type="button" class="btn btn-primary" onclick="analyzeMenu()">تحليل قائمة الطعام الآن</button>
+      </div>
+
+      <div id="menu-analysis-result" class="result-box">
+        <h3 style="color: var(--text); margin-bottom: 1rem;">نتائج تحليل وتصنيف المنيو:</h3>
+        <div class="grid-2" style="margin-bottom: 1.5rem;">
+          <div style="background: var(--surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+            <div style="font-size: 0.85rem; color: var(--text-muted);">إجمالي المبيعات المحققة</div>
+            <div id="stat-revenue" style="font-size: 1.5rem; font-weight: 700; color: var(--text);">0.00 ر.س</div>
+          </div>
+          <div style="background: var(--surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border);">
+            <div style="font-size: 0.85rem; color: var(--text-muted);">إجمالي الأرباح الإجمالية</div>
+            <div id="stat-profit" style="font-size: 1.5rem; font-weight: 700; color: var(--primary);">0.00 ر.س</div>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; text-align: right; background: var(--surface); border-radius: var(--radius-md); overflow: hidden;">
+            <thead>
+              <tr style="background: var(--surface-alt); font-size: 0.85rem; border-bottom: 1px solid var(--border);">
+                <th style="padding: 0.65rem;">الطبق</th>
+                <th style="padding: 0.65rem;">هامش الربح</th>
+                <th style="padding: 0.65rem;">نسبة التكلفة %</th>
+                <th style="padding: 0.65rem;">التصنيف</th>
+                <th style="padding: 0.65rem;">التوصية التشغيلية</th>
+              </tr>
+            </thead>
+            <tbody id="analysis-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <article class="info-article">
+      <h2>ما هي مصفوفة هندسة المنيو (Menu Engineering)؟</h2>
+      <p>تعتمد هندسة القوائم على قياس عاملين أساسيين لكل طبق: <strong>الربحية</strong> (هامش ربح الصنف مقارنة بمتوسط المنيو) و<strong>الشعبية</strong> (حجم مبيعات الصنف مقارنة بالمتوسط العام):</p>
+      <ul>
+        <li><strong>النجوم (Stars):</strong> ربح عالٍ + شعبية عالية. التوصية: حافظ على جودة الطبق كما هي وروّج له بوضوح.</li>
+        <li><strong>أحصنة العمل (Plowhorses):</strong> ربح منخفض + شعبية عالية. التوصية: ارفع سعره تدريجياً أو أعد ضبط حجم الحصة والمكونات لخفض التكلفة.</li>
+        <li><strong>الألغاز (Puzzles):</strong> ربح عالٍ + شعبية منخفضة. التوصية: حسّن موقعه في المنيو ودرب النوادل على اقتراحه للعملاء.</li>
+        <li><strong>الأعباء (Dogs):</strong> ربح منخفض + شعبية منخفضة. التوصية: فكر جدياً في حذفه من القائمة أو تغييره كلياً.</li>
+      </ul>
+    </article>
+  </main>
+
+  <script>
+    const defaultItems = [
+      { name: "برجر لحم كلاسيك", cost: 12, price: 34, sold: 180 },
+      { name: "بطاطس مقلية بالجبن", cost: 4, price: 16, sold: 240 },
+      { name: "ستيك ريب آي مشوي", cost: 45, price: 95, sold: 40 },
+      { name: "سلطة كينوا دايت", cost: 18, price: 26, sold: 25 }
+    ];
+
+    function renderRows() {
+      const tbody = document.getElementById('items-tbody');
+      tbody.innerHTML = defaultItems.map((item, idx) => `
+        <tr style="border-bottom: 1px solid var(--border-light);">
+          <td style="padding: 0.65rem;"><input type="text" class="form-control item-name" value="${item.name}" required></td>
+          <td style="padding: 0.65rem;"><input type="number" class="form-control item-cost" value="${item.cost}" step="0.5" min="0" required></td>
+          <td style="padding: 0.65rem;"><input type="number" class="form-control item-price" value="${item.price}" step="0.5" min="0" required></td>
+          <td style="padding: 0.65rem;"><input type="number" class="form-control item-sold" value="${item.sold}" min="0" required></td>
+          <td style="padding: 0.65rem; text-align: center;">
+            <button type="button" class="btn-icon" onclick="deleteRow(${idx})" aria-label="حذف">✕</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function addRow() {
+      defaultItems.push({ name: "طبق جديد", cost: 10, price: 25, sold: 50 });
+      renderRows();
+    }
+
+    function deleteRow(idx) {
+      if (defaultItems.length <= 1) return;
+      defaultItems.splice(idx, 1);
+      renderRows();
+    }
+
+    function analyzeMenu() {
+      const names = document.querySelectorAll('.item-name');
+      const costs = document.querySelectorAll('.item-cost');
+      const prices = document.querySelectorAll('.item-price');
+      const solds = document.querySelectorAll('.item-sold');
+
+      const items = [];
+      let totalRevenue = 0;
+      let totalProfit = 0;
+      let totalUnits = 0;
+
+      for (let i = 0; i < names.length; i++) {
+        const name = names[i].value.trim() || 'صنف';
+        const cost = parseFloat(costs[i].value) || 0;
+        const price = parseFloat(prices[i].value) || 0;
+        const sold = parseInt(solds[i].value) || 0;
+
+        const margin = price - cost;
+        const rev = price * sold;
+        const prof = margin * sold;
+        const foodCostPct = price > 0 ? (cost / price) * 100 : 0;
+
+        totalRevenue += rev;
+        totalProfit += prof;
+        totalUnits += sold;
+
+        items.push({ name, cost, price, sold, margin, foodCostPct, prof });
+      }
+
+      const avgMargin = items.length > 0 ? items.reduce((acc, x) => acc + x.margin, 0) / items.length : 0;
+      const avgUnits = items.length > 0 ? totalUnits / items.length : 0;
+
+      document.getElementById('stat-revenue').textContent = totalRevenue.toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' ر.س';
+      document.getElementById('stat-profit').textContent = totalProfit.toLocaleString('en-US', { minimumFractionDigits: 2 }) + ' ر.س';
+
+      const analysisTbody = document.getElementById('analysis-tbody');
+      analysisTbody.innerHTML = items.map(item => {
+        const isHighMargin = item.margin >= avgMargin;
+        const isHighPop = item.sold >= avgUnits;
+
+        let category = "";
+        let rec = "";
+        let color = "";
+
+        if (isHighMargin && isHighPop) {
+          category = "⭐ نجم (Star)";
+          rec = "حافظ على الجودة وعزز موقعه في الصدارة";
+          color = "var(--primary)";
+        } else if (!isHighMargin && isHighPop) {
+          category = "🐎 حصان عمل (Plowhorse)";
+          rec = "ارفع السعر قليلاً أو قلل تكلفة التحضير";
+          color = "var(--accent)";
+        } else if (isHighMargin && !isHighPop) {
+          category = "🧩 لغز (Puzzle)";
+          rec = "حسّن التسويق وسلط الضوء عليه";
+          color = "var(--warning)";
+        } else {
+          category = "⚠️ عبء (Dog)";
+          rec = "فكر في حذفه أو تغييره جذرياً";
+          color = "var(--danger)";
+        }
+
+        return `
+          <tr style="border-bottom: 1px solid var(--border-light); font-size: 0.9rem;">
+            <td style="padding: 0.65rem; font-weight: 600;">${item.name}</td>
+            <td style="padding: 0.65rem;">${item.margin.toFixed(2)} ر.س</td>
+            <td style="padding: 0.65rem;">${item.foodCostPct.toFixed(1)}%</td>
+            <td style="padding: 0.65rem; font-weight: 700; color: ${color};">${category}</td>
+            <td style="padding: 0.65rem; font-size: 0.85rem;">${rec}</td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('menu-analysis-result').classList.add('show');
+    }
+
+    renderRows();
+  </script>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container" style="text-align:center;">
+      <p>© 2026 سهّلها — جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+  <script src="/config/config.js"></script>
+  <script src="/assets/js/storage.js"></script>
+  <script src="/assets/js/navigation.js"></script>
+</body>
+</html>

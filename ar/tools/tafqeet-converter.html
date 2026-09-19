@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ar-SA" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أداة تفقيط المبالغ والأرقام إلى كلمات عربية | سهّلها</title>
+  <meta name="description" content="تحويل الأرقام والمبالغ إلى كلمات عربية للشيكات والفواتير.">
+  <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/responsive.css">
+  <style>
+    .tool-layout {
+      max-width: 900px;
+      margin: 2.5rem auto 4rem;
+      padding: 0 1.25rem;
+    }
+    .tool-card-box {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .tool-header-section {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 1.5rem;
+    }
+    .tool-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background-color: var(--background);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: var(--transition);
+      outline: none;
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-tint);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .tool-card-box { padding: 1.5rem 1.25rem; }
+    }
+    .result-box {
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--surface-alt) 100%);
+      border: 1px solid var(--primary-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      margin-top: 2rem;
+      display: none;
+    }
+    .result-box.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .result-value {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.2;
+    }
+    [data-theme="dark"] .result-value {
+      color: var(--primary);
+    }
+    .info-article {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+    .info-article h2 {
+      color: var(--text);
+      margin: 1.5rem 0 0.75rem;
+      font-size: 1.35rem;
+    }
+    .info-article h2:first-child {
+      margin-top: 0;
+    }
+    .info-article p {
+      margin-bottom: 1rem;
+    }
+    .info-article ul {
+      list-style: disc;
+      margin-right: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-container">
+      <div class="brand-logo">
+        <a href="/" aria-label="سهّلها - الصفحة الرئيسية" style="display:flex; align-items:center; gap:0.75rem;">
+          <div class="brand-symbol" aria-hidden="true">س</div>
+          <div class="brand-text">
+            <span class="brand-name">سهّلها</span>
+            <span class="brand-tagline">أدوات مجانية تجعل حياتك أسهل</span>
+          </div>
+        </a>
+      </div>
+      <nav class="nav-desktop" aria-label="القائمة الرئيسية">
+        <a href="/" class="nav-link">الرئيسية</a>
+        <a href="/#featured-tools" class="nav-link active">جميع الأدوات</a>
+        <a href="/about.html" class="nav-link">من نحن</a>
+        <a href="/contact.html" class="nav-link">اتصل بنا</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="btn-icon" id="theme-toggle-btn" aria-label="التبديل بين الوضع الداكن والفاتح">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="tool-layout" id="main-content">
+    <nav class="breadcrumb" aria-label="مسار التنقل">
+      <a href="/">الرئيسية</a>
+      <span>/</span>
+      <a href="/#categories">الحاسبات</a>
+      <span>/</span>
+      <span>أداة تفقيط المبالغ (Tafqeet Pro)</span>
+    </nav>
+
+    <div class="tool-card-box">
+      <div class="tool-header-section">
+        <span class="tool-badge-pill">تفقيط مالي قانوني معتمد للشيكات والفواتير</span>
+        <h1>تحويل الأرقام والمبالغ إلى كلمات عربية</h1>
+        <p>حوّل أي مبلغ رقمي إلى نص مكتوب باللغة العربية الفصحى مع تحديد العملة والكسور لحماية الشيكات والفواتير من التلاعب.</p>
+      </div>
+
+      <form id="tafqeet-form" onsubmit="event.preventDefault(); runTafqeet();">
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="amount">المبلغ أو الرقم</label>
+            <input type="number" id="amount" class="form-control" placeholder="مثال: 5450.75" step="0.01" min="0" required oninput="runTafqeet()">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="currency">العملة والكسور</label>
+            <select id="currency" class="form-control" onchange="runTafqeet()">
+              <option value="sar">ريال سعودي / هللة</option>
+              <option value="usd">دولار أمريكي / سنت</option>
+              <option value="aed">درهم إماراتي / فلس</option>
+              <option value="kwd">دينار كويتي / فلس</option>
+              <option value="qar">ريال قطري / درهم</option>
+              <option value="egp">جنيه مصري / قرش</option>
+              <option value="none">بدون عملة (أرقام مجردة فقط)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">صيغة البداية والنهاية</label>
+          <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+              <input type="checkbox" id="add-faqt" checked onchange="runTafqeet()"> إضافة "فقط ... لا غير"
+            </label>
+          </div>
+        </div>
+      </form>
+
+      <div id="tafqeet-result" class="result-box show">
+        <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem;">النص العربي المفقط:</div>
+        <div id="tafqeet-output" style="font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.6; margin-bottom: 1.25rem;">
+          أدخل مبلغاً لعرض التفقيط
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <button type="button" class="btn btn-secondary" onclick="copyTafqeet()">نسخ النص</button>
+        </div>
+      </div>
+    </div>
+
+    <article class="info-article">
+      <h2>ما هو التفقيط ولماذا يُستخدم؟</h2>
+      <p><strong>التفقيط (Tafqeet)</strong> هو كتابة الأرقام المالية بالحروف والكلمات العربية لمنع التزوير أو التلاعب في المبالغ المدونة على الشيكات، والعقود، والفواتير الضريبية، وسندات القبض.</p>
+      <p>تعتمد الأداة القواعد النحوية السليمة للغة العربية من حيث تمييز العدد وتذكيره وتأنيثه بحسب جنس العملة (مثل الريال مذكر والهللة مؤنث)، مع دعم فواصل الآحاد والعشرات والمئات والآلاف والملايين والمليارات.</p>
+    </article>
+  </main>
+
+  <script>
+    const ONES = ['', 'واحد', 'اثنان', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة', 'عشرة', 'أحد عشر', 'اثنا عشر', 'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر', 'ستة عشر', 'سبعة عشر', 'ثمانية عشر', 'تسعة عشر'];
+    const TENS = ['', '', 'عشرون', 'ثلاثون', 'أربعون', 'خمسون', 'ستون', 'سبعون', 'ثمانون', 'تسعون'];
+    const HUNDREDS = ['', 'مائة', 'مئتان', 'ثلاثمائة', 'أربعمائة', 'خمسمائة', 'ستمائة', 'سبعمائة', 'ثمانمائة', 'تسعمائة'];
+
+    function convertGroup(num) {
+      if (num === 0) return '';
+      let str = '';
+      const h = Math.floor(num / 100);
+      const rem = num % 100;
+
+      if (h > 0) str += HUNDREDS[h];
+
+      if (rem > 0) {
+        if (str !== '') str += ' و ';
+        if (rem < 20) {
+          str += ONES[rem];
+        } else {
+          const ones = rem % 10;
+          const tens = Math.floor(rem / 10);
+          if (ones > 0) {
+            str += ONES[ones] + ' و ' + TENS[tens];
+          } else {
+            str += TENS[tens];
+          }
+        }
+      }
+      return str;
+    }
+
+    function tafqeetNumber(num) {
+      if (num === 0) return 'صفر';
+      num = Math.floor(num);
+      let parts = [];
+
+      const billions = Math.floor(num / 1e9);
+      num %= 1e9;
+      const millions = Math.floor(num / 1e6);
+      num %= 1e6;
+      const thousands = Math.floor(num / 1e3);
+      const remainder = num % 1e3;
+
+      if (billions > 0) {
+        if (billions === 1) parts.push('مليار');
+        else if (billions === 2) parts.push('ملياران');
+        else parts.push(convertGroup(billions) + ' مليار');
+      }
+
+      if (millions > 0) {
+        if (millions === 1) parts.push('مليون');
+        else if (millions === 2) parts.push('مليونان');
+        else parts.push(convertGroup(millions) + ' مليون');
+      }
+
+      if (thousands > 0) {
+        if (thousands === 1) parts.push('ألف');
+        else if (thousands === 2) parts.push('ألفان');
+        else if (thousands >= 3 && thousands <= 10) parts.push(convertGroup(thousands) + ' آلاف');
+        else parts.push(convertGroup(thousands) + ' ألف');
+      }
+
+      if (remainder > 0) {
+        parts.push(convertGroup(remainder));
+      }
+
+      return parts.join(' و ');
+    }
+
+    function runTafqeet() {
+      const val = parseFloat(document.getElementById('amount').value);
+      if (isNaN(val)) {
+        document.getElementById('tafqeet-output').textContent = 'أدخل مبلغاً لعرض التفقيط';
+        return;
+      }
+
+      const currency = document.getElementById('currency').value;
+      const addFaqt = document.getElementById('add-faqt').checked;
+
+      const intPart = Math.floor(val);
+      const fracPart = Math.round((val - intPart) * 100);
+
+      const currencies = {
+        sar: { main: 'ريال سعودي', sub: 'هللة' },
+        usd: { main: 'دولار أمريكي', sub: 'سنت' },
+        aed: { main: 'درهم إماراتي', sub: 'فلس' },
+        kwd: { main: 'دينار كويتي', sub: 'فلس' },
+        qar: { main: 'ريال قطري', sub: 'درهم' },
+        egp: { main: 'جنيه مصري', sub: 'قرش' },
+        none: { main: '', sub: '' }
+      };
+
+      const c = currencies[currency] || currencies.none;
+
+      let result = tafqeetNumber(intPart);
+      if (c.main) result += ' ' + c.main;
+
+      if (fracPart > 0) {
+        result += ' و ' + tafqeetNumber(fracPart);
+        if (c.sub) result += ' ' + c.sub;
+      }
+
+      if (addFaqt) {
+        result = 'فقط ' + result + ' لا غير.';
+      }
+
+      document.getElementById('tafqeet-output').textContent = result;
+    }
+
+    function copyTafqeet() {
+      const txt = document.getElementById('tafqeet-output').textContent;
+      navigator.clipboard.writeText(txt).then(() => alert('تم نسخ النص بنجاح!'));
+    }
+  </script>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container" style="text-align:center;">
+      <p>© 2026 سهّلها — جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+  <script src="/config/config.js"></script>
+  <script src="/assets/js/storage.js"></script>
+  <script src="/assets/js/navigation.js"></script>
+</body>
+</html>

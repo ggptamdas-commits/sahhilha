@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ar-SA" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حاسبة مكافأة نهاية الخدمة (نظام العمل السعودي) | سهّلها</title>
+  <meta name="description" content="احسب مكافأة نهاية الخدمة للعاملين في السعودية وفق المادتين 84 و85 بدقة.">
+  <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/responsive.css">
+  <style>
+    .tool-layout {
+      max-width: 900px;
+      margin: 2.5rem auto 4rem;
+      padding: 0 1.25rem;
+    }
+    .tool-card-box {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 2rem;
+    }
+    .tool-header-section {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-light);
+      padding-bottom: 1.5rem;
+    }
+    .tool-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background-color: var(--background);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+      transition: var(--transition);
+      outline: none;
+    }
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-tint);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr; }
+      .tool-card-box { padding: 1.5rem 1.25rem; }
+    }
+    .result-box {
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--surface-alt) 100%);
+      border: 1px solid var(--primary-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      margin-top: 2rem;
+      display: none;
+    }
+    .result-box.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .result-value {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.2;
+    }
+    [data-theme="dark"] .result-value {
+      color: var(--primary);
+    }
+    .info-article {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+    }
+    .info-article h2 {
+      color: var(--text);
+      margin: 1.5rem 0 0.75rem;
+      font-size: 1.35rem;
+    }
+    .info-article h2:first-child {
+      margin-top: 0;
+    }
+    .info-article p {
+      margin-bottom: 1rem;
+    }
+    .info-article ul {
+      list-style: disc;
+      margin-right: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .breadcrumb a:hover {
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-container">
+      <div class="brand-logo">
+        <a href="/" aria-label="سهّلها - الصفحة الرئيسية" style="display:flex; align-items:center; gap:0.75rem;">
+          <div class="brand-symbol" aria-hidden="true">س</div>
+          <div class="brand-text">
+            <span class="brand-name">سهّلها</span>
+            <span class="brand-tagline">أدوات مجانية تجعل حياتك أسهل</span>
+          </div>
+        </a>
+      </div>
+      <nav class="nav-desktop" aria-label="القائمة الرئيسية">
+        <a href="/" class="nav-link">الرئيسية</a>
+        <a href="/#featured-tools" class="nav-link active">جميع الأدوات</a>
+        <a href="/about.html" class="nav-link">من نحن</a>
+        <a href="/contact.html" class="nav-link">اتصل بنا</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="btn-icon" id="theme-toggle-btn" aria-label="التبديل بين الوضع الداكن والفاتح">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="tool-layout" id="main-content">
+    <nav class="breadcrumb" aria-label="مسار التنقل">
+      <a href="/">الرئيسية</a>
+      <span>/</span>
+      <a href="/#categories">أدوات السعودية</a>
+      <span>/</span>
+      <span>حاسبة مكافأة نهاية الخدمة</span>
+    </nav>
+
+    <div class="tool-card-box">
+      <div class="tool-header-section">
+        <span class="tool-badge-pill">نظام العمل السعودي (المادة 84 والمادة 85)</span>
+        <h1>حاسبة مكافأة نهاية الخدمة</h1>
+        <p>احسب مستحقات مكافأة نهاية الخدمة النظامية بدقة بناءً على نوع العقد، سبب انتهاء العلاقة العمالية، والأجر الأخير.</p>
+      </div>
+
+      <form id="eos-form" onsubmit="event.preventDefault(); calculateEOS();">
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="wage">الراتب الفعلي الأخير (الأساسي + البدلات الثابتة)</label>
+            <input type="number" id="wage" class="form-control" placeholder="مثال: 8000" min="1" step="0.01" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="contract-type">نوع عقد العمل</label>
+            <select id="contract-type" class="form-control">
+              <option value="fixed">عقد محدد المدة</option>
+              <option value="unspecified">عقد غير محدد المدة</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reason">سبب انتهاء العلاقة العمالية</label>
+          <select id="reason" class="form-control">
+            <option value="terminated">انتهاء مدة العقد أو فسخه من قبل صاحب العمل (استحقاق كامل)</option>
+            <option value="resignation">استقالة العامل (تخضع لنسب سنوات الخدمة المادة 85)</option>
+            <option value="force_majeure">فسخ العقد لظرف طارئ أو قوة قاهرة (استحقاق كامل)</option>
+            <option value="female_leave">استقالة العاملة خلال 6 أشهر من الزواج أو 3 أشهر من الوضع (كامل)</option>
+          </select>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="years">سنوات الخدمة</label>
+            <input type="number" id="years" class="form-control" placeholder="عدد السنوات" min="0" value="3" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="months">الأشهر الإضافية</label>
+            <input type="number" id="months" class="form-control" placeholder="عدد الأشهر" min="0" max="11" value="0">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.05rem; padding: 0.85rem;">
+          احسب المكافأة الآن
+        </button>
+      </form>
+
+      <div id="eos-result" class="result-box" role="region" aria-live="polite">
+        <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem;">مبلغ مكافأة نهاية الخدمة التقديري:</div>
+        <div id="eos-total" class="result-value">0.00 ر.س</div>
+        <div id="eos-notes" style="margin-top: 1rem; font-size: 0.9rem; line-height: 1.6; color: var(--text);"></div>
+      </div>
+    </div>
+
+    <article class="info-article">
+      <h2>كيف تُحسب مكافأة نهاية الخدمة وفق النظام السعودي؟</h2>
+      <p>تنص <strong>المادة 84</strong> من نظام العمل السعودي على أنه إذا انتهت علاقة العمل، وجب على صاحب العمل أن يدفع للعامل مكافأة عن مدة خدمته تحسب على أساس:</p>
+      <ul>
+        <li><strong>السنوات الخمس الأولى:</strong> أجر نصف شهر عن كل سنة من السنوات الخمس الأولى.</li>
+        <li><strong>السنوات التالية:</strong> أجر شهر كامل عن كل سنة من السنوات التالية للخمس الأولى.</li>
+        <li>يستحق العامل مكافأة عن أجزاء السنة بنسبة ما قضاه منها في العمل.</li>
+      </ul>
+
+      <h2>حالة استقالة العامل (المادة 85)</h2>
+      <p>في حال كان سبب انتهاء الخدمة هو استقالة العامل في العقود غير المحددة، يُستحق التالي:</p>
+      <ul>
+        <li><strong>أقل من سنتين:</strong> لا يستحق العامل أي مكافأة.</li>
+        <li><strong>من سنتين إلى أقل من 5 سنوات:</strong> يستحق ثلث المكافأة (33.3%).</li>
+        <li><strong>من 5 سنوات إلى أقل من 10 سنوات:</strong> يستحق ثلثي المكافأة (66.6%).</li>
+        <li><strong>10 سنوات فأكثر:</strong> يستحق المكافأة كاملة (100%).</li>
+      </ul>
+    </article>
+  </main>
+
+  <script>
+    function calculateEOS() {
+      const wage = parseFloat(document.getElementById('wage').value) || 0;
+      const years = parseInt(document.getElementById('years').value) || 0;
+      const months = parseInt(document.getElementById('months').value) || 0;
+      const reason = document.getElementById('reason').value;
+
+      const totalYears = years + (months / 12);
+      if (totalYears <= 0 || wage <= 0) return;
+
+      let baseGratuity = 0;
+      if (totalYears <= 5) {
+        baseGratuity = totalYears * (wage / 2);
+      } else {
+        baseGratuity = (5 * (wage / 2)) + ((totalYears - 5) * wage);
+      }
+
+      let factor = 1.0;
+      let ratioText = "استحقاق كامل بنسبة 100%";
+
+      if (reason === "resignation") {
+        if (totalYears < 2) {
+          factor = 0;
+          ratioText = "لا يستحق مكافأة لأن مدة الخدمة أقل من سنتين (المادة 85).";
+        } else if (totalYears < 5) {
+          factor = 1 / 3;
+          ratioText = "استحقاق ثلث المكافأة (33.3%) لخدمة بين سنتين و5 سنوات.";
+        } else if (totalYears < 10) {
+          factor = 2 / 3;
+          ratioText = "استحقاق ثلثي المكافأة (66.7%) لخدمة بين 5 سنوات و10 سنوات.";
+        } else {
+          factor = 1.0;
+          ratioText = "استحقاق كامل بنسبة 100% لأن مدة الخدمة بلغت 10 سنوات أو أكثر.";
+        }
+      }
+
+      const finalAmount = baseGratuity * factor;
+
+      document.getElementById('eos-total').textContent = finalAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ر.س';
+      document.getElementById('eos-notes').innerHTML = `
+        <strong>تفاصيل الحسبة:</strong><br>
+        إجمالي مدة الخدمة: ${totalYears.toFixed(2)} سنة.<br>
+        المكافأة الأساسية المحتسبة: ${baseGratuity.toFixed(2)} ر.س.<br>
+        الحالة: ${ratioText}
+      `;
+      document.getElementById('eos-result').classList.add('show');
+    }
+  </script>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container" style="text-align:center;">
+      <p>© 2026 سهّلها — جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+  <script src="/config/config.js"></script>
+  <script src="/assets/js/storage.js"></script>
+  <script src="/assets/js/navigation.js"></script>
+</body>
+</html>
