@@ -4,11 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>اتصل بنا | سهّلها</title>
-  <meta name="description" content="تواصل مع فريق منصة سهّلها للاستفسارات والاقتراحات.">
-  <link rel="canonical" href="https://sahhilha.com/contact.html">
+  <meta name="description" content="تواصل مع فريق منصة سهّلها للاستفسارات والمقترحات حول الأدوات والحاسبات المجانية.">
+  <link rel="canonical" href="https://sahhilha.pages.dev/contact.html">
   <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/responsive.css">
+
+  <!-- Open Graph / Social Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sahhilha.pages.dev/contact.html">
+  <meta property="og:title" content="اتصل بنا | سهّلها">
+  <meta property="og:description" content="تواصل مع فريق منصة سهّلها للاستفسارات والمقترحات حول الأدوات والحاسبات المجانية.">
+  <meta property="og:site_name" content="سهّلها - Sahhilha">
+  <meta property="og:locale" content="ar_SA">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="اتصل بنا | سهّلها">
+  <meta name="twitter:description" content="تواصل مع فريق منصة سهّلها للاستفسارات والمقترحات حول الأدوات والحاسبات المجانية.">
 </head>
 <body>
   <header class="site-header" role="banner">
@@ -44,7 +55,7 @@
     </p>
 
     <div style="background-color: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem;">
-      <form onsubmit="event.preventDefault(); alert('شكراً لتواصلك معنا! سيتم الرد قريباً.');" style="display:flex; flex-direction:column; gap:1.25rem;">
+      <form onsubmit="event.preventDefault(); if (window.App && window.App.showToast) { window.App.showToast('شكراً لتواصلك معنا! سيتم الرد قريباً.', 'success'); } else { alert('شكراً لتواصلك معنا!'); }" style="display:flex; flex-direction:column; gap:1.25rem;">
         <div>
           <label for="contact-name" style="display:block; margin-bottom:0.5rem; font-weight:600;">الاسم</label>
           <input type="text" id="contact-name" required placeholder="الاسم الكامل" style="width:100%; padding:0.75rem; border-radius:var(--radius-md); border:1px solid var(--border); background:var(--background); color:var(--text); font-family:inherit;">
