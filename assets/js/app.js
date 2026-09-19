@@ -1,5 +1,6 @@
 /**
  * SAHHILHA (سهّلها) - Homepage Application Controller
+ * Handles Tool Card rendering, Search Chips, Category Filtering, and Favorites.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,10 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchChips = document.querySelectorAll('.search-chip');
   const categoriesContainer = document.getElementById('categories-container');
 
+  let activeCategory = null;
+
   // Render Category Cards
   if (categoriesContainer && typeof CATEGORIES !== 'undefined') {
     categoriesContainer.innerHTML = CATEGORIES.map(cat => `
-      <div class="category-card" data-category="${cat.id}">
+      <div class="category-card" data-category="${cat.id}" role="button" tabindex="0" aria-label="${cat.nameAr}">
         <div class="category-icon" aria-hidden="true">${cat.icon}</div>
         <div class="category-info">
           <h3 class="category-title">${cat.nameAr}</h3>
@@ -23,6 +26,36 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
     `).join('');
+
+    // Attach click and keyboard listeners to category cards
+    const categoryCards = categoriesContainer.querySelectorAll('.category-card');
+    categoryCards.forEach(card => {
+      const handleCategorySelect = () => {
+        const catId = card.getAttribute('data-category');
+        if (activeCategory === catId) {
+          activeCategory = null;
+          categoryCards.forEach(c => c.classList.remove('active'));
+        } else {
+          activeCategory = catId;
+          categoryCards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+        }
+        performSearch();
+
+        const toolsHeading = document.getElementById('featured-tools');
+        if (toolsHeading) {
+          toolsHeading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      };
+
+      card.addEventListener('click', handleCategorySelect);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleCategorySelect();
+        }
+      });
+    });
   }
 
   // Render Tool Cards
@@ -31,22 +64,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!toolsList || toolsList.length === 0) {
       toolsContainer.innerHTML = `
-        <div class="no-results" role="status">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <div class="no-results" role="status" style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem;">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin:0 auto 1rem; color:var(--text-muted);">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             <line x1="8" y1="11" x2="14" y2="11"></line>
           </svg>
-          <h3>لم يتم العثور على نتائج</h3>
-          <p>جرّب البحث بكلمة أخرى أو تصفح الأقسام المتاحة.</p>
+          <h3 style="font-size:1.25rem; margin-bottom:0.5rem; color:var(--text);">لم يتم العثور على أدوات مطابقة</h3>
+          <p style="color:var(--text-muted); margin-bottom:1.5rem;">جرّب البحث بكلمة أخرى أو إلغاء تحديد الفئة الحالية.</p>
+          <button type="button" class="btn btn-secondary" id="btn-reset-filters" style="padding:0.5rem 1.25rem;">عرض جميع الأدوات</button>
         </div>
       `;
+      const resetBtn = document.getElementById('btn-reset-filters');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          activeCategory = null;
+          if (categoriesContainer) {
+            categoriesContainer.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
+          }
+          if (searchInput) searchInput.value = '';
+          renderTools(TOOLS);
+        });
+      }
       return;
     }
 
     toolsContainer.innerHTML = toolsList.map(tool => {
-      const isFav = StorageManager.isFavorite(tool.id);
-      const catObj = CATEGORIES.find(c => c.id === tool.category) || {};
+      const isFav = typeof StorageManager !== 'undefined' && StorageManager.isFavorite(tool.id);
+      const catObj = (typeof CATEGORIES !== 'undefined' && CATEGORIES.find(c => c.id === tool.category)) || {};
       const categoryName = catObj.nameAr || 'عام';
       const isActive = tool.status === 'active';
 
@@ -61,12 +106,12 @@ document.addEventListener('DOMContentLoaded', () => {
               </button>
             </div>
           </div>
-          <h3 class="tool-card-title">${tool.nameAr}</h3>
+          <h3 class="tool-card-title"><a href="${tool.url}" style="color:inherit; text-decoration:none;">${tool.nameAr}</a></h3>
           <p class="tool-card-desc">${tool.description}</p>
           <div class="tool-card-footer">
             <span class="tool-category-label">${categoryName}</span>
             ${isActive ? 
-              `<a href="${tool.url}" class="btn btn-primary" style="padding:0.4rem 1rem; font-size:0.875rem;">استخدم الأداة</a>` :
+              `<a href="${tool.url}" class="btn btn-primary" style="padding:0.45rem 1.15rem; font-size:0.875rem;">استخدم الأداة</a>` :
               `<button class="btn btn-disabled" disabled aria-disabled="true">قريباً</button>`
             }
           </div>
@@ -77,12 +122,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Wire Favorite buttons
     document.querySelectorAll('.btn-favorite').forEach(btn => {
       btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const toolId = e.currentTarget.getAttribute('data-tool-id');
-        const active = StorageManager.toggleFavorite(toolId);
-        e.currentTarget.classList.toggle('active', active);
-        const svg = e.currentTarget.querySelector('svg');
-        if (svg) {
-          svg.setAttribute('fill', active ? 'currentColor' : 'none');
+        if (typeof StorageManager !== 'undefined') {
+          const active = StorageManager.toggleFavorite(toolId);
+          e.currentTarget.classList.toggle('active', active);
+          const svg = e.currentTarget.querySelector('svg');
+          if (svg) {
+            svg.setAttribute('fill', active ? 'currentColor' : 'none');
+          }
+          if (window.App && window.App.showToast) {
+            window.App.showToast(active ? 'تمت إضافة الأداة إلى المفضلة' : 'تمت إزالة الأداة من المفضلة', 'info');
+          }
         }
       });
     });
@@ -93,10 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTools(TOOLS);
   }
 
-  // Handle Search Input
+  // Handle Search & Filter Input
   function performSearch() {
     const query = searchInput ? searchInput.value : '';
-    const results = SearchEngine.search(query);
+    let results = [];
+    if (typeof SearchEngine !== 'undefined') {
+      results = SearchEngine.search(query, activeCategory);
+    } else if (typeof TOOLS !== 'undefined') {
+      results = TOOLS;
+    }
     renderTools(results);
   }
 
