@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sahhilha.com/sitemap.xml
+Sitemap: https://sahhilha.pages.dev/sitemap.xml

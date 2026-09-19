@@ -2,7 +2,7 @@
   "name": "سهّلها | أدوات مجانية تجعل حياتك أسهل",
   "short_name": "سهّلها",
   "description": "منصة عربية مجانية تجمع أدوات عملية ومفيدة: حاسبات متخصصة، أدوات المطاعم، مولدات QR، وأدوات النصوص العربية.",
-  "start_url": "/index.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#f8fafc",
   "theme_color": "#059669",
