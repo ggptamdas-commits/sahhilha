@@ -2,5 +2,6 @@
 
 منصة أدوات رقمية وحاسبات مجانية باللغة العربية.
 
-- **الموقع:** [https://sahhilha.pages.dev](https://sahhilha.pages.dev)
-- **المرحلة:** Phase 1 — البنية التحتية والصفحة الرئيسية
+- **رابط المنصة المباشر:** [https://sahhilha.pages.dev](https://sahhilha.pages.dev)
+- **المستودع البرمجي:** [https://github.com/ggptamdas-commits/sahhilha](https://github.com/ggptamdas-commits/sahhilha)
+- **المرحلة الحالية:** Phase 1 — البنية التحتية والصفحة الرئيسية فقط (Foundation Only)
