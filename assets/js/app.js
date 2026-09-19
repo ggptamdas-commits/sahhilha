@@ -1,6 +1,5 @@
 /**
  * SAHHILHA (سهّلها) - Homepage Application Controller
- * Handles Tool Card rendering, Search Chips, and Interactive Components.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="category-icon" aria-hidden="true">${cat.icon}</div>
         <div class="category-info">
           <h3 class="category-title">${cat.nameAr}</h3>
-          <span class="category-badge">${cat.badge || 'قريباً'}</span>
+          <span class="category-badge">${cat.badge || 'متاح'}</span>
         </div>
         <div class="category-arrow" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -49,13 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const isFav = StorageManager.isFavorite(tool.id);
       const catObj = CATEGORIES.find(c => c.id === tool.category) || {};
       const categoryName = catObj.nameAr || 'عام';
+      const isActive = tool.status === 'active';
 
       return `
         <article class="tool-card" data-id="${tool.id}">
           <div class="tool-card-header">
             <div class="tool-icon-wrapper" aria-hidden="true">${tool.icon}</div>
             <div style="display:flex; align-items:center; gap:0.5rem;">
-              <span class="tool-status-badge">${tool.status === 'coming-soon' ? 'قريباً' : 'متاح'}</span>
+              <span class="tool-status-badge" style="${isActive ? 'background-color:var(--primary-light); color:var(--primary); font-weight:700;' : ''}">${isActive ? 'متاح الآن' : 'قريباً'}</span>
               <button type="button" class="btn-favorite ${isFav ? 'active' : ''}" data-tool-id="${tool.id}" aria-label="${isFav ? 'إزالة من المفضلة' : 'إضافة إلى المفضلة'}">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
               </button>
@@ -65,9 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="tool-card-desc">${tool.description}</p>
           <div class="tool-card-footer">
             <span class="tool-category-label">${categoryName}</span>
-            <button class="btn btn-disabled" disabled aria-disabled="true">
-              قريباً
-            </button>
+            ${isActive ? 
+              `<a href="${tool.url}" class="btn btn-primary" style="padding:0.4rem 1rem; font-size:0.875rem;">استخدم الأداة</a>` :
+              `<button class="btn btn-disabled" disabled aria-disabled="true">قريباً</button>`
+            }
           </div>
         </article>
       `;
@@ -87,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initial Tool Render (Featured placeholders)
+  // Initial Tool Render
   if (typeof TOOLS !== 'undefined') {
     renderTools(TOOLS);
   }
