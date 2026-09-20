@@ -4,41 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>اتصل بنا | سهّلها</title>
-  <meta name="description" content="تواصل مع فريق منصة سهّلها للاستفسارات والمقترحات حول الأدوات والحاسبات المجانية.">
+  <meta name="description" content="تواصل مع فريق منصة سهّلها للاقتراحات، الاستفسارات، أو الإبلاغ عن مشكلة برمجية في إحدى الأدوات.">
   <link rel="canonical" href="https://sahhilha.pages.dev/contact.html">
   <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/responsive.css">
-
-  <!-- Open Graph / Social Metadata -->
+  <meta name="robots" content="index, follow">
+  <meta property="og:image" content="https://sahhilha.pages.dev/assets/icons/favicon.svg">
+  <meta name="twitter:image" content="https://sahhilha.pages.dev/assets/icons/favicon.svg">
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sahhilha.pages.dev/contact.html">
   <meta property="og:title" content="اتصل بنا | سهّلها">
-  <meta property="og:description" content="تواصل مع فريق منصة سهّلها للاستفسارات والمقترحات حول الأدوات والحاسبات المجانية.">
+  <meta property="og:description" content="تواصل مع فريق منصة سهّلها للاقتراحات أو الاستفسارات.">
   <meta property="og:site_name" content="سهّلها - Sahhilha">
-  <meta property="og:locale" content="ar_SA">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="اتصل بنا | سهّلها">
-  <meta name="twitter:description" content="تواصل مع فريق منصة سهّلها للاستفسارات والمقترحات حول الأدوات والحاسبات المجانية.">
 </head>
 <body>
   <header class="site-header" role="banner">
     <div class="container header-container">
       <div class="brand-logo">
-        <a href="/" aria-label="سهّلها" style="display:flex; align-items:center; gap:0.75rem;">
-          <div class="brand-symbol">س</div>
-          <div class="brand-text">
-            <span class="brand-name">سهّلها</span>
-            <span class="brand-tagline">أدوات مجانية تجعل حياتك أسهل</span>
+        <a href="/" aria-label="سهّلها - الصفحة الرئيسية" style="display:flex; align-items:center; gap:0.75rem;">
+          <div class="brand-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <span class="brand-title">سهّلها</span>
+            <span class="brand-subtitle">أدوات رقمية ذكية</span>
           </div>
         </a>
       </div>
-      <nav class="nav-desktop">
-        <a href="/" class="nav-link">الرئيسية</a>
-        <a href="/#featured-tools" class="nav-link">جميع الأدوات</a>
-        <a href="/#guides" class="nav-link">الأدلة</a>
-        <a href="/about.html" class="nav-link">من نحن</a>
-        <a href="/contact.html" class="nav-link active">اتصل بنا</a>
+      <nav class="nav-links" aria-label="التنقل الرئيسي">
+        <a href="/#saudi" class="nav-link">أدوات السعودية</a>
+        <a href="/#calculators" class="nav-link">الحاسبات</a>
+        <a href="/#arabic" class="nav-link">أدوات اللغة</a>
+        <a href="/#restaurant" class="nav-link">المطاعم</a>
       </nav>
       <div class="header-actions">
         <button type="button" class="btn-icon" id="theme-toggle-btn" aria-label="التبديل بين الوضع الداكن والفاتح">
@@ -47,42 +46,40 @@
       </div>
     </div>
   </header>
-
-  <main id="main-content" class="container" style="padding: 4rem 1.25rem; max-width: 650px;">
-    <h1>اتصل بنا</h1>
-    <p style="margin: 1rem 0 2rem; font-size: 1.05rem;">
-      يسعدنا دائماً استقبال آرائكم واقتراحاتكم لتطوير الأدوات أو إضافة أدوات جديدة تلبي احتياجاتكم.
-    </p>
-
-    <div style="background-color: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem;">
-      <form onsubmit="event.preventDefault(); if (window.App && window.App.showToast) { window.App.showToast('شكراً لتواصلك معنا! سيتم الرد قريباً.', 'success'); } else { alert('شكراً لتواصلك معنا!'); }" style="display:flex; flex-direction:column; gap:1.25rem;">
-        <div>
-          <label for="contact-name" style="display:block; margin-bottom:0.5rem; font-weight:600;">الاسم</label>
-          <input type="text" id="contact-name" required placeholder="الاسم الكامل" style="width:100%; padding:0.75rem; border-radius:var(--radius-md); border:1px solid var(--border); background:var(--background); color:var(--text); font-family:inherit;">
+  <main class="main-content">
+    <div class="container">
+      <article class="info-article">
+        <h1>تواصل معنا</h1>
+        <p>يسعدنا دائماً استقبال آرائكم، مقترحاتكم لإضافة أدوات جديدة، أو استفساراتكم حول المنصة.</p>
+        <div style="background:var(--bg-surface); padding:1.5rem; border-radius:12px; border:1px solid var(--border); margin:1.5rem 0;">
+          <h3 style="margin-top:0;">معلومات التواصل المباشر</h3>
+          <p><strong>البريد الإلكتروني للدعم الفني:</strong> <a href="mailto:support@sahhilha.pages.dev">support@sahhilha.pages.dev</a></p>
+          <p><strong>المستودع البرمجي والمساهمة:</strong> <a href="https://github.com/ggptamdas-commits/sahhilha" target="_blank" rel="noopener">مستودع المشروع على GitHub</a></p>
         </div>
-
-        <div>
-          <label for="contact-email" style="display:block; margin-bottom:0.5rem; font-weight:600;">البريد الإلكتروني</label>
-          <input type="email" id="contact-email" required placeholder="name@example.com" style="width:100%; padding:0.75rem; border-radius:var(--radius-md); border:1px solid var(--border); background:var(--background); color:var(--text); font-family:inherit;">
-        </div>
-
-        <div>
-          <label for="contact-message" style="display:block; margin-bottom:0.5rem; font-weight:600;">الرسالة أو الاقتراح</label>
-          <textarea id="contact-message" rows="5" required placeholder="اكتب رسالتك هنا..." style="width:100%; padding:0.75rem; border-radius:var(--radius-md); border:1px solid var(--border); background:var(--background); color:var(--text); font-family:inherit;"></textarea>
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="align-self:flex-start;">إرسال الرسالة</button>
-      </form>
+      </article>
     </div>
   </main>
-
-  <footer class="site-footer">
-    <div class="container" style="text-align: center;">
-      <p>© 2026 سهّلها — جميع الحقوق محفوظة</p>
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <div class="footer-brand-logo"><span class="brand-title">سهّلها</span></div>
+        <p class="footer-tagline">أدوات رقمية سريعة ومجانية بدون تسجيل أو قيود.</p>
+      </div>
+      <div class="footer-nav">
+        <h4 class="footer-nav-title">روابط هامة</h4>
+        <ul class="footer-nav-list">
+          <li><a href="/about.html">عن المنصة</a></li>
+          <li><a href="/contact.html">اتصل بنا</a></li>
+          <li><a href="/privacy.html">سياسة الخصوصية</a></li>
+          <li><a href="/terms.html">شروط الاستخدام</a></li>
+          <li><a href="/disclaimer.html">إخلاء المسؤولية</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>© 2026 سهّلها (Sahhilha). جميع الحقوق محفوظة.</p>
     </div>
   </footer>
-
-  <script src="/config/config.js"></script>
   <script src="/assets/js/storage.js"></script>
   <script src="/assets/js/navigation.js"></script>
 </body>
