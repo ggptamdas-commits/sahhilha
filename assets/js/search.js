@@ -1,44 +1,69 @@
 /**
- * SAHHILHA (سهّلها) - Search Architecture & Filtering Engine
- * Supports Arabic / English name lookup, category filtering, and keyword indexing.
+ * SAHHILHA (سهّلها) - Search & Filtering Engine
+ * Client-side search and category filtering for tools catalog.
  */
 
 const SearchEngine = {
-  // Normalize Arabic letters for accurate matching
-  normalizeArabic(text) {
-    if (!text) return '';
-    return text
-      .trim()
-      .toLowerCase()
-      .replace(/[إأآا]/g, 'ا')
-      .replace(/ة/g, 'ه')
-      .replace(/ى/g, 'ي')
-      .replace(/[ًٌٍَُِّْ]/g, ''); // Strip Tashkeel
-  },
-
-  search(query, categoryFilter = null) {
-    const normalizedQuery = this.normalizeArabic(query);
-    if (!normalizedQuery && !categoryFilter) {
-      return TOOLS;
+  /**
+   * Search tools by text query and optional category filter.
+   * @param {string} query - Free-text search input
+   * @param {string} categoryId - Optional category ID filter
+   * @returns {Array} Matching tool objects
+   */
+  search(query, categoryId = null) {
+    if (typeof TOOLS === 'undefined' || !Array.isArray(TOOLS)) {
+      console.warn('TOOLS registry not loaded.');
+      return [];
     }
 
+    const cleanQuery = this.normalizeArabic(query.trim().toLowerCase());
+
     return TOOLS.filter(tool => {
-      // Category filter check
-      if (categoryFilter && categoryFilter !== 'all' && tool.category !== categoryFilter) {
+      // Category matching
+      if (categoryId && categoryId !== 'all' && tool.category !== categoryId) {
         return false;
       }
 
-      if (!normalizedQuery) {
-        return true;
-      }
+      // Empty query returns all tools in selected category
+      if (!cleanQuery) return true;
 
-      // Keyword & Text matching
-      const matchNameAr = this.normalizeArabic(tool.nameAr).includes(normalizedQuery);
-      const matchNameEn = (tool.nameEn || '').toLowerCase().includes(normalizedQuery);
-      const matchDesc = this.normalizeArabic(tool.description).includes(normalizedQuery);
-      const matchKeywords = (tool.keywords || []).some(k => this.normalizeArabic(k).includes(normalizedQuery));
+      // Multi-term token matching (all tokens must match at least one field)
+      const tokens = cleanQuery.split(/\s+/).filter(t => t.length > 0);
 
-      return matchNameAr || matchNameEn || matchDesc || matchKeywords;
+      const nameArNorm = this.normalizeArabic(tool.nameAr || '');
+      const nameEnNorm = (tool.nameEn || '').toLowerCase();
+      const descNorm = this.normalizeArabic(tool.description || '');
+      const keywordsNorm = (tool.keywords || []).map(k => this.normalizeArabic(k)).join(' ');
+
+      const combinedText = `${nameArNorm} ${nameEnNorm} ${descNorm} ${keywordsNorm}`;
+
+      return tokens.every(token => combinedText.includes(token));
     });
+  },
+
+  /**
+   * Normalize Arabic text for search matching.
+   * Strips tashkeel (diacritics), tatweel (kashida), and normalizes hamzas.
+   * @param {string} text 
+   * @returns {string} Normalized text
+   */
+  normalizeArabic(text) {
+    if (!text) return '';
+    return text
+      // Remove diacritics
+      .replace(/[\u064B-\u065F\u0670]/g, '')
+      // Remove tatweel (kashida)
+      .replace(/\u0640/g, '')
+      // Normalize alef variants
+      .replace(/[إأآ]/g, 'ا')
+      // Normalize teh marbuta
+      .replace(/ة/g, 'ه')
+      // Normalize alif maqsura
+      .replace(/ى/g, 'ي')
+      .toLowerCase();
   }
 };
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { SearchEngine };
+}

@@ -1,98 +1,99 @@
 /**
- * SAHHILHA (سهّلها) - Local Storage & Preferences Manager
- * Handles Dark Mode, User Favorites, and Recently Used Tools.
+ * SAHHILHA (سهّلها) - User Preferences & Local Storage Manager
+ * Handles favorites, recents, and local settings with error resilience.
  */
 
 const StorageManager = {
-  KEYS: {
+  STORAGE_KEYS: {
     THEME: 'sahhilha_theme',
     FAVORITES: 'sahhilha_favorites',
-    RECENT: 'sahhilha_recent_tools'
+    RECENT_TOOLS: 'sahhilha_recent_tools'
   },
 
-  // Theme Management
-  initTheme() {
-    const savedTheme = localStorage.getItem(this.KEYS.THEME);
-    if (savedTheme) {
-      this.applyTheme(savedTheme);
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      this.applyTheme('dark');
-    } else {
-      this.applyTheme('light');
-    }
-  },
-
-  applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem(this.KEYS.THEME, theme);
-    const themeBtn = document.getElementById('theme-toggle-btn');
-    if (themeBtn) {
-      themeBtn.setAttribute('aria-label', theme === 'dark' ? 'التبديل إلى الوضع الفاتح' : 'التبديل إلى الوضع الداكن');
-    }
-  },
-
-  toggleTheme() {
-    const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    this.applyTheme(newTheme);
-    return newTheme;
-  },
-
-  // Favorites Management
-  getFavorites() {
+  isAvailable() {
     try {
-      const items = localStorage.getItem(this.KEYS.FAVORITES);
-      return items ? JSON.parse(items) : [];
+      const testKey = '__storage_test__';
+      localStorage.setItem(testKey, testKey);
+      localStorage.removeItem(testKey);
+      return true;
     } catch (e) {
-      console.warn('Could not read favorites from localStorage:', e);
-      return [];
+      return false;
     }
+  },
+
+  get(key, defaultValue = null) {
+    if (!this.isAvailable()) return defaultValue;
+    try {
+      const item = localStorage.getItem(key);
+      return item !== null ? JSON.parse(item) : defaultValue;
+    } catch (e) {
+      console.warn(`Error reading from localStorage [${key}]:`, e);
+      return defaultValue;
+    }
+  },
+
+  set(key, value) {
+    if (!this.isAvailable()) return false;
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch (e) {
+      console.warn(`Error writing to localStorage [${key}]:`, e);
+      return false;
+    }
+  },
+
+  getFavorites() {
+    return this.get(this.STORAGE_KEYS.FAVORITES, []);
   },
 
   isFavorite(toolId) {
-    const favs = this.getFavorites();
-    return favs.includes(toolId);
+    const favorites = this.getFavorites();
+    return favorites.includes(toolId);
   },
 
   toggleFavorite(toolId) {
-    let favs = this.getFavorites();
-    if (favs.includes(toolId)) {
-      favs = favs.filter(id => id !== toolId);
-    } else {
-      favs.push(toolId);
-    }
-    try {
-      localStorage.setItem(this.KEYS.FAVORITES, JSON.stringify(favs));
-    } catch (e) {
-      console.warn('Could not save favorites to localStorage:', e);
-    }
-    return favs.includes(toolId);
-  },
+    let favorites = this.getFavorites();
+    const index = favorites.indexOf(toolId);
+    let isNowFavorite = false;
 
-  // Recently Used Tools
-  getRecentTools() {
-    try {
-      const items = localStorage.getItem(this.KEYS.RECENT);
-      return items ? JSON.parse(items) : [];
-    } catch (e) {
-      return [];
+    if (index > -1) {
+      favorites.splice(index, 1);
+      isNowFavorite = false;
+    } else {
+      favorites.push(toolId);
+      isNowFavorite = true;
     }
+
+    this.set(this.STORAGE_KEYS.FAVORITES, favorites);
+    return isNowFavorite;
   },
 
   addRecentTool(toolId) {
-    let recents = this.getRecentTools();
+    if (!toolId) return;
+    let recents = this.get(this.STORAGE_KEYS.RECENT_TOOLS, []);
     recents = recents.filter(id => id !== toolId);
     recents.unshift(toolId);
-    if (recents.length > 8) {
-      recents = recents.slice(0, 8);
-    }
-    try {
-      localStorage.setItem(this.KEYS.RECENT, JSON.stringify(recents));
-    } catch (e) {
-      console.warn('Could not save recents to localStorage:', e);
-    }
+    // Keep top 6
+    if (recents.length > 6) recents = recents.slice(0, 6);
+    this.set(this.STORAGE_KEYS.RECENT_TOOLS, recents);
+  },
+
+  getRecentTools() {
+    return this.get(this.STORAGE_KEYS.RECENT_TOOLS, []);
+  },
+
+  getTheme() {
+    if (!this.isAvailable()) return 'light';
+    return localStorage.getItem(this.STORAGE_KEYS.THEME) || 'light';
+  },
+
+  setTheme(theme) {
+    if (!this.isAvailable()) return;
+    localStorage.setItem(this.STORAGE_KEYS.THEME, theme);
   }
 };
 
-// Initialize theme immediately to avoid flash of unstyled theme
-StorageManager.initTheme();
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { StorageManager };
+}
