@@ -4,157 +4,118 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>أداة تفقيط المبالغ والأرقام إلى كلمات عربية | سهّلها</title>
-  <meta name="description" content="تحويل الأرقام والمبالغ إلى كلمات عربية للشيكات والفواتير.">
+  <meta name="description" content="أداة مجانية لتحويل الأرقام والمبالغ المالية إلى كلمات عربية مكتوبة (تفقيط) مع دعم العملات العربية (الريال، الدرهم، الدينار، الجنيه) للشيكات والعقود والفواتير.">
+  <meta name="keywords" content="تفقيط, تحويل الارقام لكلمات, تفقيط المبالغ, تفقيط الشيكات, كتابة الارقام بالحروف, تفقيط ريال سعودي, كتابة المبالغ بالعربي">
+  <link rel="canonical" href="https://sahhilha.pages.dev/ar/tools/tafqeet-converter.html">
   <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
   <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/responsive.css">
-  <style>
-    .tool-layout {
-      max-width: 900px;
-      margin: 2.5rem auto 4rem;
-      padding: 0 1.25rem;
-    }
-    .tool-card-box {
-      background-color: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      padding: 2.25rem;
-      box-shadow: var(--shadow-sm);
-      margin-bottom: 2rem;
-    }
-    .tool-header-section {
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--border-light);
-      padding-bottom: 1.5rem;
-    }
-    .tool-badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background-color: var(--primary-light);
-      color: var(--primary);
-      padding: 0.35rem 0.85rem;
-      border-radius: var(--radius-full);
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin-bottom: 0.75rem;
-    }
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-    .form-label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--text);
-    }
-    .form-control {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background-color: var(--background);
-      color: var(--text);
-      font-family: inherit;
-      font-size: 1rem;
-      transition: var(--transition);
-      outline: none;
-    }
-    .form-control:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px var(--primary-tint);
-    }
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
-    }
-    @media (max-width: 640px) {
-      .grid-2 { grid-template-columns: 1fr; }
-      .tool-card-box { padding: 1.5rem 1.25rem; }
-    }
-    .result-box {
-      background: linear-gradient(135deg, var(--primary-light) 0%, var(--surface-alt) 100%);
-      border: 1px solid var(--primary-border);
-      border-radius: var(--radius-lg);
-      padding: 1.75rem;
-      margin-top: 2rem;
-      display: none;
-    }
-    .result-box.show {
-      display: block;
-      animation: fadeIn 0.3s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .result-value {
-      font-size: 2.25rem;
-      font-weight: 800;
-      color: var(--primary-dark);
-      line-height: 1.2;
-    }
-    [data-theme="dark"] .result-value {
-      color: var(--primary);
-    }
-    .info-article {
-      background-color: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-xl);
-      padding: 2.25rem;
-      line-height: 1.8;
-      color: var(--text-muted);
-    }
-    .info-article h2 {
-      color: var(--text);
-      margin: 1.5rem 0 0.75rem;
-      font-size: 1.35rem;
-    }
-    .info-article h2:first-child {
-      margin-top: 0;
-    }
-    .info-article p {
-      margin-bottom: 1rem;
-    }
-    .info-article ul {
-      list-style: disc;
-      margin-right: 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-    }
-    .breadcrumb a:hover {
-      color: var(--primary);
-    }
-  </style>
+
+  <meta name="robots" content="index, follow">
+  <meta property="og:image" content="https://sahhilha.pages.dev/assets/icons/favicon.svg">
+  <meta name="twitter:image" content="https://sahhilha.pages.dev/assets/icons/favicon.svg">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sahhilha.pages.dev/ar/tools/tafqeet-converter.html">
+  <meta property="og:title" content="أداة تفقيط المبالغ والأرقام إلى كلمات عربية | سهّلها">
+  <meta property="og:description" content="حوّل الأرقام والمبالغ المالية إلى نصوص عربية نحوية دقيقة مع العملات والكسور للشيكات والفواتير.">
+  <meta property="og:site_name" content="سهّلها - Sahhilha">
+  <meta property="og:locale" content="ar_SA">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="أداة التفقيط العربي السريع | سهّلها">
+  <meta name="twitter:description" content="تحويل الأرقام إلى كلمات عربية مكتوبة بدقة نحوية متناهية.">
+
+  <!-- Structured Data: WebApplication, BreadcrumbList, FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "أداة تفقيط المبالغ والأرقام إلى كلمات عربية",
+        "url": "https://sahhilha.pages.dev/ar/tools/tafqeet-converter.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "SAR"
+        },
+        "description": "أداة متخصصة لتحويل الأعداد والمبالغ المالية إلى نص عربي مكتوب بدقة نحوية."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "الرئيسية",
+            "item": "https://sahhilha.pages.dev/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "الحاسبات",
+            "item": "https://sahhilha.pages.dev/#calculators"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "أداة التفقيط العربي",
+            "item": "https://sahhilha.pages.dev/ar/tools/tafqeet-converter.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "ما هو التفقيط ولماذا يُستخدم؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "التفقيط هو كتابة الأرقام والمبالغ بالحروف والكلمات العربية (مثل: 1500 تصبح 'ألف وخمسمائة ريال')، ويُستخدم قانونياً في الشيكات، وسندات الصرف، والفواتير، والعقود لمنع التلاعب أو التزوير في الأرقام."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "هل تدعم الأداة الكسور والهللات؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "نعم، تدعم الأداة الكسور العشرية والهللات، والقروش، والفلوس، والسنات لجميع العملات العربية والعالمية بدقة متناهية."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <header class="site-header" role="banner">
     <div class="container header-container">
       <div class="brand-logo">
         <a href="/" aria-label="سهّلها - الصفحة الرئيسية" style="display:flex; align-items:center; gap:0.75rem;">
-          <div class="brand-symbol" aria-hidden="true">س</div>
-          <div class="brand-text">
-            <span class="brand-name">سهّلها</span>
-            <span class="brand-tagline">أدوات مجانية تجعل حياتك أسهل</span>
+          <div class="brand-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/></svg>
+          </div>
+          <div>
+            <span class="brand-title">سهّلها</span>
+            <span class="brand-subtitle">أدوات رقمية ذكية</span>
           </div>
         </a>
       </div>
-      <nav class="nav-desktop" aria-label="القائمة الرئيسية">
-        <a href="/" class="nav-link">الرئيسية</a>
-        <a href="/#featured-tools" class="nav-link active">جميع الأدوات</a>
-        <a href="/about.html" class="nav-link">من نحن</a>
-        <a href="/contact.html" class="nav-link">اتصل بنا</a>
+
+      <nav class="nav-links" aria-label="التنقل الرئيسي">
+        <a href="/#saudi" class="nav-link">أدوات السعودية</a>
+        <a href="/#calculators" class="nav-link active">الحاسبات</a>
+        <a href="/#arabic" class="nav-link">أدوات اللغة</a>
+        <a href="/#restaurant" class="nav-link">المطاعم</a>
       </nav>
+
       <div class="header-actions">
         <button type="button" class="btn-icon" id="theme-toggle-btn" aria-label="التبديل بين الوضع الداكن والفاتح">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
@@ -163,74 +124,150 @@
     </div>
   </header>
 
-  <main class="tool-layout" id="main-content">
-    <nav class="breadcrumb" aria-label="مسار التنقل">
-      <a href="/">الرئيسية</a>
-      <span>/</span>
-      <a href="/#categories">الحاسبات</a>
-      <span>/</span>
-      <span>أداة تفقيط المبالغ (Tafqeet Pro)</span>
-    </nav>
+  <main class="main-content" id="main-content">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="مسار التنقل">
+        <ol class="breadcrumb-list">
+          <li class="breadcrumb-item"><a href="/">الرئيسية</a></li>
+          <li class="breadcrumb-item"><a href="/#calculators">الحاسبات</a></li>
+          <li class="breadcrumb-item active" aria-current="page">أداة تفقيط المبالغ والأرقام</li>
+        </ol>
+      </nav>
 
-    <div class="tool-card-box">
-      <div class="tool-header-section">
-        <span class="tool-badge-pill">تفقيط مالي قانوني معتمد للشيكات والفواتير</span>
-        <h1>تحويل الأرقام والمبالغ إلى كلمات عربية</h1>
-        <p>حوّل أي مبلغ رقمي إلى نص مكتوب باللغة العربية الفصحى مع تحديد العملة والكسور لحماية الشيكات والفواتير من التلاعب.</p>
+      <div class="tool-header">
+        <div class="tool-badge-wrap">
+          <span class="badge badge-calculators">المعاملات المالية والعقود</span>
+          <span class="badge badge-featured">دقة نحوية كاملة</span>
+        </div>
+        <h1 class="tool-title">أداة تفقيط المبالغ والأرقام إلى كلمات عربية</h1>
+        <p class="tool-description">
+          حوّل المبالغ المالية والأرقام إلى نص عربي مكتوب بالحروف بدقة نحوية فائقة مع ضبط وحدات العملات (الريال، الهللة، الدرهم، الفلس، الجنيه) للاستخدام المباشر في كتابة الشيكات، الفواتير، والعقود الرسمية.
+        </p>
       </div>
 
-      <form id="tafqeet-form" onsubmit="event.preventDefault(); runTafqeet();">
-        <div class="grid-2">
+      <div class="calculator-card">
+        <form id="tafqeet-form" onsubmit="event.preventDefault(); runTafqeet();">
           <div class="form-group">
-            <label class="form-label" for="amount">المبلغ أو الرقم</label>
-            <input type="number" id="amount" class="form-control" placeholder="مثال: 5450.75" step="0.01" min="0" required oninput="runTafqeet()">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="currency">العملة والكسور</label>
-            <select id="currency" class="form-control" onchange="runTafqeet()">
-              <option value="sar">ريال سعودي / هللة</option>
-              <option value="usd">دولار أمريكي / سنت</option>
-              <option value="aed">درهم إماراتي / فلس</option>
-              <option value="kwd">دينار كويتي / فلس</option>
-              <option value="qar">ريال قطري / درهم</option>
-              <option value="egp">جنيه مصري / قرش</option>
-              <option value="none">بدون عملة (أرقام مجردة فقط)</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">صيغة البداية والنهاية</label>
-          <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-              <input type="checkbox" id="add-faqt" checked onchange="runTafqeet()"> إضافة "فقط ... لا غير"
+            <label for="amount" class="form-label">
+              المبلغ أو الرقم المراد تفقيطه <span class="required">*</span>
             </label>
+            <input type="text" id="amount" class="form-control" placeholder="أدخل رقماً مثل: 1250.50 أو ١٢٥٠٫٥٠" value="1250.50" required oninput="runTafqeet()">
+            <small class="form-hint">يدعم الأرقام الإنجليزية والأرقام العربية المشرقية والكسور العشرية.</small>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="currency" class="form-label">العملة المالية الملحقة</label>
+              <select id="currency" class="form-control" onchange="runTafqeet()">
+                <option value="sar" selected>ريال سعودي (هللة)</option>
+                <option value="aed">درهم إماراتي (فلس)</option>
+                <option value="kwd">دينار كويتي (فلس)</option>
+                <option value="qar">ريال قطري (درهم)</option>
+                <option value="bhd">دينار بحريني (فلس)</option>
+                <option value="omr">ريال عماني (بيسة)</option>
+                <option value="egp">جنيه مصري (قرش)</option>
+                <option value="jod">دينار أردني (قرش)</option>
+                <option value="usd">دولار أمريكي (سنت)</option>
+                <option value="eur">يورو أوروبي (سنت)</option>
+                <option value="none">بدون عملة (تفقيط أرقام مجردة فقط)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">خيارات الصياغة القانونية</label>
+              <div style="margin-top: 0.5rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" id="add-faqt" checked onchange="runTafqeet()">
+                  إضافة صيغة "فقط لا غير" (معتمدة للشيكات والعقود)
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+            <button type="submit" class="btn btn-primary" style="flex: 1; min-width: 200px; font-size: 1.05rem; padding: 0.85rem;">
+              تحديث التفقيط
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="resetTafqeet()" style="padding: 0.85rem 1.5rem;">
+              إعادة تعيين
+            </button>
+          </div>
+        </form>
+
+        <div id="tafqeet-result" class="result-box show" aria-live="polite" style="margin-top: 2rem;">
+          <div class="result-title">النص العربي المُفقّط</div>
+          <div class="result-value" id="tafqeet-output" style="font-size: 1.35rem; line-height: 1.8; color: var(--text); padding: 1rem 0; font-family: var(--font-base);">
+            أدخل مبلغاً لعرض التفقيط
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap;">
+            <button type="button" class="btn btn-primary" onclick="copyTafqeet()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              نسخ النص المُفقّط
+            </button>
           </div>
         </div>
-      </form>
+      </div>
 
-      <div id="tafqeet-result" class="result-box show">
-        <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem;">النص العربي المفقط:</div>
-        <div id="tafqeet-output" style="font-size: 1.5rem; font-weight: 700; color: var(--text); line-height: 1.6; margin-bottom: 1.25rem;">
-          أدخل مبلغاً لعرض التفقيط
+      <article class="info-article">
+        <h2>أهمية التفقيط في المحاسبة والمعاملات القانونية</h2>
+        <p>
+          التفقيط هو فن وعلم كتابة الأرقام بالكلمات العربية الفصيحة، وله أهمية كبرى في النظام المصرفي والمحاسبي والتعاملات التجارية لضمان الأمان والنزاهة وتفادي اللبس والتزوير.
+        </p>
+
+        <h3>أبرز حالات استخدام التفقيط:</h3>
+        <ul>
+          <li><strong>تحرير الشيكات البنكية:</strong> تفرض البنوك كتابة المبلغ بالحروف لتأكيد تطابقه مع الأرقام الحسابية، وتعتمد المبلغ المكتوب بالحروف في حال وجود أي اختلاف.</li>
+          <li><strong>العقود والاتفاقيات:</strong> كعقود البيع، الإيجار، وتأسيس الشركات لتوثيق الالتزامات المالية بوضوح لا يقبل الشك.</li>
+          <li><strong>الفواتير الضريبية وسندات الصرف:</strong> لتوكيد الإجمالي الصافي الخاضع للدفع.</li>
+        </ul>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <div class="footer-brand-logo">
+          <div class="brand-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/></svg>
+          </div>
+          <span class="brand-title">سهّلها</span>
         </div>
-        <div style="display: flex; gap: 0.75rem;">
-          <button type="button" class="btn btn-secondary" onclick="copyTafqeet()">نسخ النص</button>
-        </div>
+        <p class="footer-tagline">أدوات رقمية سريعة ومجانية للمستخدم والأنشطة التجارية في العالم العربي.</p>
+      </div>
+
+      <div class="footer-nav">
+        <h4 class="footer-nav-title">روابط هامة</h4>
+        <ul class="footer-nav-list">
+          <li><a href="/about.html">عن المنصة</a></li>
+          <li><a href="/contact.html">اتصل بنا</a></li>
+          <li><a href="/privacy.html">سياسة الخصوصية</a></li>
+          <li><a href="/terms.html">شروط الاستخدام</a></li>
+          <li><a href="/disclaimer.html">إخلاء المسؤولية</a></li>
+        </ul>
       </div>
     </div>
-
-    <article class="info-article">
-      <h2>ما هو التفقيط ولماذا يُستخدم؟</h2>
-      <p><strong>التفقيط (Tafqeet)</strong> هو كتابة الأرقام المالية بالحروف والكلمات العربية لمنع التزوير أو التلاعب في المبالغ المدونة على الشيكات، والعقود، والفواتير الضريبية، وسندات القبض.</p>
-      <p>تعتمد الأداة القواعد النحوية السليمة للغة العربية من حيث تمييز العدد وتذكيره وتأنيثه بحسب جنس العملة (مثل الريال مذكر والهللة مؤنث)، مع دعم فواصل الآحاد والعشرات والمئات والآلاف والملايين والمليارات.</p>
-    </article>
-  </main>
+    <div class="container footer-bottom">
+      <p>© 2026 سهّلها (Sahhilha). جميع الحقوق محفوظة.</p>
+    </div>
+  </footer>
 
   <script>
     const ONES = ['', 'واحد', 'اثنان', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة', 'عشرة', 'أحد عشر', 'اثنا عشر', 'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر', 'ستة عشر', 'سبعة عشر', 'ثمانية عشر', 'تسعة عشر'];
     const TENS = ['', '', 'عشرون', 'ثلاثون', 'أربعون', 'خمسون', 'ستون', 'سبعون', 'ثمانون', 'تسعون'];
     const HUNDREDS = ['', 'مائة', 'مئتان', 'ثلاثمائة', 'أربعمائة', 'خمسمائة', 'ستمائة', 'سبعمائة', 'ثمانمائة', 'تسعمائة'];
+
+    function parseArabicNumber(input) {
+      if (!input) return NaN;
+      const standard = input.toString()
+        .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+        .replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d))
+        .replace(/٫/g, '.')
+        .replace(/,/g, '')
+        .trim();
+      return parseFloat(standard);
+    }
 
     function convertGroup(num) {
       if (num === 0) return '';
@@ -259,7 +296,7 @@
 
     function tafqeetNumber(num) {
       if (num === 0) return 'صفر';
-      num = Math.floor(num);
+      num = Math.floor(Math.abs(num));
       let parts = [];
 
       const billions = Math.floor(num / 1e9);
@@ -272,12 +309,16 @@
       if (billions > 0) {
         if (billions === 1) parts.push('مليار');
         else if (billions === 2) parts.push('ملياران');
+        else if (billions >= 3 && billions <= 10) parts.push(convertGroup(billions) + ' مليارات');
+        else if (billions >= 11 && billions <= 99) parts.push(convertGroup(billions) + ' ملياراً');
         else parts.push(convertGroup(billions) + ' مليار');
       }
 
       if (millions > 0) {
         if (millions === 1) parts.push('مليون');
         else if (millions === 2) parts.push('مليونان');
+        else if (millions >= 3 && millions <= 10) parts.push(convertGroup(millions) + ' ملايين');
+        else if (millions >= 11 && millions <= 99) parts.push(convertGroup(millions) + ' مليوناً');
         else parts.push(convertGroup(millions) + ' مليون');
       }
 
@@ -285,6 +326,7 @@
         if (thousands === 1) parts.push('ألف');
         else if (thousands === 2) parts.push('ألفان');
         else if (thousands >= 3 && thousands <= 10) parts.push(convertGroup(thousands) + ' آلاف');
+        else if (thousands >= 11 && thousands <= 99) parts.push(convertGroup(thousands) + ' ألفاً');
         else parts.push(convertGroup(thousands) + ' ألف');
       }
 
@@ -295,37 +337,74 @@
       return parts.join(' و ');
     }
 
+    const CURRENCY_DICT = {
+      sar: { decimals: 2, main: { s: 'ريال سعودي', d: 'ريالان سعوديان', p: 'ريالات سعودية', acc: 'ريالاً سعودياً', fem: false }, sub: { s: 'هللة واحدة', d: 'هللتان', p: 'هللات', acc: 'هللة', fem: true } },
+      aed: { decimals: 2, main: { s: 'درهم إماراتي', d: 'درهمان إماراتيان', p: 'دراهم إماراتية', acc: 'درهماً إماراتياً', fem: false }, sub: { s: 'فلس واحد', d: 'فلسان', p: 'فلوس', acc: 'فلساً', fem: false } },
+      kwd: { decimals: 3, main: { s: 'دينار كويتي', d: 'ديناران كويتيان', p: 'دنانير كويتية', acc: 'ديناراً كويتياً', fem: false }, sub: { s: 'فلس واحد', d: 'فلسان', p: 'فلوس', acc: 'فلساً', fem: false } },
+      qar: { decimals: 2, main: { s: 'ريال قطري', d: 'ريالان قطريان', p: 'ريالات قطرية', acc: 'ريالاً قطرياً', fem: false }, sub: { s: 'درهم واحد', d: 'درهمان', p: 'دراهم', acc: 'درهماً', fem: false } },
+      bhd: { decimals: 3, main: { s: 'دينار بحريني', d: 'ديناران بحرينيان', p: 'دنانير بحرينية', acc: 'ديناراً بحرينياً', fem: false }, sub: { s: 'فلس واحد', d: 'فلسان', p: 'فلوس', acc: 'فلساً', fem: false } },
+      omr: { decimals: 3, main: { s: 'ريال عماني', d: 'ريالان عمانيان', p: 'ريالات عمانية', acc: 'ريالاً عمانياً', fem: false }, sub: { s: 'بيسة واحدة', d: 'بيستان', p: 'بيسات', acc: 'بيسة', fem: true } },
+      egp: { decimals: 2, main: { s: 'جنيه مصري', d: 'جنيهان مصريان', p: 'جنيهات مصرية', acc: 'جنيهاً مصرياً', fem: false }, sub: { s: 'قرش واحد', d: 'قرشان', p: 'قروش', acc: 'قرشاً', fem: false } },
+      jod: { decimals: 3, main: { s: 'دينار أردني', d: 'ديناران أردنيان', p: 'دنانير أردنية', acc: 'ديناراً أردنياً', fem: false }, sub: { s: 'قرش واحد', d: 'قرشان', p: 'قروش', acc: 'قرشاً', fem: false } },
+      usd: { decimals: 2, main: { s: 'دولار أمريكي', d: 'دولاران أمريكيان', p: 'دولارات أمريكية', acc: 'دولاراً أمريكياً', fem: false }, sub: { s: 'سنت واحد', d: 'سنتان', p: 'سنتات', acc: 'سنتاً', fem: false } },
+      eur: { decimals: 2, main: { s: 'يورو', d: 'يورو', p: 'يورو', acc: 'يورو', fem: false }, sub: { s: 'سنت واحد', d: 'سنتان', p: 'سنتات', acc: 'سنتاً', fem: false } }
+    };
+
+    function formatCurrencyName(amount, currencyKey, isSubUnit = false) {
+      if (!CURRENCY_DICT[currencyKey]) return '';
+      const c = isSubUnit ? CURRENCY_DICT[currencyKey].sub : CURRENCY_DICT[currencyKey].main;
+      const absAmount = Math.abs(amount);
+      const rem100 = absAmount % 100;
+
+      if (absAmount === 1) return c.s;
+      if (absAmount === 2) return c.d;
+      if (rem100 >= 3 && rem100 <= 10) return c.p;
+      if (rem100 >= 11 && rem100 <= 99) return c.acc;
+      return c.s;
+    }
+
     function runTafqeet() {
-      const val = parseFloat(document.getElementById('amount').value);
+      const rawInput = document.getElementById('amount').value;
+      const val = parseArabicNumber(rawInput);
+
       if (isNaN(val)) {
-        document.getElementById('tafqeet-output').textContent = 'أدخل مبلغاً لعرض التفقيط';
+        document.getElementById('tafqeet-output').textContent = 'يرجى إدخال مبلغ صحيح';
         return;
       }
 
       const currency = document.getElementById('currency').value;
       const addFaqt = document.getElementById('add-faqt').checked;
 
-      const intPart = Math.floor(val);
-      const fracPart = Math.round((val - intPart) * 100);
+      const isNegative = val < 0;
+      const absVal = Math.abs(val);
 
-      const currencies = {
-        sar: { main: 'ريال سعودي', sub: 'هللة' },
-        usd: { main: 'دولار أمريكي', sub: 'سنت' },
-        aed: { main: 'درهم إماراتي', sub: 'فلس' },
-        kwd: { main: 'دينار كويتي', sub: 'فلس' },
-        qar: { main: 'ريال قطري', sub: 'درهم' },
-        egp: { main: 'جنيه مصري', sub: 'قرش' },
-        none: { main: '', sub: '' }
-      };
+      const curObj = CURRENCY_DICT[currency] || { decimals: 2 };
+      const multiplier = Math.pow(10, curObj.decimals);
+      const intPart = Math.floor(absVal);
+      const fracPart = Math.round((absVal - intPart) * multiplier);
 
-      const c = currencies[currency] || currencies.none;
+      let result = '';
+      if (isNegative) {
+        result += 'سالب ';
+      }
 
-      let result = tafqeetNumber(intPart);
-      if (c.main) result += ' ' + c.main;
+      // Format main amount
+      if (intPart === 0 && fracPart === 0) {
+        result += 'صفر';
+      } else if (intPart > 0) {
+        result += tafqeetNumber(intPart);
+        if (currency !== 'none') {
+          result += ' ' + formatCurrencyName(intPart, currency, false);
+        }
+      }
 
+      // Format sub-unit
       if (fracPart > 0) {
-        result += ' و ' + tafqeetNumber(fracPart);
-        if (c.sub) result += ' ' + c.sub;
+        if (intPart > 0) result += ' و ';
+        result += tafqeetNumber(fracPart);
+        if (currency !== 'none') {
+          result += ' ' + formatCurrencyName(fracPart, currency, true);
+        }
       }
 
       if (addFaqt) {
@@ -335,19 +414,37 @@
       document.getElementById('tafqeet-output').textContent = result;
     }
 
+    function resetTafqeet() {
+      document.getElementById('amount').value = '';
+      document.getElementById('tafqeet-output').textContent = 'أدخل مبلغاً لعرض التفقيط';
+      if (window.App && window.App.showToast) {
+        window.App.showToast('تمت إعادة ضبط الأداة', 'info');
+      }
+    }
+
     function copyTafqeet() {
       const txt = document.getElementById('tafqeet-output').textContent;
-      navigator.clipboard.writeText(txt).then(() => alert('تم نسخ النص بنجاح!'));
-    }
-  </script>
+      if (!txt || txt === 'يرجى إدخال مبلغ صحيح') return;
 
-  <footer class="site-footer" role="contentinfo">
-    <div class="container" style="text-align:center;">
-      <p>© 2026 سهّلها — جميع الحقوق محفوظة</p>
-    </div>
-  </footer>
+      if (typeof ShareUtils !== 'undefined') {
+        ShareUtils.copyToClipboard(txt, 'تم نسخ النص المُفقّط بنجاح');
+      } else {
+        navigator.clipboard.writeText(txt).then(() => {
+          if (window.App && window.App.showToast) {
+            window.App.showToast('تم نسخ النص المُفقّط بنجاح', 'success');
+          } else {
+            alert('تم نسخ النص بنجاح!');
+          }
+        });
+      }
+    }
+
+    // Run initial on page load
+    runTafqeet();
+  </script>
   <script src="/config/config.js"></script>
   <script src="/assets/js/storage.js"></script>
   <script src="/assets/js/navigation.js"></script>
+  <script src="/assets/js/share.js"></script>
 </body>
 </html>
