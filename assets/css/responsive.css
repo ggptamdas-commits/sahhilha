@@ -3,6 +3,22 @@
  * Breakpoints: 320px, 360px, 390px, 430px, 768px, 1024px, 1280px, 1440px+
  */
 
+/* Universal Zero-Overflow Lock */
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden !important;
+  position: relative;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+img, svg, canvas, video, table {
+  max-width: 100%;
+}
+
 /* Desktops & Large Screens (1024px to 1440px+) */
 @media (min-width: 1025px) {
   .hamburger-btn {
@@ -14,18 +30,18 @@
 @media (max-width: 1024px) {
   .category-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
   }
 
-  .tools-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .tools-grid,
+  .tool-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.25rem;
   }
 
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .articles-grid {
-    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
   }
 
   .footer-grid {
@@ -54,6 +70,7 @@
   /* Header adjustments */
   .header-container {
     height: 64px;
+    padding: 0 1rem;
   }
 
   .brand-tagline,
@@ -73,21 +90,25 @@
   }
 
   /* Hero Adjustments */
+  .hero-section,
   .hero {
-    padding: 3.5rem 0 3rem;
+    padding: 3rem 0 2.5rem;
   }
 
+  .hero-title,
   .hero h1 {
-    font-size: 2rem;
+    font-size: 1.85rem;
   }
 
+  .hero-description,
   .hero p {
-    font-size: 1rem;
-    margin-bottom: 1.75rem;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
   }
 
+  .search-input-wrap,
   .search-box {
-    padding: 0.35rem 0.5rem 0.35rem 0.85rem;
+    padding: 0.35rem 0.75rem;
   }
 
   .search-btn {
@@ -95,8 +116,9 @@
     font-size: 0.9rem;
   }
 
+  /* Grids Collapse Smoothly to Single Column on Mobile */
   .category-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
 
@@ -110,19 +132,28 @@
     height: 44px;
   }
 
-  .tools-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+  .tools-grid,
+  .tool-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+
+  .tools-filter-actions {
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+  }
+
+  .tools-filter-actions .btn-filter {
+    flex-shrink: 0;
   }
 
   .features-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
-  }
-
-  .articles-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
   }
 
   .footer-grid {
@@ -137,7 +168,7 @@
   /* Tool Cards & Forms on Mobile */
   .tool-layout {
     margin-top: 1rem;
-    padding: 0 1rem;
+    padding: 0 0.85rem;
   }
 
   .tool-card-box,
@@ -156,6 +187,7 @@
   .form-grid,
   .duration-grid {
     grid-template-columns: 1fr !important;
+    gap: 1rem;
   }
 
   .btn {
@@ -212,17 +244,14 @@
 
 /* Small Smartphone screens (max-width: 430px) */
 @media (max-width: 430px) {
+  .hero-title,
   .hero h1 {
-    font-size: 1.75rem;
-  }
-
-  .category-grid {
-    grid-template-columns: 1fr;
+    font-size: 1.65rem;
   }
 
   .search-chip {
     padding: 0.3rem 0.65rem;
-    font-size: 0.775rem;
+    font-size: 0.75rem;
   }
 }
 
@@ -238,8 +267,15 @@
     font-size: 1.1rem;
   }
 
+  .hero-title,
   .hero h1 {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
+  }
+
+  .tool-card-box,
+  .calculator-card,
+  .info-article {
+    padding: 1.25rem 0.75rem;
   }
 
   .btn {
