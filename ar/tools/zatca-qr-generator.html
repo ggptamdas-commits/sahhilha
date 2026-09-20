@@ -3,12 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>مولد رمز QR للفاتورة الإلكترونية (ZATCA) | سهّلها</title>
-  <meta name="description" content="مولد كود QR للفاتورة الإلكترونية السعودية المبسطة بتشفير TLV Base64.">
+  <title>مولد رمز QR الفاتورة الإلكترونية (ZATCA المرحلة الأولى) | سهّلها</title>
+  <meta name="description" content="أداة مجانية لتوليد رمز QR للفواتير الضريبية المبسطة بتشفير TLV Base64 المعتمد لهيئة الزكاة والضريبة والجمارك (ZATCA) في السعودية فورياً وبأعلى خصوصية محلياً.">
+  <meta name="keywords" content="zatca, هيئة الزكاة, فاتورة الكترونية, باركود فاتورة, tlv base64, qr زكاة, ضريبة القيمة المضافة, فاتورة مبسطة">
+  <link rel="canonical" href="https://sahhilha.pages.dev/ar/tools/zatca-qr-generator.html">
   <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
   <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/responsive.css">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sahhilha.pages.dev/ar/tools/zatca-qr-generator.html">
+  <meta property="og:title" content="مولد رمز QR الفاتورة الإلكترونية (ZATCA) | سهّلها">
+  <meta property="og:description" content="توليد باركود الفاتورة الإلكترونية الضريبية المبسطة بتشفير TLV Base64 المعتمد محلياً في متصفحك.">
+  <meta property="og:site_name" content="سهّلها - Sahhilha">
+  <meta property="og:locale" content="ar_SA">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="مولد رمز QR الفاتورة الإلكترونية (ZATCA) | سهّلها">
+  <meta name="twitter:description" content="أنشئ وحمّل كود QR للفاتورة الضريبية وفق معايير هيئة الزكاة والضريبة والجمارك في السعودية.">
+
+  <!-- Structured Data: WebApplication, BreadcrumbList, FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "مولد كود QR الفاتورة الإلكترونية ZATCA",
+        "url": "https://sahhilha.pages.dev/ar/tools/zatca-qr-generator.html",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "SAR"
+        },
+        "description": "أداة لتوليد باركود QR للفواتير الضريبية المبسطة بترميز TLV Base64 المتوافق مع هيئة الزكاة والضريبة والجمارك."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "الرئيسية",
+            "item": "https://sahhilha.pages.dev/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "أدوات QR",
+            "item": "https://sahhilha.pages.dev/#qr"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "مولد QR الفاتورة الإلكترونية",
+            "item": "https://sahhilha.pages.dev/ar/tools/zatca-qr-generator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "ما هي الحقول الإلزامية في كود QR للفاتورة الإلكترونية المبسطة؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "تتطلب المرحلة الأولى خمسة حقول مشفرة بنظام TLV: (1) اسم المورد، (2) الرقم الضريبي، (3) تاريخ ووقت إصدار الفاتورة بصيغة ISO 8601، (4) إجمالي الفاتورة شاملاً الضريبة، و(5) إجمالي ضريبة القيمة المضافة."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "هل يتم إرسال بيانات الفاتورة إلى أي خوادم خارجية؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "لا، تتم معالجة تشفير TLV وتوليد رمز الاستجابة السريعة بالكامل محلياً داخل متصفحك دون إرسال أي بيانات إلى خوادمنا لحماية سرية أعمالك."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <style>
     .tool-layout {
       max-width: 900px;
@@ -76,12 +158,13 @@
       .tool-card-box { padding: 1.5rem 1.25rem; }
     }
     .result-box {
-      background: linear-gradient(135deg, var(--primary-light) 0%, var(--surface-alt) 100%);
+      background: var(--surface-alt);
       border: 1px solid var(--primary-border);
       border-radius: var(--radius-lg);
-      padding: 1.75rem;
+      padding: 2rem;
       margin-top: 2rem;
       display: none;
+      text-align: center;
     }
     .result-box.show {
       display: block;
@@ -91,14 +174,31 @@
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .result-value {
-      font-size: 2.25rem;
-      font-weight: 800;
-      color: var(--primary-dark);
-      line-height: 1.2;
+    #qrcode-container {
+      display: flex;
+      justify-content: center;
+      margin: 1.5rem 0;
     }
-    [data-theme="dark"] .result-value {
-      color: var(--primary);
+    #qrcode-container canvas {
+      border: 10px solid #ffffff;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      max-width: 100%;
+    }
+    .code-snippet {
+      background-color: var(--background);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+      direction: ltr;
+      text-align: left;
+      word-break: break-all;
+      color: var(--text-muted);
+      margin: 1rem 0;
+      max-height: 120px;
+      overflow-y: auto;
     }
     .info-article {
       background-color: var(--surface);
@@ -136,6 +236,7 @@
       color: var(--primary);
     }
   </style>
+  <script src="/assets/js/qrcode.min.js"></script>
 </head>
 <body>
   <header class="site-header" role="banner">
@@ -167,84 +268,146 @@
     <nav class="breadcrumb" aria-label="مسار التنقل">
       <a href="/">الرئيسية</a>
       <span>/</span>
-      <a href="/#categories">أدوات QR</a>
+      <a href="/#qr">أدوات QR</a>
       <span>/</span>
-      <span>مولد QR للفاتورة الإلكترونية ZATCA</span>
+      <span aria-current="page">مولد رمز QR الفاتورة الإلكترونية ZATCA</span>
     </nav>
 
     <div class="tool-card-box">
       <div class="tool-header-section">
-        <span class="tool-badge-pill">هيئة الزكاة والضريبة والجمارك (ZATCA TLV Base64)</span>
-        <h1>مولد رمز QR للفاتورة الإلكترونية المبسطة</h1>
-        <p>أنشئ كود QR مطابق للمواصفات الفنية المعتمدة للمرحلة الأولى في المملكة العربية السعودية بمعيار TLV محلياً في متصفحك دون رفع البيانات لأي خادم.</p>
+        <span class="tool-badge-pill">المملكة العربية السعودية • هيئة الزكاة والضريبة والجمارك</span>
+        <h1>مولد رمز QR للفاتورة الإلكترونية (ZATCA)</h1>
+        <p>أنشئ رمز الاستجابة السريعة (QR Code) للفواتير الضريبية المبسطة بتشفير TLV Base64 المعتمد فورياً ومحلياً على جهازك دون إرسال بياناتك لأي خادم خارجي.</p>
       </div>
 
       <form id="zatca-form" onsubmit="event.preventDefault(); generateZatcaQR();">
-        <div class="form-group">
-          <label class="form-label" for="seller">اسم المنشأة أو المورد (التاجر)</label>
-          <input type="text" id="seller" class="form-control" placeholder="مثال: مؤسسة التقنية الحديثة للتجارة" required>
-        </div>
-
         <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="seller">اسم المنشأة أو المورد (التاجر)</label>
+            <input type="text" id="seller" class="form-control" placeholder="مثال: شركة سهّلها لتقنية المعلومات" required>
+          </div>
           <div class="form-group">
             <label class="form-label" for="vat-no">الرقم الضريبي للمنشأة (15 رقماً)</label>
-            <input type="text" id="vat-no" class="form-control" placeholder="300000000000003" pattern="[0-9]{15}" maxlength="15" required>
+            <input type="text" id="vat-no" class="form-control" placeholder="مثال: 310123456700003" maxlength="15" pattern="3[0-9]{13}3" title="الرقم الضريبي السعودي يتكون من 15 رقماً يبدأ بـ 3 وينتهي بـ 3" required>
+            <small style="font-size:0.8rem; color:var(--text-muted); display:block; margin-top:0.25rem;">الرقم الضريبي النظامي في السعودية يتكون من 15 رقماً تبدأ وتنتهي برقم 3.</small>
           </div>
-          <div class="form-group">
-            <label class="form-label" for="inv-date">تاريخ ووقت الفاتورة</label>
-            <input type="datetime-local" id="inv-date" class="form-control" required>
-          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="inv-date">تاريخ ووقت إصدار الفاتورة</label>
+          <input type="datetime-local" id="inv-date" class="form-control" required>
         </div>
 
         <div class="grid-2">
           <div class="form-group">
-            <label class="form-label" for="total-amount">إجمالي الفاتورة شاملاً الضريبة (ر.س)</label>
-            <input type="number" id="total-amount" class="form-control" placeholder="115.00" step="0.01" min="0" required oninput="calcVatAuto()">
+            <label class="form-label" for="total-amount">المبلغ الإجمالي للفاتورة (شاملاً الضريبة)</label>
+            <input type="number" id="total-amount" class="form-control" placeholder="مثال: 115.00" min="0.01" step="0.01" oninput="calcVatAuto()" required>
           </div>
           <div class="form-group">
             <label class="form-label" for="vat-amount">مبلغ ضريبة القيمة المضافة (15%)</label>
-            <input type="number" id="vat-amount" class="form-control" placeholder="15.00" step="0.01" min="0" required>
+            <input type="number" id="vat-amount" class="form-control" placeholder="مثال: 15.00" min="0" step="0.01" required>
+            <small style="font-size:0.8rem; color:var(--text-muted); display:block; margin-top:0.25rem;">يتم الاحتساب تلقائياً بنسبة 15% ويمكن تعديله يدوياً.</small>
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.05rem; padding: 0.85rem;">
-          إنشاء رمز QR المتوافق مع هيئة الزكاة
-        </button>
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;">
+          <button type="submit" class="btn btn-primary" style="flex:1; min-width:200px; font-size:1.05rem; padding:0.85rem;">
+            توليد كود QR المعتمد
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="resetZatcaForm()" style="padding:0.85rem 1.5rem;">
+            إعادة تعيين
+          </button>
+        </div>
       </form>
 
-      <div id="zatca-result" class="result-box" style="text-align: center;">
-        <h3 style="color: var(--text); margin-bottom: 1rem;">رمز QR الفاتورة الإلكترونية المعتمد</h3>
-        <div id="qrcode-container" style="display: flex; justify-content: center; margin: 1.25rem 0;"></div>
-        
-        <div style="background-color: var(--surface); padding: 1rem; border-radius: var(--radius-md); border: 1px solid var(--border); margin-bottom: 1.25rem; text-align: right; font-family: monospace; font-size: 0.8rem; word-break: break-all;" id="tlv-base64-text"></div>
+      <div id="zatca-result" class="result-box" role="region" aria-live="polite">
+        <h2 style="font-size:1.35rem; color:var(--text); margin-bottom:0.5rem;">رمز QR الفاتورة الإلكترونية المعتمد</h2>
+        <p style="color:var(--text-muted); font-size:0.9rem;">متطابق مع معايير هيئة الزكاة والضريبة والجمارك (المرحلة الأولى - الفاتورة المبسطة).</p>
 
-        <button type="button" class="btn btn-secondary" onclick="copyBase64()">
-          نسخ كود Base64
-        </button>
+        <div id="qrcode-container"></div>
+
+        <div style="display:flex; justify-content:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:1.5rem;">
+          <button type="button" class="btn btn-primary" onclick="downloadQRCodePNG()" style="display:inline-flex; align-items:center; gap:0.5rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            تحميل الرمز بصيغة PNG
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="copyBase64()">
+            نسخ كود TLV Base64
+          </button>
+        </div>
+
+        <div style="text-align:right;">
+          <div style="font-weight:600; font-size:0.9rem; color:var(--text); margin-bottom:0.25rem;">سلسلة TLV المرمزة (Base64 String):</div>
+          <div id="tlv-base64-text" class="code-snippet"></div>
+        </div>
       </div>
     </div>
 
+    <!-- Educational Content on ZATCA QR -->
     <article class="info-article">
-      <h2>ما هي متطلبات رمز QR للفواتير الضريبية المبسطة في السعودية؟</h2>
-      <p>تشترط هيئة الزكاة والضريبة والجمارك (ZATCA) في الفواتير الضريبية المبسطة تضمين رمز QR يحتوي على بنية بيانات مشفرة بصيغة <strong>TLV (Tag-Length-Value)</strong> ثم تحويلها إلى <strong>Base64</strong>.</p>
+      <h2>ما هي متطلبات رمز QR للفواتير الإلكترونية (ZATCA)؟</h2>
+      <p>أطلقت <strong>هيئة الزكاة والضريبة والجمارك</strong> في المملكة العربية السعودية منظومة الفوترة الإلكترونية (فاتورة). وفي الفواتير الضريبية المبسطة (B2C) الصادرة للمستهلكين، يشترط تضمين رمز QR يحتوي على البيانات المشفرة بتنسيق <strong>TLV (Tag-Length-Value)</strong> ثم تحويلها إلى ترميز Base64.</p>
+      
+      <h2>الحقول الخمسة الأساسية (المرحلة الأولى)</h2>
       <ul>
-        <li><strong>Tag 1:</strong> اسم المورد (المنشأة).</li>
-        <li><strong>Tag 2:</strong> الرقم التعريفي لضريبة القيمة المضافة (15 خانة تبدأ وتنتهي برقم 3).</li>
-        <li><strong>Tag 3:</strong> الطابع الزمني وتاريخ الفاتورة (ISO 8601).</li>
-        <li><strong>Tag 4:</strong> إجمالي الفاتورة مع الضريبة.</li>
-        <li><strong>Tag 5:</strong> إجمالي ضريبة القيمة المضافة (VAT Amount).</li>
+        <li><strong>الوسم 1 (Tag 1):</strong> اسم المورد / المنشأة المسجلة.</li>
+        <li><strong>الوسم 2 (Tag 2):</strong> الرقم الضريبي للمورد المكون من 15 رقماً.</li>
+        <li><strong>الوسم 3 (Tag 3):</strong> طابع التاريخ والوقت وفق صيغة ISO 8601 (بدون أجزاء من الثانية).</li>
+        <li><strong>الوسم 4 (Tag 4):</strong> إجمالي الفاتورة شاملاً ضريبة القيمة المضافة بالريال السعودي.</li>
+        <li><strong>الوسم 5 (Tag 5):</strong> إجمالي مبلغ ضريبة القيمة المضافة.</li>
       </ul>
-      <p>جميع العمليات في هذه الأداة تنفذ <strong>محلياً بنسبة 100%</strong> داخل متصفح جهازك ولا يتم حفظ أو إرسال أي تفاصيل فواتير لأي خوادم خارجية.</p>
+
+      <h2>مبدأ الخصوصية والأمان الفائق في سهّلها</h2>
+      <p>الأداة تعمل بنسبة 100% داخل متصفح الإنترنت على جهازك؛ لا يتم حفظ أو نقل بيانات فواتيرك، أو اسم شركتك، أو أرقام مبيعاتك لأي خوادم خارجية حفاظاً على سرية معلوماتك التجارية.</p>
     </article>
+
+    <!-- Related Tools -->
+    <section class="related-tools-section" aria-label="أدوات ذات صلة">
+      <h2 style="font-size:1.25rem; color:var(--text);">أدوات أخرى تهم المحاسبين والشركات</h2>
+      <div class="related-tools-grid">
+        <a href="/ar/tools/tafqeet-converter.html" class="related-tool-card">
+          <div class="related-tool-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;">أداة تفقيط المبالغ والأرقام</div>
+            <div style="font-size:0.85rem; color:var(--text-muted);">كتابة مبالغ الفواتير بالكلمات العربية للفواتير والسندات</div>
+          </div>
+        </a>
+
+        <a href="/ar/tools/end-of-service-calculator.html" class="related-tool-card">
+          <div class="related-tool-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;">حاسبة مكافأة نهاية الخدمة</div>
+            <div style="font-size:0.85rem; color:var(--text-muted);">حساب مستحقات نهاية الخدمة وفق نظام العمل السعودي</div>
+          </div>
+        </a>
+
+        <a href="/ar/tools/menu-engineering-calculator.html" class="related-tool-card">
+          <div class="related-tool-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;">حاسبة هندسة المنيو والمطاعم</div>
+            <div style="font-size:0.85rem; color:var(--text-muted);">تحليل تكاليف وأرباح الأطباق وقوائم الطعام</div>
+          </div>
+        </a>
+      </div>
+    </section>
   </main>
 
-  <script src="/assets/js/qrcode.min.js"></script>
   <script>
     window.addEventListener('DOMContentLoaded', () => {
+      setDefaultDateTime();
+    });
+
+    function setDefaultDateTime() {
       const now = new Date();
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
       document.getElementById('inv-date').value = now.toISOString().slice(0, 16);
-    });
+    }
 
     function calcVatAuto() {
       const total = parseFloat(document.getElementById('total-amount').value) || 0;
@@ -261,9 +424,28 @@
     function generateZatcaQR() {
       const seller = document.getElementById('seller').value.trim();
       const vatNo = document.getElementById('vat-no').value.trim();
-      const invDate = new Date(document.getElementById('inv-date').value).toISOString();
-      const total = parseFloat(document.getElementById('total-amount').value).toFixed(2);
-      const vat = parseFloat(document.getElementById('vat-amount').value).toFixed(2);
+      const rawDate = document.getElementById('inv-date').value;
+      const totalNum = parseFloat(document.getElementById('total-amount').value);
+      const vatNum = parseFloat(document.getElementById('vat-amount').value);
+
+      if (!seller || !vatNo || !rawDate || isNaN(totalNum) || isNaN(vatNum)) {
+        if (window.App && window.App.showToast) {
+          window.App.showToast('يرجى تعبئة جميع حقول الفاتورة بشكل صحيح', 'warning');
+        }
+        return;
+      }
+
+      if (!/^3\d{13}3$/.test(vatNo)) {
+        if (window.App && window.App.showToast) {
+          window.App.showToast('تنبيه: الرقم الضريبي السعودي النظامي يجب أن يتكون من 15 رقماً ويبدأ وينتهي بـ 3', 'warning', 4500);
+        }
+      }
+
+      const dateObj = new Date(rawDate);
+      const invDate = dateObj.toISOString().replace(/\.\d{3}/, '');
+
+      const total = totalNum.toFixed(2);
+      const vat = vatNum.toFixed(2);
 
       const fields = [
         { tag: 1, val: seller },
@@ -280,8 +462,8 @@
         parts.push(bytes);
       }
 
-      let totalLen = parts.reduce((acc, p) => acc + p.length, 0);
-      let merged = new Uint8Array(totalLen);
+      const totalLen = parts.reduce((acc, p) => acc + p.length, 0);
+      const merged = new Uint8Array(totalLen);
       let offset = 0;
       for (const p of parts) {
         merged.set(p, offset);
@@ -294,17 +476,70 @@
       }
       const base64TLV = btoa(binary);
 
+      const qrContainer = document.getElementById('qrcode-container');
+      qrContainer.innerHTML = '';
       new QRCode('qrcode-container', base64TLV);
 
       document.getElementById('tlv-base64-text').textContent = base64TLV;
-      document.getElementById('zatca-result').classList.add('show');
+      const resultBox = document.getElementById('zatca-result');
+      resultBox.classList.add('show');
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      if (window.App && window.App.showToast) {
+        window.App.showToast('تم توليد رمز QR بنجاح وفق معايير ZATCA', 'success');
+      }
+    }
+
+    function downloadQRCodePNG() {
+      const canvas = document.querySelector('#qrcode-container canvas');
+      if (!canvas) {
+        if (window.App && window.App.showToast) {
+          window.App.showToast('يرجى توليد الرمز أولاً للتحميل', 'warning');
+        }
+        return;
+      }
+
+      const dataUrl = canvas.toDataURL('image/png');
+      if (typeof ShareUtils !== 'undefined') {
+        ShareUtils.downloadDataUrl(dataUrl, 'zatca-invoice-qr.png');
+      } else {
+        const a = document.createElement('a');
+        a.href = dataUrl;
+        a.download = 'zatca-invoice-qr.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+
+      if (window.App && window.App.showToast) {
+        window.App.showToast('تم تحميل صورة الرمز بنجاح', 'success');
+      }
     }
 
     function copyBase64() {
       const text = document.getElementById('tlv-base64-text').textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        alert('تم نسخ كود Base64 بنجاح!');
-      });
+      if (!text) return;
+
+      if (typeof ShareUtils !== 'undefined') {
+        ShareUtils.copyToClipboard(text, 'تم نسخ كود Base64 بنجاح');
+      } else {
+        navigator.clipboard.writeText(text).then(() => {
+          if (window.App && window.App.showToast) {
+            window.App.showToast('تم نسخ كود Base64 بنجاح', 'success');
+          } else {
+            alert('تم نسخ كود Base64 بنجاح!');
+          }
+        });
+      }
+    }
+
+    function resetZatcaForm() {
+      document.getElementById('zatca-form').reset();
+      setDefaultDateTime();
+      document.getElementById('zatca-result').classList.remove('show');
+      if (window.App && window.App.showToast) {
+        window.App.showToast('تمت إعادة ضبط النموذج', 'info');
+      }
     }
   </script>
 
@@ -316,5 +551,6 @@
   <script src="/config/config.js"></script>
   <script src="/assets/js/storage.js"></script>
   <script src="/assets/js/navigation.js"></script>
+  <script src="/assets/js/share.js"></script>
 </body>
 </html>
