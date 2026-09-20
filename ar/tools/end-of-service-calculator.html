@@ -4,11 +4,101 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>حاسبة مكافأة نهاية الخدمة (نظام العمل السعودي) | سهّلها</title>
-  <meta name="description" content="احسب مكافأة نهاية الخدمة للعاملين في السعودية وفق المادتين 84 و85 بدقة.">
+  <meta name="description" content="احسب مستحقات مكافأة نهاية الخدمة للعاملين في السعودية وفق المادتين 84 و85 من نظام العمل السعودي بدقة بناءً على الأجر ونوع العقد وسبب انتهاء العلاقة العمالية.">
+  <meta name="keywords" content="حاسبة مكافأة نهاية الخدمة, نظام العمل السعودي, المادة 84, المادة 85, استقالة, نهاية الخدمة, حساب مستحقات, وزارة الموارد البشرية">
+  <link rel="canonical" href="https://sahhilha.pages.dev/ar/tools/end-of-service-calculator.html">
   <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
   <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/responsive.css">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sahhilha.pages.dev/ar/tools/end-of-service-calculator.html">
+  <meta property="og:title" content="حاسبة مكافأة نهاية الخدمة (نظام العمل السعودي) | سهّلها">
+  <meta property="og:description" content="أداة مجانية لحساب مستحقات مكافأة نهاية الخدمة وفقاً لنظام العمل السعودي ولائحة وزارة الموارد البشرية.">
+  <meta property="og:site_name" content="سهّلها - Sahhilha">
+  <meta property="og:locale" content="ar_SA">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="حاسبة مكافأة نهاية الخدمة (نظام العمل السعودي) | سهّلها">
+  <meta name="twitter:description" content="احسب مستحقات نهاية الخدمة التقديرية بالسنوات والأشهر والأيام فورياً ومجاناً.">
+
+  <!-- Structured Data: WebApplication, BreadcrumbList, FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "حاسبة مكافأة نهاية الخدمة في السعودية",
+        "url": "https://sahhilha.pages.dev/ar/tools/end-of-service-calculator.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "SAR"
+        },
+        "description": "حاسبة تفاعلية لحساب مكافأة نهاية الخدمة للموظفين والعمال في المملكة العربية السعودية طبقاً لنظام العمل."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "الرئيسية",
+            "item": "https://sahhilha.pages.dev/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "أدوات السعودية",
+            "item": "https://sahhilha.pages.dev/#saudi"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "حاسبة نهاية الخدمة",
+            "item": "https://sahhilha.pages.dev/ar/tools/end-of-service-calculator.html"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "ما هو الأجر المعتمد في حساب مكافأة نهاية الخدمة؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "يُعتمد الأجر الفعلي الأخير (الراتب الأساسي مضافاً إليه جميع البدلات الثابتة كبدل السكن والمواصلات والعمولات الثابتة) وفقاً للمادة الثانية من نظام العمل السعودي."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "كم يستحق العامل من مكافأة نهاية الخدمة عند الاستقالة؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "وفق المادة 85: إذا كانت الخدمة أقل من سنتين فلا يستحق شيئاً، ومن سنتين إلى أقل من 5 سنوات يستحق ثلث المكافأة، ومن 5 إلى أقل من 10 سنوات يستحق ثلثيها، وإذا بلغت الخدمة 10 سنوات أو أكثر يستحق المكافأة كاملة."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "هل يستحق العامل مكافأة عن أجزاء السنة؟",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "نعم، يستحق العامل مكافأة عن أجزاء السنة (الأشهر والأيام) بنسبة ما قضاه منها في العمل استناداً للمادة 84 من نظام العمل."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
   <style>
     .tool-layout {
       max-width: 900px;
@@ -71,8 +161,13 @@
       grid-template-columns: 1fr 1fr;
       gap: 1.25rem;
     }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
     @media (max-width: 640px) {
-      .grid-2 { grid-template-columns: 1fr; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
       .tool-card-box { padding: 1.5rem 1.25rem; }
     }
     .result-box {
@@ -92,13 +187,22 @@
       to { opacity: 1; transform: translateY(0); }
     }
     .result-value {
-      font-size: 2.25rem;
+      font-size: 2.35rem;
       font-weight: 800;
       color: var(--primary-dark);
       line-height: 1.2;
     }
     [data-theme="dark"] .result-value {
       color: var(--primary);
+    }
+    .breakdown-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin-top: 1.25rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
     }
     .info-article {
       background-color: var(--surface);
@@ -167,16 +271,16 @@
     <nav class="breadcrumb" aria-label="مسار التنقل">
       <a href="/">الرئيسية</a>
       <span>/</span>
-      <a href="/#categories">أدوات السعودية</a>
+      <a href="/#saudi">أدوات السعودية</a>
       <span>/</span>
-      <span>حاسبة مكافأة نهاية الخدمة</span>
+      <span aria-current="page">حاسبة مكافأة نهاية الخدمة</span>
     </nav>
 
     <div class="tool-card-box">
       <div class="tool-header-section">
-        <span class="tool-badge-pill">نظام العمل السعودي (المادة 84 والمادة 85)</span>
+        <span class="tool-badge-pill">نظام العمل السعودي (المادتين 84 و 85)</span>
         <h1>حاسبة مكافأة نهاية الخدمة</h1>
-        <p>احسب مستحقات مكافأة نهاية الخدمة النظامية بدقة بناءً على نوع العقد، سبب انتهاء العلاقة العمالية، والأجر الأخير.</p>
+        <p>احسب بدقة مستحقات مكافأة نهاية الخدمة النظامية بناءً على الأجر الشهري الأخير، نوع العقد، مدة الخدمة (بالسنوات والأشهر والأيام)، وسبب انتهاء العلاقة التعاقدية.</p>
       </div>
 
       <form id="eos-form" onsubmit="event.preventDefault(); calculateEOS();">
@@ -184,115 +288,251 @@
           <div class="form-group">
             <label class="form-label" for="wage">الراتب الفعلي الأخير (الأساسي + البدلات الثابتة)</label>
             <input type="number" id="wage" class="form-control" placeholder="مثال: 8000" min="1" step="0.01" required>
+            <small style="color:var(--text-muted); font-size:0.8rem; display:block; margin-top:0.25rem;">يشمل الأساسي وبدل السكن والنقل وأي بدلات دورية مستمرة.</small>
           </div>
           <div class="form-group">
             <label class="form-label" for="contract-type">نوع عقد العمل</label>
             <select id="contract-type" class="form-control">
-              <option value="fixed">عقد محدد المدة</option>
-              <option value="unspecified">عقد غير محدد المدة</option>
+              <option value="unspecified">عقد غير محدد المدة (دائم / غير محدد)</option>
+              <option value="fixed">عقد محدد المدة (ينتهي بتاريخ محدد)</option>
             </select>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="reason">سبب انتهاء العلاقة العمالية</label>
+          <label class="form-label" for="reason">سبب انتهاء العلاقة التعاقدية</label>
           <select id="reason" class="form-control">
-            <option value="terminated">انتهاء مدة العقد أو فسخه من قبل صاحب العمل (استحقاق كامل)</option>
-            <option value="resignation">استقالة العامل (تخضع لنسب سنوات الخدمة المادة 85)</option>
-            <option value="force_majeure">فسخ العقد لظرف طارئ أو قوة قاهرة (استحقاق كامل)</option>
-            <option value="female_leave">استقالة العاملة خلال 6 أشهر من الزواج أو 3 أشهر من الوضع (كامل)</option>
+            <option value="terminated">إنهاء العقد من قبل صاحب العمل أو انتهاء مدته (استحقاق كامل 100%)</option>
+            <option value="resignation">استقالة العامل (تخضع لنسب سنوات الخدمة وفق المادة 85)</option>
+            <option value="force_majeure">فسخ العقد لظرف طارئ أو قوة قاهرة خارجة عن الإرادة (استحقاق كامل 100%)</option>
+            <option value="female_leave">استقالة العاملة خلال 6 أشهر من الزواج أو 3 أشهر من الوضع (المادة 87 - كامل 100%)</option>
           </select>
         </div>
 
-        <div class="grid-2">
-          <div class="form-group">
-            <label class="form-label" for="years">سنوات الخدمة</label>
-            <input type="number" id="years" class="form-control" placeholder="عدد السنوات" min="0" value="3" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="months">الأشهر الإضافية</label>
-            <input type="number" id="months" class="form-control" placeholder="عدد الأشهر" min="0" max="11" value="0">
+        <div class="form-group">
+          <label class="form-label">مدة الخدمة الإجمالية لدى صاحب العمل</label>
+          <div class="grid-3">
+            <div>
+              <input type="number" id="years" class="form-control" placeholder="السنوات" min="0" value="3" required>
+              <span style="font-size:0.8rem; color:var(--text-muted); display:block; margin-top:0.25rem;">سنوات كاملة</span>
+            </div>
+            <div>
+              <input type="number" id="months" class="form-control" placeholder="الأشهر" min="0" max="11" value="0">
+              <span style="font-size:0.8rem; color:var(--text-muted); display:block; margin-top:0.25rem;">أشهر إضافية</span>
+            </div>
+            <div>
+              <input type="number" id="days" class="form-control" placeholder="الأيام" min="0" max="30" value="0">
+              <span style="font-size:0.8rem; color:var(--text-muted); display:block; margin-top:0.25rem;">أيام إضافية</span>
+            </div>
           </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.05rem; padding: 0.85rem;">
-          احسب المكافأة الآن
-        </button>
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.5rem;">
+          <button type="submit" class="btn btn-primary" style="flex:1; min-width:200px; font-size:1.05rem; padding:0.85rem;">
+            احسب المكافأة الآن
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="resetEOSForm()" style="padding:0.85rem 1.5rem;">
+            إعادة تعيين
+          </button>
+        </div>
       </form>
 
       <div id="eos-result" class="result-box" role="region" aria-live="polite">
-        <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem;">مبلغ مكافأة نهاية الخدمة التقديري:</div>
+        <div style="font-size: 0.95rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem;">مبلغ مكافأة نهاية الخدمة الصافي المستحق:</div>
         <div id="eos-total" class="result-value">0.00 ر.س</div>
-        <div id="eos-notes" style="margin-top: 1rem; font-size: 0.9rem; line-height: 1.6; color: var(--text);"></div>
+        
+        <div class="breakdown-card" id="eos-notes"></div>
+
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.25rem;">
+          <button type="button" class="btn btn-secondary" onclick="window.print()">طباعة التقرير</button>
+          <button type="button" class="btn btn-secondary" onclick="copyEOSSummary()">نسخ ملخص الحسبة</button>
+        </div>
       </div>
     </div>
 
+    <!-- Legal & Educational Details -->
     <article class="info-article">
-      <h2>كيف تُحسب مكافأة نهاية الخدمة وفق النظام السعودي؟</h2>
-      <p>تنص <strong>المادة 84</strong> من نظام العمل السعودي على أنه إذا انتهت علاقة العمل، وجب على صاحب العمل أن يدفع للعامل مكافأة عن مدة خدمته تحسب على أساس:</p>
+      <h2>كيف تُحسب مكافأة نهاية الخدمة طبقاً لنظام العمل السعودي؟</h2>
+      <p>تنص <strong>المادة الرابعة والثمانون (84)</strong> من نظام العمل في المملكة العربية السعودية على أنه عند انتهاء علاقة العمل يجب على صاحب العمل دفع مكافأة محسوبة وفق القواعد التالية:</p>
       <ul>
-        <li><strong>السنوات الخمس الأولى:</strong> أجر نصف شهر عن كل سنة من السنوات الخمس الأولى.</li>
-        <li><strong>السنوات التالية:</strong> أجر شهر كامل عن كل سنة من السنوات التالية للخمس الأولى.</li>
-        <li>يستحق العامل مكافأة عن أجزاء السنة بنسبة ما قضاه منها في العمل.</li>
+        <li><strong>السنوات الخمس الأولى:</strong> أجر نصف شهر (50% من الأجر الشهري الأخير) عن كل سنة من السنوات الخمس الأولى.</li>
+        <li><strong>السنوات التالية:</strong> أجر شهر كامل (100% من الأجر الشهري الأخير) عن كل سنة تلي السنوات الخمس الأولى.</li>
+        <li><strong>أجزاء السنة:</strong> يستحق العامل مكافأة عن أجزاء السنة (أشهر وأيام) بنسبة ما قضاه منها في العمل دون أي نقصان.</li>
       </ul>
 
-      <h2>حالة استقالة العامل (المادة 85)</h2>
-      <p>في حال كان سبب انتهاء الخدمة هو استقالة العامل في العقود غير المحددة، يُستحق التالي:</p>
+      <h2>أحكام استقالة العامل (المادة 85)</h2>
+      <p>في العقود غير محددة المدة، إذا أنهى العامل العقد من طرفه بالاستقالة النظامية، يتحدد استحقاقه حسب فترة الخدمة:</p>
       <ul>
-        <li><strong>أقل من سنتين:</strong> لا يستحق العامل أي مكافأة.</li>
-        <li><strong>من سنتين إلى أقل من 5 سنوات:</strong> يستحق ثلث المكافأة (33.3%).</li>
-        <li><strong>من 5 سنوات إلى أقل من 10 سنوات:</strong> يستحق ثلثي المكافأة (66.6%).</li>
-        <li><strong>10 سنوات فأكثر:</strong> يستحق المكافأة كاملة (100%).</li>
+        <li><strong>أقل من سنتين:</strong> لا يستحق العامل أي مكافأة (0%).</li>
+        <li><strong>من سنتين وحتى أقل من 5 سنوات:</strong> يستحق العامل ثلث المكافأة (33.33%).</li>
+        <li><strong>من 5 سنوات وحتى أقل من 10 سنوات:</strong> يستحق العامل ثلثي المكافأة (66.67%).</li>
+        <li><strong>10 سنوات فأكثر:</strong> يستحق العامل المكافأة كاملة (100%).</li>
       </ul>
+
+      <h2>استثناءات الاستحقاق الكامل عند الاستقالة (المادة 87)</h2>
+      <p>تستحق العاملة المكافأة كاملة في حال أنهت العقد خلال 6 أشهر من تاريخ عقد زواجها، أو خلال 3 أشهر من تاريخ وضع حملها. كما يستحق العامل المكافأة كاملة إذا ترك العمل نتيجة قوة قاهرة أو ظرف طارئ خارج عن إرادته.</p>
     </article>
+
+    <!-- Related Tools -->
+    <section class="related-tools-section" aria-label="أدوات ذات صلة">
+      <h2 style="font-size:1.25rem; color:var(--text);">أدوات مالية ووظيفية أخرى تهمك</h2>
+      <div class="related-tools-grid">
+        <a href="/ar/tools/tafqeet-converter.html" class="related-tool-card">
+          <div class="related-tool-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;">أداة تفقيط المبالغ والأرقام</div>
+            <div style="font-size:0.85rem; color:var(--text-muted);">تحويل المبالغ المحسوبة إلى كلمات عربية مكتوبة</div>
+          </div>
+        </a>
+
+        <a href="/ar/tools/zatca-qr-generator.html" class="related-tool-card">
+          <div class="related-tool-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 14h3v3h-3z"/><path d="M20 14v3"/><path d="M17 20h3"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;">مولد QR الفاتورة الإلكترونية ZATCA</div>
+            <div style="font-size:0.85rem; color:var(--text-muted);">توليد كود الفواتير الضريبية المبسطة بتشفير TLV</div>
+          </div>
+        </a>
+
+        <a href="/ar/tools/menu-engineering-calculator.html" class="related-tool-card">
+          <div class="related-tool-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700;">حاسبة هندسة المنيو والمطاعم</div>
+            <div style="font-size:0.85rem; color:var(--text-muted);">تحليل تكاليف وأرباح الأطباق وتصنيف القائمة</div>
+          </div>
+        </a>
+      </div>
+    </section>
   </main>
 
   <script>
     function calculateEOS() {
       const wage = parseFloat(document.getElementById('wage').value) || 0;
-      const years = parseInt(document.getElementById('years').value) || 0;
-      const months = parseInt(document.getElementById('months').value) || 0;
+      const contractType = document.getElementById('contract-type').value;
       const reason = document.getElementById('reason').value;
+      const years = parseInt(document.getElementById('years').value, 10) || 0;
+      const months = parseInt(document.getElementById('months').value, 10) || 0;
+      const days = parseInt(document.getElementById('days').value, 10) || 0;
 
-      const totalYears = years + (months / 12);
-      if (totalYears <= 0 || wage <= 0) return;
-
-      let baseGratuity = 0;
-      if (totalYears <= 5) {
-        baseGratuity = totalYears * (wage / 2);
-      } else {
-        baseGratuity = (5 * (wage / 2)) + ((totalYears - 5) * wage);
+      const totalYears = years + (months / 12) + (days / 365);
+      if (totalYears <= 0 || wage <= 0) {
+        if (window.App && window.App.showToast) {
+          window.App.showToast('يرجى إدخال أجر شهري صحيح ومدة خدمة أكبر من صفر', 'warning');
+        }
+        return;
       }
 
+      let first5Amount = 0;
+      let after5Amount = 0;
+
+      if (totalYears <= 5) {
+        first5Amount = totalYears * (wage / 2);
+      } else {
+        first5Amount = 5 * (wage / 2);
+        after5Amount = (totalYears - 5) * wage;
+      }
+
+      const baseGratuity = first5Amount + after5Amount;
+
       let factor = 1.0;
-      let ratioText = "استحقاق كامل بنسبة 100%";
+      let ratioText = "استحقاق كامل (100%) وفقاً للمادة 84 من نظام العمل.";
 
       if (reason === "resignation") {
-        if (totalYears < 2) {
-          factor = 0;
-          ratioText = "لا يستحق مكافأة لأن مدة الخدمة أقل من سنتين (المادة 85).";
-        } else if (totalYears < 5) {
-          factor = 1 / 3;
-          ratioText = "استحقاق ثلث المكافأة (33.3%) لخدمة بين سنتين و5 سنوات.";
-        } else if (totalYears < 10) {
-          factor = 2 / 3;
-          ratioText = "استحقاق ثلثي المكافأة (66.7%) لخدمة بين 5 سنوات و10 سنوات.";
+        if (contractType === "fixed") {
+          ratioText = "في العقد محدد المدة، تترتب الاستقالة قبل نهاية المدة على اتفاق الطرفين أو شروط العقد المبرم.";
+          if (totalYears < 2) {
+            factor = 0;
+            ratioText = "مدة الخدمة أقل من سنتين (0%).";
+          } else if (totalYears < 5) {
+            factor = 1 / 3;
+            ratioText = "استحقاق ثلث المكافأة (33.33%) مع مراعاة بنود العقد المحدد.";
+          } else if (totalYears < 10) {
+            factor = 2 / 3;
+            ratioText = "استحقاق ثلثي المكافأة (66.67%) مع مراعاة بنود العقد المحدد.";
+          } else {
+            factor = 1.0;
+            ratioText = "استحقاق كامل (100%) لبلوغ الخدمة 10 سنوات فأكثر.";
+          }
         } else {
-          factor = 1.0;
-          ratioText = "استحقاق كامل بنسبة 100% لأن مدة الخدمة بلغت 10 سنوات أو أكثر.";
+          if (totalYears < 2) {
+            factor = 0;
+            ratioText = "لا يستحق العامل مكافأة نهاية خدمة لأن مدة الخدمة بالاستقالة أقل من سنتين (المادة 85).";
+          } else if (totalYears < 5) {
+            factor = 1 / 3;
+            ratioText = "يستحق العامل ثلث المكافأة (33.33%) لأن مدة خدمته بين سنتين وأقل من خمس سنوات (المادة 85).";
+          } else if (totalYears < 10) {
+            factor = 2 / 3;
+            ratioText = "يستحق العامل ثلثي المكافأة (66.67%) لأن مدة خدمته بين خمس سنوات وأقل من عشر سنوات (المادة 85).";
+          } else {
+            factor = 1.0;
+            ratioText = "يستحق العامل المكافأة كاملة بنسبة 100% لأن مدة خدمته بلغت عشر سنوات فأكثر (المادة 85).";
+          }
         }
+      } else if (reason === "female_leave") {
+        factor = 1.0;
+        ratioText = "استحقاق كامل للمكافأة بنسبة 100% طبقاً للاستثناء الخاص بالمادة (87) من نظام العمل السعودي.";
+      } else if (reason === "force_majeure") {
+        factor = 1.0;
+        ratioText = "استحقاق كامل للمكافأة بنسبة 100% لانتهاء العقد بسبب ظرف قاهر خارج عن الإرادة.";
+      } else {
+        factor = 1.0;
+        ratioText = "استحقاق كامل للمكافأة بنسبة 100% لانتهاء العقد أو إنهائه من قبل صاحب العمل (المادة 84).";
       }
 
       const finalAmount = baseGratuity * factor;
 
       document.getElementById('eos-total').textContent = finalAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ر.س';
-      document.getElementById('eos-notes').innerHTML = `
-        <strong>تفاصيل الحسبة:</strong><br>
-        إجمالي مدة الخدمة: ${totalYears.toFixed(2)} سنة.<br>
-        المكافأة الأساسية المحتسبة: ${baseGratuity.toFixed(2)} ر.س.<br>
-        الحالة: ${ratioText}
+
+      const notesHtml = `
+        <div style="font-weight:700; color:var(--text); margin-bottom:0.6rem;">تفاصيل واحتساب المكافأة:</div>
+        <div>• مدة الخدمة المحتسبة: <strong>${years}</strong> سنة، و <strong>${months}</strong> شهر، و <strong>${days}</strong> يوم (إجمالي: ${totalYears.toFixed(2)} سنة).</div>
+        <div>• مكافأة السنوات الخمس الأولى: <strong>${first5Amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ر.س</strong> (بمعدل نصف شهر لكل سنة).</div>
+        ${after5Amount > 0 ? `<div>• مكافأة ما بعد الخمس سنوات: <strong>${after5Amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ر.س</strong> (بمعدل شهر كامل لكل سنة).</div>` : ''}
+        <div>• إجمالي المكافأة قبل نسبة الاستحقاق: <strong>${baseGratuity.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ر.س</strong>.</div>
+        <div>• نسبة الاستحقاق المطبقة: <strong>${(factor * 100).toFixed(1)}%</strong>.</div>
+        <div style="margin-top:0.5rem; padding-top:0.5rem; border-top:1px dashed var(--border); color:var(--text); font-size:0.875rem;"><strong>السند النظامي:</strong> ${ratioText}</div>
       `;
-      document.getElementById('eos-result').classList.add('show');
+
+      document.getElementById('eos-notes').innerHTML = notesHtml;
+      const resultEl = document.getElementById('eos-result');
+      resultEl.classList.add('show');
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function resetEOSForm() {
+      document.getElementById('eos-form').reset();
+      document.getElementById('years').value = '3';
+      document.getElementById('months').value = '0';
+      document.getElementById('days').value = '0';
+      document.getElementById('eos-result').classList.remove('show');
+      if (window.App && window.App.showToast) {
+        window.App.showToast('تمت إعادة ضبط الحاسبة', 'info');
+      }
+    }
+
+    function copyEOSSummary() {
+      const total = document.getElementById('eos-total').textContent;
+      const notes = document.getElementById('eos-notes').innerText;
+      const wage = document.getElementById('wage').value;
+
+      const text = `📋 تقرير مكافأة نهاية الخدمة (منصة سهّلها):\n- الراتب الفعلي: ${wage} ر.س\n- المبلغ المستحق: ${total}\n\n${notes}\n\nتم الحساب عبر: https://sahhilha.pages.dev/ar/tools/end-of-service-calculator.html`;
+
+      if (typeof ShareUtils !== 'undefined') {
+        ShareUtils.copyToClipboard(text, 'تم نسخ ملخص مكافأة نهاية الخدمة بنجاح');
+      } else {
+        navigator.clipboard.writeText(text).then(() => {
+          if (window.App && window.App.showToast) {
+            window.App.showToast('تم نسخ ملخص مكافأة نهاية الخدمة بنجاح', 'success');
+          } else {
+            alert('تم نسخ ملخص المكافأة بنجاح!');
+          }
+        });
+      }
     }
   </script>
 
@@ -304,5 +544,6 @@
   <script src="/config/config.js"></script>
   <script src="/assets/js/storage.js"></script>
   <script src="/assets/js/navigation.js"></script>
+  <script src="/assets/js/share.js"></script>
 </body>
 </html>
