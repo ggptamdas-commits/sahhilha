@@ -36,19 +36,43 @@
 
 /* Mobile & Small Tablets (max-width: 768px) */
 @media (max-width: 768px) {
-  /* Prevent horizontal scroll */
+  /* Prevent horizontal scroll & add space for mobile bottom bar */
   body {
-    padding-bottom: 72px; /* Safe space for fixed bottom navigation */
+    padding-bottom: 72px;
   }
 
-  .nav-desktop {
-    display: none;
+  /* CRITICAL: HIDE DESKTOP NAV ON MOBILE SO IT NEVER OVERLAPS HEADER */
+  .nav-desktop,
+  .nav-links {
+    display: none !important;
   }
 
   .hamburger-btn {
     display: inline-flex;
   }
 
+  /* Header adjustments */
+  .header-container {
+    height: 64px;
+  }
+
+  .brand-tagline,
+  .brand-subtitle {
+    display: none !important;
+  }
+
+  .brand-name,
+  .brand-title {
+    font-size: 1.25rem;
+  }
+
+  .brand-symbol {
+    width: 36px;
+    height: 36px;
+    font-size: 1.15rem;
+  }
+
+  /* Hero Adjustments */
   .hero {
     padding: 3.5rem 0 3rem;
   }
@@ -110,9 +134,37 @@
     padding: 2rem 1.25rem;
   }
 
+  /* Tool Cards & Forms on Mobile */
+  .tool-layout {
+    margin-top: 1rem;
+    padding: 0 1rem;
+  }
+
+  .tool-card-box,
+  .calculator-card,
+  .info-article {
+    padding: 1.5rem 1rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .tool-title {
+    font-size: 1.45rem;
+  }
+
+  .grid-2,
+  .grid-3,
+  .form-grid,
+  .duration-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
   /* Fixed Mobile Bottom Navigation */
   .mobile-bottom-bar {
-    display: flex;
+    display: flex !important;
     position: fixed;
     bottom: 0;
     left: 0;
