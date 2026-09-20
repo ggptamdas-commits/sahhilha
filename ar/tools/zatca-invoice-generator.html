@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar-SA" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>صانع الفواتير الضريبية المبسطة ZATCA وطباعة كاشير 80mm و A4 | سهّلها</title>
-  <meta name="description" content="أداة مجانية لإنشاء وتصميم وطباعة الفواتير الضريبية المبسطة المتوافقة مع متطلبات هيئة الزكاة والضريبة والجمارك (ZATCA) مع كود QR مشفر TLV وطباعة حرارية فورية.">
+  <meta name="description" content="أداة مجانية لإنشاء وتصميم وطباعة الفواتير الضريبية المبسطة المتوافقة مع هيئة الزكاة والضريبة والجمارك (ZATCA) في السعودية، تدعم توليد كود QR مشفر TLV، طباعة كاشير 80mm، طباعة A4، وتحميل صورة الفاتورة فورياً.">
   <link rel="canonical" href="https://sahhilha.pages.dev/ar/tools/zatca-invoice-generator.html">
 
   <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
@@ -12,64 +12,52 @@
   <link rel="stylesheet" href="/assets/css/responsive.css">
 
   <style>
-    .invoice-builder-grid {
+    .invoice-layout {
+      margin-top: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    .invoice-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 2rem;
       align-items: start;
     }
-
-    @media (max-width: 992px) {
-      .invoice-builder-grid {
+    @media (max-width: 1024px) {
+      .invoice-grid {
         grid-template-columns: 1fr;
       }
     }
-
-    /* Print Preview Wrapper */
     .preview-sticky-wrap {
       position: sticky;
-      top: 90px;
+      top: 85px;
     }
-
-    /* Receipt Styling - 80mm Thermal Cashier & A4 */
     .receipt-container {
       background: #ffffff;
-      color: #111111;
-      padding: 1.5rem;
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-md);
+      color: #0f172a;
+      border-radius: var(--radius-xl);
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
       margin: 0 auto;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", "Tajawal", sans-serif;
       line-height: 1.5;
       direction: rtl;
       transition: all 0.2s ease;
+      position: relative;
       max-width: 100%;
       box-sizing: border-box;
     }
-
-    .thermal-80mm {
-      max-width: min(320px, 100%);
+    .receipt-container.thermal-80mm {
+      max-width: min(350px, 100%);
       width: 100%;
-      font-size: 0.825rem;
-      padding: 1.25rem 1rem;
-      border-top: 5px dashed #4b5563;
-      border-bottom: 5px dashed #4b5563;
+      padding: 1.75rem 1.25rem;
+      font-size: 0.85rem;
     }
-
-    .standard-a4 {
+    .receipt-container.corporate-a4 {
       max-width: 100%;
-      font-size: 0.95rem;
+      width: 100%;
       padding: 2.5rem;
-      border: 1px solid #e5e7eb;
+      font-size: 0.95rem;
     }
-
-    .receipt-header {
-      text-align: center;
-      margin-bottom: 1rem;
-      border-bottom: 1px dashed #9ca3af;
-      padding-bottom: 0.75rem;
-    }
-
     .receipt-logo {
       max-height: 60px;
       max-width: 140px;
@@ -77,72 +65,78 @@
       display: block;
       object-fit: contain;
     }
-
-    .receipt-title {
-      font-size: 1.15rem;
+    .receipt-store-title {
+      font-size: 1.35rem;
       font-weight: 800;
+      text-align: center;
       margin-bottom: 0.25rem;
-      color: #000000;
+      color: #000;
     }
-
-    .receipt-subtitle {
-      font-size: 0.75rem;
-      color: #4b5563;
+    .receipt-badge-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-align: center;
+      border-top: 1px dashed #000;
+      border-bottom: 1px dashed #000;
+      padding: 0.35rem 0;
+      margin: 0.5rem 0;
+      letter-spacing: 0.5px;
     }
-
-    .receipt-meta {
-      font-size: 0.8rem;
-      margin-bottom: 0.75rem;
-      border-bottom: 1px dashed #9ca3af;
-      padding-bottom: 0.75rem;
-    }
-
-    .meta-row {
+    .receipt-meta-line {
       display: flex;
       justify-content: space-between;
+      font-size: 0.8rem;
       margin-bottom: 0.25rem;
+      color: #333;
     }
-
     .receipt-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 0.75rem;
-      font-size: 0.8rem;
+      margin: 0.75rem 0;
+      font-size: 0.825rem;
     }
-
     .receipt-table th {
-      border-bottom: 1px solid #111111;
-      padding: 0.35rem 0.2rem;
+      border-top: 1px dashed #444;
+      border-bottom: 1px dashed #444;
+      padding: 0.4rem 0.25rem;
       text-align: right;
+      color: #000;
+      font-weight: 700;
     }
-
     .receipt-table td {
-      padding: 0.4rem 0.2rem;
-      border-bottom: 1px dotted #d1d5db;
+      padding: 0.4rem 0.25rem;
+      border-bottom: 1px dotted #ccc;
     }
-
-    .receipt-totals {
-      border-top: 1px dashed #9ca3af;
+    .receipt-totals-box {
+      border-top: 1px dashed #000;
       padding-top: 0.5rem;
-      margin-bottom: 1rem;
+      margin-top: 0.5rem;
     }
-
-    .total-row {
+    .receipt-total-row {
       display: flex;
       justify-content: space-between;
       margin-bottom: 0.25rem;
       font-size: 0.85rem;
     }
-
-    .total-row.grand-total {
-      font-size: 1.05rem;
+    .receipt-grand-total {
+      font-size: 1.1rem;
       font-weight: 800;
-      border-top: 1px solid #000000;
-      border-bottom: 1px solid #000000;
-      padding: 0.35rem 0;
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+      padding: 0.4rem 0;
       margin-top: 0.35rem;
+      color: #000;
     }
-
+    .receipt-tafqeet {
+      font-size: 0.75rem;
+      text-align: center;
+      background-color: #f3f4f6;
+      border-radius: 4px;
+      padding: 0.4rem;
+      margin: 0.75rem 0;
+      color: #333;
+      font-weight: 600;
+    }
     .receipt-qr-wrap {
       text-align: center;
       margin: 1rem auto 0.5rem;
@@ -151,37 +145,56 @@
       align-items: center;
       justify-content: center;
     }
-
-    .receipt-qr-wrap canvas,
-    .receipt-qr-wrap img {
-      margin: 0 auto;
-      display: block;
-      max-width: 150px;
-      height: auto;
+    .receipt-qr-wrap canvas {
+      border: 1px solid #eee;
+      padding: 6px;
+      background: #ffffff;
+      border-radius: 6px;
     }
-
-    .receipt-footer-text {
+    .receipt-footer-msg {
       text-align: center;
       font-size: 0.75rem;
-      color: #6b7280;
+      color: #555;
       margin-top: 0.5rem;
+      line-height: 1.4;
     }
-
-    /* Interactive Table in Form */
-    .items-table-edit input {
-      padding: 0.4rem 0.5rem;
-      font-size: 0.875rem;
+    .items-table-edit th {
+      background-color: var(--surface-alt);
+      padding: 0.65rem 0.5rem;
+      font-size: 0.85rem;
+      text-align: right;
+      border-bottom: 1px solid var(--border);
     }
-
-    /* Print Stylesheet Overrides */
+    .items-table-edit td {
+      padding: 0.5rem 0.35rem;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .editor-section {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+    }
+    .editor-section:last-child {
+      margin-bottom: 0;
+    }
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
     @media print {
       body * {
         visibility: hidden !important;
       }
-      .no-print, .site-header, .site-footer, .breadcrumb, .tool-header, .form-side-column, .tool-actions-bar, .info-article {
-        display: none !important;
-      }
-      #printable-receipt, #printable-receipt * {
+      #printable-receipt,
+      #printable-receipt * {
         visibility: visible !important;
       }
       #printable-receipt {
@@ -191,14 +204,50 @@
         width: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+      }
+      .no-print,
+      .site-header,
+      .site-footer,
+      .breadcrumb-nav,
+      .tool-header,
+      .info-article,
+      .related-tools-section {
+        display: none !important;
+      }
+      .invoice-layout,
+      .invoice-grid,
+      .preview-sticky-wrap {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .receipt-container {
         box-shadow: none !important;
         border: none !important;
+        margin: 0 auto !important;
+      }
+      .receipt-container.thermal-80mm {
+        width: 76mm !important;
+        max-width: 76mm !important;
+        padding: 4mm !important;
+      }
+      .receipt-container.corporate-a4 {
+        width: 100% !important;
+        padding: 0 !important;
       }
       @page {
         margin: 0;
       }
     }
   </style>
+  <script src="/assets/js/qrcode.min.js"></script>
 </head>
 <body>
   <header class="site-header no-print" role="banner">
@@ -212,14 +261,12 @@
           </div>
         </a>
       </div>
-
       <nav class="nav-desktop" aria-label="القائمة الرئيسية">
         <a href="/" class="nav-link">الرئيسية</a>
         <a href="/#featured-tools" class="nav-link active">جميع الأدوات</a>
         <a href="/about.html" class="nav-link">من نحن</a>
         <a href="/contact.html" class="nav-link">اتصل بنا</a>
       </nav>
-
       <div class="header-actions">
         <button type="button" class="btn-icon" id="theme-toggle-btn" aria-label="التبديل بين الوضع الداكن والفاتح">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
@@ -228,367 +275,500 @@
     </div>
   </header>
 
-  <main class="container" id="main-content" style="max-width:1200px; padding-top:1.5rem; padding-bottom:4rem;">
+  <main class="container invoice-layout" id="main-content">
     <!-- Breadcrumb -->
-    <nav class="breadcrumb-nav no-print" aria-label="مسار التنقل" style="display:flex; align-items:center; gap:0.5rem; font-size:0.875rem; color:var(--text-muted); margin:1.25rem 0 1.5rem;">
-      <a href="/" style="color:var(--text-muted); text-decoration:none;">الرئيسية</a>
+    <nav class="breadcrumb-nav no-print" aria-label="مسار التنقل">
+      <a href="/">الرئيسية</a>
       <span>/</span>
-      <a href="/#saudi" style="color:var(--text-muted); text-decoration:none;">أدوات السعودية</a>
+      <a href="/#category-saudi">أدوات السعودية</a>
       <span>/</span>
-      <span aria-current="page" style="color:var(--primary); font-weight:700;">صانع الفاتورة الضريبية المبسطة ZATCA</span>
+      <span aria-current="page">صانع الفاتورة الضريبية المبسطة ZATCA</span>
     </nav>
 
     <!-- Header Section -->
     <div class="tool-header no-print">
       <div class="tool-badge-wrap">
-        <span class="badge">أدوات الأعمال والمطاعم</span>
-        <span class="badge">المملكة العربية السعودية</span>
-        <span class="badge">مطابق لمرحلة الربط ZATCA</span>
+        <span class="tool-badge-pill">أدوات الأعمال والفواتير</span>
+        <span class="tool-badge-pill">متوافق مع هيئة الزكاة والضريبة (ZATCA)</span>
+        <span class="tool-badge-pill">معالجة محلية 100%</span>
       </div>
-      <h1 class="tool-title">صانع الفاتورة الضريبية المبسطة ZATCA وتوليد كاشير 80mm</h1>
+      <h1 class="tool-title">صانع الفاتورة الضريبية المبسطة وطباعة كاشير 80mm و A4</h1>
       <p class="tool-description">
-        أداة احترافية مجانية وسريعة لإنشاء وإصدار الفواتير الضريبية المبسطة للمتاجر والمطاعم والمقاهي. تتضمن توليد رمز الاستجابة السريعة (QR Code) المشفر تلقائياً بصيغة TLV Base64 المعتمدة من هيئة الزكاة والضريبة والجمارك، مع معاينة وطباعة حرارية مباشرة بدون اشتراك.
+        أنشئ وصمم فواتير المبيعات الضريبية المبسطة المتوافقة كلياً مع متطلبات هيئة الزكاة والضريبة والجمارك (المرحلة الأولى والثانية). تتضمن توليد رمز الاستجابة السريعة (QR Code) المشفر بترميز TLV Base64 تلقائياً، مع دعم الطباعة الفورية بمقاسات الكاشير الحراري 80mm أو الورق العادي A4، وتحميل الفاتورة كصورة بجودة عالية.
       </p>
     </div>
 
-    <!-- Builder Layout -->
-    <div class="invoice-builder-grid">
-      <!-- Input Forms Column -->
-      <div class="form-side-column no-print">
-        <div class="tool-card-box">
-          <h2 style="font-size:1.25rem; margin-bottom:1.25rem; color:var(--text); display:flex; align-items:center; gap:0.5rem;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            بيانات المنشأة والفاتورة
-          </h2>
-
+    <!-- Main Workspace Grid -->
+    <div class="invoice-grid">
+      <!-- Editor Column (Inputs) -->
+      <div class="editor-column no-print">
+        <!-- Store Information -->
+        <div class="editor-section">
+          <div class="section-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            بيانات المنشأة والمورد (البائع)
+          </div>
           <div class="grid-2">
             <div class="form-group">
-              <label for="inp-seller" class="form-label">اسم المتجر / المنشأة <span style="color:var(--danger)">*</span></label>
-              <input type="text" id="inp-seller" class="form-control" value="مؤسسة التقنية الذكية للتجارة" placeholder="اسم الشركة أو المؤسسة">
+              <label class="form-label" for="inp-seller">اسم المتجر أو المؤسسة <span style="color:var(--danger)">*</span></label>
+              <input type="text" id="inp-seller" class="form-control" value="مؤسسة سهّلها للخدمات" placeholder="مثال: مطعم النخيل / متجر الأناقة" oninput="updateInvoice()" required>
             </div>
-
             <div class="form-group">
-              <label for="inp-vat" class="form-label">الرقم الضريبي (15 رقماً) <span style="color:var(--danger)">*</span></label>
-              <input type="text" id="inp-vat" class="form-control" value="300012345600003" maxlength="15" placeholder="يبدأ وينتهي بـ 3">
-              <small class="form-hint">الرقم الضريبي الصادر من هيئة الزكاة</small>
+              <label class="form-label" for="inp-vat">الرقم الضريبي (15 رقماً) <span style="color:var(--danger)">*</span></label>
+              <input type="text" id="inp-vat" class="form-control" value="310123456700003" maxlength="15" placeholder="يبدأ وينتهي بـ 3" oninput="updateInvoice()" required>
+              <small class="form-hint">الرقم التعريفي الضريبي المسجل لدى هيئة الزكاة</small>
             </div>
           </div>
-
           <div class="grid-2">
             <div class="form-group">
-              <label for="inp-address" class="form-label">العنوان / الفرع</label>
-              <input type="text" id="inp-address" class="form-control" value="الرياض - حي الملز - شارع الستين" placeholder="المدينة، الحي، الشارع">
+              <label class="form-label" for="inp-address">العنوان أو الفرع</label>
+              <input type="text" id="inp-address" class="form-control" value="جازان - صبيا، طريق الملك فهد" placeholder="المدينة، الحي، اسم الشارع" oninput="updateInvoice()">
             </div>
-
             <div class="form-group">
-              <label for="inp-phone" class="form-label">رقم الهاتف / التواصل</label>
-              <input type="text" id="inp-phone" class="form-control" value="0501234567" placeholder="05xxxxxxxx">
+              <label class="form-label" for="inp-phone">رقم الهاتف / الجوال / س.ت</label>
+              <input type="text" id="inp-phone" class="form-control" value="س.ت: 5900123456 • هاتف: 0501234567" placeholder="بيانات التواصل أو السجل التجاري" oninput="updateInvoice()">
             </div>
           </div>
-
           <div class="form-group">
-            <label for="inp-logo" class="form-label">شعار المنشأة (اختياري)</label>
-            <input type="file" id="inp-logo" class="form-control" accept="image/*">
-            <small class="form-hint">يتم حفظ الشعار على متصفحك محلياً فقط دون رفعه لأي خادم.</small>
-            <button type="button" id="btn-remove-logo" class="btn btn-secondary" style="margin-top:0.5rem; padding:0.3rem 0.75rem; font-size:0.8rem; display:none;">إزالة الشعار</button>
+            <label class="form-label" for="inp-logo">شعار المنشأة (اختياري - يظهر أعلى الفاتورة)</label>
+            <div style="display:flex; gap:0.5rem; align-items:center;">
+              <input type="file" id="inp-logo" class="form-control" accept="image/*" onchange="handleLogoUpload(this)">
+              <button type="button" id="btn-remove-logo" class="btn btn-secondary" onclick="removeLogo()" style="display:none; padding:0.45rem 0.75rem; font-size:0.85rem;">إزالة</button>
+            </div>
+            <small class="form-hint">يتم حفظ الشعار في متصفحك محلياً فقط دون إرساله إلى أي خادم خارجي.</small>
           </div>
+        </div>
 
-          <hr style="border:0; border-top:1px solid var(--border-light); margin:1.5rem 0;">
-
+        <!-- Invoice Details -->
+        <div class="editor-section">
+          <div class="section-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            تفاصيل ورقم الفاتورة
+          </div>
           <div class="grid-2">
             <div class="form-group">
-              <label for="inp-inv-number" class="form-label">رقم الفاتورة</label>
-              <input type="text" id="inp-inv-number" class="form-control" value="INV-2026-0042">
+              <label class="form-label" for="inp-inv-number">رقم الفاتورة</label>
+              <input type="text" id="inp-inv-number" class="form-control" value="INV-1025" oninput="updateInvoice()">
             </div>
-
             <div class="form-group">
-              <label for="inp-inv-date" class="form-label">تاريخ ووقت الفاتورة <span style="color:var(--danger)">*</span></label>
-              <input type="datetime-local" id="inp-inv-date" class="form-control">
+              <label class="form-label" for="inp-inv-date">تاريخ ووقت الإصدار</label>
+              <input type="datetime-local" id="inp-inv-date" class="form-control" onchange="updateInvoice()">
             </div>
           </div>
-
           <div class="grid-2">
             <div class="form-group">
-              <label for="inp-customer-name" class="form-label">اسم العميل (اختياري)</label>
-              <input type="text" id="inp-customer-name" class="form-control" value="عميل نقدي" placeholder="اسم العميل">
+              <label class="form-label" for="inp-customer-name">اسم العميل / المستلم (اختياري)</label>
+              <input type="text" id="inp-customer-name" class="form-control" placeholder="عميل نقدي / اسم العميل" oninput="updateInvoice()">
             </div>
-
             <div class="form-group">
-              <label for="inp-price-mode" class="form-label">طريقة إدخال أسعار الأصناف</label>
-              <select id="inp-price-mode" class="form-control">
-                <option value="included" selected>الأسعار شاملة ضريبة القيمة المضافة (15%)</option>
-                <option value="excluded">الأسعار غير شاملة الضريبة (تُضاف 15%)</option>
+              <label class="form-label" for="inp-price-mode">طريقة إدخال أسعار الأصناف</label>
+              <select id="inp-price-mode" class="form-control" onchange="updateInvoice()">
+                <option value="inclusive">الأسعار المدخلة شاملة ضريبة 15% (الأنسب للتجزئة والمطاعم)</option>
+                <option value="exclusive">الأسعار المدخلة غير شاملة الضريبة (يضاف 15% فوقها)</option>
               </select>
             </div>
           </div>
+        </div>
 
-          <hr style="border:0; border-top:1px solid var(--border-light); margin:1.5rem 0;">
-
-          <!-- Items Table Editor -->
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-            <h3 style="font-size:1.1rem; color:var(--text); margin:0;">قائمة الأصناف والخدمات</h3>
-            <button type="button" class="btn btn-secondary" id="btn-add-item" style="padding:0.35rem 0.85rem; font-size:0.85rem;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              إضافة صنف
+        <!-- Line Items Section -->
+        <div class="editor-section">
+          <div class="section-title" style="justify-content:space-between;">
+            <span style="display:flex; align-items:center; gap:0.5rem;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+              جدول بنود السلع والخدمات
+            </span>
+            <button type="button" class="btn btn-secondary" onclick="addItemRow()" style="padding:0.35rem 0.75rem; font-size:0.85rem;">
+              + إضافة صنف
             </button>
           </div>
 
           <div style="overflow-x:auto;">
             <table class="items-table-edit" style="width:100%; border-collapse:collapse;">
               <thead>
-                <tr style="background:var(--surface-alt); border-bottom:1px solid var(--border); font-size:0.85rem;">
-                  <th style="padding:0.5rem; text-align:right;">الصنف</th>
-                  <th style="padding:0.5rem; width:80px; text-align:center;">الكمية</th>
-                  <th style="padding:0.5rem; width:110px; text-align:center;">السعر (ر.س)</th>
-                  <th style="padding:0.5rem; width:100px; text-align:center;">الإجمالي</th>
-                  <th style="padding:0.5rem; width:45px; text-align:center;"></th>
+                <tr>
+                  <th style="width:45%;">اسم الصنف أو الخدمة</th>
+                  <th style="width:18%;">الكمية</th>
+                  <th style="width:25%;">سعر الوحدة (ر.س)</th>
+                  <th style="width:12%; text-align:center;">حذف</th>
                 </tr>
               </thead>
               <tbody id="items-tbody-edit">
-                <!-- Dynamically Rendered -->
+                <!-- Rendered dynamically -->
               </tbody>
             </table>
           </div>
 
           <div class="form-group" style="margin-top:1.5rem;">
-            <label for="inp-footer-note" class="form-label">ملاحظة أسفل الفاتورة</label>
-            <input type="text" id="inp-footer-note" class="form-control" value="شكراً لزيارتكم • البضاعة المباعة ترد وتستبدل خلال 3 أيام">
+            <label class="form-label" for="inp-footer-note">ملاحظة أسفل الفاتورة أو شروط الاسترجاع</label>
+            <input type="text" id="inp-footer-note" class="form-control" value="شكراً لزيارتكم • البضاعة المباعة ترد وتستبدل خلال 3 أيام بموجب الفاتورة" oninput="updateInvoice()">
           </div>
-        </div>
-      </div>
 
-      <!-- Live Printable Preview Column -->
-      <div class="preview-side-column">
-        <div class="preview-sticky-wrap">
-          <div class="tool-actions-bar no-print" style="margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center; background:var(--surface); padding:0.75rem 1rem; border-radius:var(--radius-lg); border:1px solid var(--border);">
-            <div style="display:flex; gap:0.5rem;">
-              <button type="button" class="btn btn-secondary active" id="btn-layout-80mm" style="padding:0.4rem 0.85rem; font-size:0.85rem;">حراري 80mm</button>
-              <button type="button" class="btn btn-secondary" id="btn-layout-a4" style="padding:0.4rem 0.85rem; font-size:0.85rem;">ورق A4</button>
-            </div>
-            <button type="button" class="btn btn-primary" id="btn-print-receipt" style="padding:0.5rem 1.25rem;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-              طباعة الفاتورة
+          <div style="display:flex; gap:0.75rem; margin-top:1.5rem; flex-wrap:wrap;">
+            <button type="button" class="btn btn-primary" onclick="window.print()" style="padding:0.85rem 1.5rem;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              طباعة الفاتورة / حفظ PDF
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="resetInvoice()" style="padding:0.85rem 1.25rem;">
+              إعادة تعيين
             </button>
           </div>
+        </div>
+      </div>
 
-          <!-- Printable Container Target -->
-          <div id="printable-receipt" class="receipt-container thermal-80mm" role="region" aria-label="معاينة الفاتورة الضريبية">
-            <div class="receipt-header">
-              <img id="rcp-logo" class="receipt-logo" src="" alt="شعار المتجر" style="display:none;">
-              <div class="receipt-title" id="rcp-store-name">مؤسسة التقنية الذكية للتجارة</div>
-              <div class="receipt-subtitle" id="rcp-store-address">الرياض - حي الملز - شارع الستين</div>
-              <div class="receipt-subtitle" id="rcp-store-phone">هاتف: 0501234567</div>
-              <div style="margin-top:0.35rem; font-weight:700; font-size:0.9rem; color:#000000;">فاتورة ضريبية مبسطة</div>
-              <div style="font-size:0.75rem; color:#4b5563;">Simplified Tax Invoice</div>
+      <!-- Preview Column -->
+      <div class="preview-sticky-wrap">
+        <div class="preview-header-bar no-print" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; margin-bottom:1rem; background:var(--surface); padding:0.75rem 1rem; border-radius:var(--radius-lg); border:1px solid var(--border); box-shadow:var(--shadow-sm);">
+          <div style="display:flex; gap:0.5rem; align-items:center;">
+            <button type="button" id="btn-layout-80mm" class="btn btn-primary" style="padding:0.35rem 0.75rem; font-size:0.85rem;" onclick="setLayoutMode('80mm')">
+              كاشير 80mm
+            </button>
+            <button type="button" id="btn-layout-a4" class="btn btn-secondary" style="padding:0.35rem 0.75rem; font-size:0.85rem;" onclick="setLayoutMode('a4')">
+              قياس A4
+            </button>
+          </div>
+          <div style="display:flex; gap:0.5rem; align-items:center;">
+            <button type="button" id="btn-download-png" class="btn btn-primary" style="padding:0.45rem 1rem; font-size:0.85rem; background:#059669; color:#ffffff; font-weight:700;" onclick="downloadReceiptImage()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              تحميل الفاتورة (PNG)
+            </button>
+            <button type="button" class="btn btn-secondary" style="padding:0.45rem 0.85rem; font-size:0.85rem;" onclick="window.print()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              طباعة / PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Rendered Receipt Container (Target of print) -->
+        <div id="printable-receipt" class="receipt-container thermal-80mm" role="region" aria-label="معاينة الفاتورة" translate="no">
+          <img id="rcp-logo" class="receipt-logo" src="" alt="شعار المنشأة" style="display:none;">
+          <div id="rcp-store-name" class="receipt-store-title" translate="no">مؤسسة سهّلها للخدمات</div>
+          <div id="rcp-store-address" style="font-size:0.8rem; text-align:center; color:#333;" translate="no">جازان - صبيا، طريق الملك فهد</div>
+          <div id="rcp-store-phone" style="font-size:0.775rem; text-align:center; color:#555;" translate="no">س.ت: 5900123456 • هاتف: 0501234567</div>
+          <div style="font-size:0.8rem; text-align:center; font-weight:700; margin-top:0.25rem;" translate="no">الرقم الضريبي: <span id="rcp-store-vat">310123456700003</span></div>
+
+          <div style="text-align:center; margin:0.5rem 0;" translate="no">
+            <span class="receipt-badge-title" style="display:inline-block; font-size:0.75rem; font-weight:700; background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; padding:0.25rem 0.85rem; border-radius:9999px;">فاتورة ضريبية مبسطة</span>
+          </div>
+
+          <div class="receipt-meta-line">
+            <span>رقم الفاتورة: <strong id="rcp-inv-number">INV-1025</strong></span>
+            <span id="rcp-inv-date" style="direction:ltr; font-weight:600;">2026-09-20 09:40</span>
+          </div>
+          <div id="rcp-customer-wrap" class="receipt-meta-line" style="display:none;">
+            <span>العميل: <span id="rcp-customer-name">عميل نقدي</span></span>
+          </div>
+
+          <table class="receipt-table" aria-label="أصناف الفاتورة">
+            <thead>
+              <tr>
+                <th style="width:50%;">الصنف</th>
+                <th style="width:15%; text-align:center;">الكمية</th>
+                <th style="width:18%; text-align:center;">السعر</th>
+                <th style="width:17%; text-align:left;">المجموع</th>
+              </tr>
+            </thead>
+            <tbody id="rcp-items-tbody">
+              <!-- Dynamically Populated -->
+            </tbody>
+          </table>
+
+          <div class="receipt-totals-box">
+            <div class="receipt-total-row">
+              <span>المجموع الخاضع للضريبة:</span>
+              <span id="rcp-subtotal">0.00 ر.س</span>
             </div>
-
-            <div class="receipt-meta">
-              <div class="meta-row">
-                <span>الرقم الضريبي:</span>
-                <span style="font-family:monospace; font-weight:700;" id="rcp-vat-number">300012345600003</span>
-              </div>
-              <div class="meta-row">
-                <span>رقم الفاتورة:</span>
-                <span style="font-family:monospace; font-weight:700;" id="rcp-invoice-id">INV-2026-0042</span>
-              </div>
-              <div class="meta-row">
-                <span>تاريخ ووقت الإصدار:</span>
-                <span id="rcp-date-time" style="direction:ltr;">2026-09-20 18:00</span>
-              </div>
-              <div class="meta-row" id="rcp-customer-row">
-                <span>العميل:</span>
-                <span id="rcp-customer-name">عميل نقدي</span>
-              </div>
+            <div class="receipt-total-row">
+              <span>ضريبة القيمة المضافة (15%):</span>
+              <span id="rcp-vat">0.00 ر.س</span>
             </div>
-
-            <table class="receipt-table" aria-label="أصناف الفاتورة">
-              <thead>
-                <tr>
-                  <th style="text-align:right;">الصنف</th>
-                  <th style="text-align:center; width:35px;">العدد</th>
-                  <th style="text-align:left; width:65px;">السعر</th>
-                  <th style="text-align:left; width:70px;">الإجمالي</th>
-                </tr>
-              </thead>
-              <tbody id="rcp-items-tbody">
-                <!-- Populated via Script -->
-              </tbody>
-            </table>
-
-            <div class="receipt-totals">
-              <div class="total-row">
-                <span>المجموع الخاضع للضريبة:</span>
-                <span><span id="rcp-subtotal">0.00</span> ر.س</span>
-              </div>
-              <div class="total-row">
-                <span>ضريبة القيمة المضافة (15%):</span>
-                <span><span id="rcp-tax-amount">0.00</span> ر.س</span>
-              </div>
-              <div class="total-row grand-total">
-                <span>الإجمالي المستحق:</span>
-                <span><span id="rcp-grand-total">0.00</span> ر.س</span>
-              </div>
+            <div class="receipt-total-row receipt-grand-total">
+              <span>الإجمالي المستحق (شامل الضريبة):</span>
+              <span id="rcp-grand-total">0.00 ر.س</span>
             </div>
+          </div>
 
-            <!-- Tafqeet in Arabic Words -->
-            <div style="font-size:0.75rem; background:#f3f4f6; padding:0.4rem 0.5rem; border-radius:4px; margin-bottom:0.75rem; text-align:center;">
-              <span id="rcp-tafqeet-words">فقط صفر ريال لا غير</span>
-            </div>
+          <div id="rcp-tafqeet" class="receipt-tafqeet">
+            فقط صفر ريال سعودي لا غير.
+          </div>
 
-            <!-- Certified ZATCA QR Code -->
-            <div class="receipt-qr-wrap">
-              <div id="rcp-qrcode-box" style="background:#ffffff; padding:6px; display:inline-block;"></div>
-              <div style="font-size:0.7rem; color:#4b5563; margin-top:0.25rem;">امسح للتحقق عبر تطبيق زاتكا (ZATCA)</div>
-            </div>
+          <div class="receipt-qr-wrap">
+            <div id="rcp-qrcode"></div>
+            <span style="font-size:0.7rem; color:#444; margin-top:0.35rem;">✓ كود مشفر معتمد في منصة فاتورة (ZATCA)</span>
+          </div>
 
-            <div class="receipt-footer-text" id="rcp-footer-note">
-              شكراً لزيارتكم • البضاعة المباعة ترد وتستبدل خلال 3 أيام
-            </div>
+          <div id="rcp-footer-note" class="receipt-footer-msg">
+            شكراً لزيارتكم • البضاعة المباعة ترد وتستبدل خلال 3 أيام بموجب الفاتورة
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Educational Content -->
-    <article class="info-article no-print" style="margin-top:4rem;">
-      <h2>ما هي الفاتورة الضريبية المبسطة وفق متطلبات هيئة الزكاة والضريبة والجمارك (ZATCA)؟</h2>
-      <p>
-        الفاتورة الضريبية المبسطة (Simplified Tax Invoice) هي الفاتورة التي تُصدر غالباً في التعاملات بين منشأة ومستهلك فرد (B2C) كالمتاجر والمطاعم والخدمات اليومية، وتكون قيمتها الإجمالية عادة أقل من 1,000 ريال سعودي أو حسب لوائح الهيئة.
-      </p>
-
-      <h3>المتطلبات الإلزامية في رمز الاستجابة السريعة (QR Code):</h3>
-      <p>
-        تشترط هيئة الزكاة والضريبة والجمارك في المرحلة الأولى والثانية من الفاتورة الإلكترونية أن يتضمن رمز QR خمسة حقول رئيسية يتم تشفيرها وفق ترميز <strong>TLV (Tag-Length-Value)</strong> ثم تحويلها إلى <strong>Base64</strong>:
-      </p>
+    <!-- Educational & Legal Article -->
+    <article class="info-article no-print" style="margin-top:2.5rem;">
+      <h2>شروط الفاتورة الضريبية المبسطة وفق هيئة الزكاة والضريبة والجمارك</h2>
+      <p>تُعد الفاتورة الضريبية المبسطة الوثيقة القانونية المعتمدة في المملكة العربية السعودية للمعاملات التي تقل قيمتها عن 1,000 ريال سعودي أو الموجهة للمستهلكين الأفراد (B2C). وتشتمل المتطلبات الأساسية على:</p>
       <ul>
-        <li><strong>الوسم 1 (Tag 1):</strong> اسم المورّد أو المنشأة المسجلة.</li>
-        <li><strong>الوسم 2 (Tag 2):</strong> الرقم التعريفي الضريبي للمورّد (المؤلف من 15 رقماً ويبدأ وينتهي برقم 3).</li>
-        <li><strong>الوسم 3 (Tag 3):</strong> طابع التاريخ والوقت الزمني لإصدار الفاتورة بصيغة ISO 8601 (مثل: 2026-09-20T18:00:00+03:00).</li>
-        <li><strong>الوسم 4 (Tag 4):</strong> إجمالي قيمة الفاتورة شاملاً ضريبة القيمة المضافة.</li>
-        <li><strong>الوسم 5 (Tag 5):</strong> إجمالي مبلغ ضريبة القيمة المضافة المحتسب (15%).</li>
+        <li><strong>بيانات المورد الإلزامية:</strong> الاسم التجاري الصريح، العنوان، والرقم الضريبي المسجل المكون من 15 رقماً ويبدأ وينتهي برقم 3.</li>
+        <li><strong>رمز الاستجابة السريعة (QR Code):</strong> مشفر بتقنية TLV ويتضمن اسم المنشأة، الرقم الضريبي، تاريخ وتوقيت الفاتورة، إجمالي المبلغ، وقيمة ضريبة 15%.</li>
+        <li><strong>الأسعار الشاملة:</strong> عرض إجمالي المبالغ والضريبة بوضوح بالريال السعودي.</li>
       </ul>
-
-      <h3>الخصوصية والأمان:</h3>
-      <p>
-        تم بناء هذه الأداة لتعمل بالكامل على المتصفح المحلي للعميل (Client-Side). لا يتم إرسال أو تخزين بيانات المبيعات أو أسماء العملاء أو أرقام الفواتير على أي خوادم خارجية إطلاقاً، مما يضمن سرية البيانات وسرعة المعالجة الفورية حتى في حال انقطاع الإنترنت.
-      </p>
+      <h2>الطباعة الحرارية 80mm وقياس A4</h2>
+      <p>يتيح هذا النظام لمستخدميه إخراج الفاتورة بنسقين:</p>
+      <ul>
+        <li><strong>فاتورة كاشير 80mm:</strong> مهيأة لمكائن الإيصالات الحرارية الصغيرة دون حواف إضافية، مناسبة للمقاهي والمطاعم والتموينات.</li>
+        <li><strong>فاتورة رسمية A4:</strong> نسق ورقي ممتد ومناسب لطباعة عروض الأسعار وفواتير الخدمات والصيانة والمكاتب.</li>
+      </ul>
     </article>
+
+    <!-- Related Tools -->
+    <section class="related-tools-section no-print" aria-label="أدوات ذات صلة">
+      <h2 style="font-size:1.3rem; margin-bottom:1rem; color:var(--text);">أدوات أخرى تهمك</h2>
+      <div class="related-tools-grid">
+        <a href="/ar/tools/zatca-qr-generator.html" class="related-tool-card">
+          <div class="related-tool-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700; color:var(--text); font-size:0.95rem;">مولد QR الفاتورة الإلكترونية ZATCA</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">توليد باركود TLV Base64 بدون فاتورة كاملة</div>
+          </div>
+        </a>
+        <a href="/ar/tools/tafqeet-converter.html" class="related-tool-card">
+          <div class="related-tool-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700; color:var(--text); font-size:0.95rem;">أداة تفقيط المبالغ والأرقام</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">تحويل المبالغ المالية إلى نصوص عربية للشيكات</div>
+          </div>
+        </a>
+        <a href="/ar/tools/end-of-service-calculator.html" class="related-tool-card">
+          <div class="related-tool-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 15h0M2 9.5h20"/></svg>
+          </div>
+          <div>
+            <div style="font-weight:700; color:var(--text); font-size:0.95rem;">حاسبة مكافأة نهاية الخدمة</div>
+            <div style="font-size:0.8rem; color:var(--text-muted);">حساب مستحقات العمل حسب نظام العمل السعودي</div>
+          </div>
+        </a>
+      </div>
+    </section>
   </main>
 
-  <footer class="site-footer no-print">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <span class="brand-name">سهّلها</span>
-        <p>منصة عربية تجمع أدوات وحاسبات رقمية متخصصة ومجانية بدون تسجيل لخدمة رواد الأعمال والمستخدم العربي.</p>
-      </div>
-      <div class="footer-col">
-        <h4>روابط سريعة</h4>
-        <ul class="footer-links">
-          <li><a href="/#saudi">أدوات السعودية</a></li>
-          <li><a href="/#calculators">الحاسبات المتخصصة</a></li>
-          <li><a href="/#arabic">أدوات اللغة العربية</a></li>
-          <li><a href="/#restaurant">أدوات المطاعم</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>منصة سهّلها</h4>
-        <ul class="footer-links">
-          <li><a href="/about.html">عن المنصة</a></li>
-          <li><a href="/contact.html">اتصل بنا</a></li>
-          <li><a href="/sitemap.xml">خريطة الموقع</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>الشروط والخصوصية</h4>
-        <ul class="footer-links">
-          <li><a href="/privacy.html">سياسة الخصوصية</a></li>
-          <li><a href="/terms.html">شروط الاستخدام</a></li>
-          <li><a href="/disclaimer.html">إخلاء المسؤولية</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <p>© 2026 سهّلها (Sahhilha) — جميع الحقوق محفوظة.</p>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
-  <script src="/config/config.js"></script>
-  <script src="/assets/js/storage.js"></script>
-  <script src="/assets/js/navigation.js"></script>
-  <script src="/assets/js/qrcode.min.js"></script>
   <script>
-    // Initial Item List
-    let items = [
-      { name: "وجبة غداء خاصة", qty: 2, price: 35.00 },
-      { name: "مشروب غازي بارد", qty: 2, price: 5.00 },
-      { name: "حلوى تشيز كيك", qty: 1, price: 18.00 }
+    // State
+    let invoiceItems = [
+      { name: "وجبة شاورما عربي دبل", qty: 1, price: 18.00 },
+      { name: "عصير برتقال طازج", qty: 1, price: 10.00 }
     ];
+    let currentLayout = '80mm';
 
-    // TLV Base64 Encoder Implementation
-    function generateZatcaTlvBase64(seller, vat, dateTime, total, vatAmount) {
+    // Helper: Escape HTML
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Set Default DateTime
+    function initDateTime() {
+      const dateInp = document.getElementById('inp-inv-date');
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+      dateInp.value = now.toISOString().slice(0, 16);
+    }
+
+    // Local Storage: Save/Load Store Profile
+    function saveStoreProfile() {
+      const profile = {
+        seller: document.getElementById('inp-seller').value,
+        vat: document.getElementById('inp-vat').value,
+        address: document.getElementById('inp-address').value,
+        phone: document.getElementById('inp-phone').value,
+        footer: document.getElementById('inp-footer-note').value
+      };
+      try {
+        localStorage.setItem('sahhilha_invoice_profile', JSON.stringify(profile));
+      } catch (e) {}
+    }
+
+    function loadStoreProfile() {
+      try {
+        const saved = localStorage.getItem('sahhilha_invoice_profile');
+        if (saved) {
+          const profile = JSON.parse(saved);
+          if (profile.seller) document.getElementById('inp-seller').value = profile.seller;
+          if (profile.vat) document.getElementById('inp-vat').value = profile.vat;
+          if (profile.address) document.getElementById('inp-address').value = profile.address;
+          if (profile.phone) document.getElementById('inp-phone').value = profile.phone;
+          if (profile.footer) document.getElementById('inp-footer-note').value = profile.footer;
+        }
+      } catch (e) {}
+    }
+
+    // Logo Handling
+    function handleLogoUpload(input) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        if (file.size > 2 * 1024 * 1024) {
+          alert('حجم الصورة كبير جداً، يرجى اختيار شعار أقل من 2 ميغابايت.');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const rcpLogo = document.getElementById('rcp-logo');
+          rcpLogo.src = e.target.result;
+          rcpLogo.style.display = 'block';
+          document.getElementById('btn-remove-logo').style.display = 'inline-block';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function removeLogo() {
+      const rcpLogo = document.getElementById('rcp-logo');
+      rcpLogo.src = '';
+      rcpLogo.style.display = 'none';
+      document.getElementById('inp-logo').value = '';
+      document.getElementById('btn-remove-logo').style.display = 'none';
+    }
+
+    // Items List Management
+    function renderItemsEditor() {
+      const tbody = document.getElementById('items-tbody-edit');
+      tbody.innerHTML = invoiceItems.map((item, index) => `
+        <tr>
+          <td>
+            <input type="text" class="form-control" value="${escapeHtml(item.name)}" oninput="updateItemField(${index}, 'name', this.value)" style="width:100%;">
+          </td>
+          <td>
+            <input type="number" class="form-control" value="${item.qty}" min="1" step="1" oninput="updateItemField(${index}, 'qty', this.value)" style="text-align:center;">
+          </td>
+          <td>
+            <input type="number" class="form-control" value="${item.price.toFixed(2)}" min="0" step="0.5" oninput="updateItemField(${index}, 'price', this.value)" style="text-align:center;">
+          </td>
+          <td style="text-align:center;">
+            <button type="button" class="btn btn-secondary" onclick="removeItemRow(${index})" style="padding:0.25rem 0.5rem; color:var(--danger); border-color:var(--border);" title="حذف">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function addItemRow() {
+      invoiceItems.push({ name: "صنف جديد", qty: 1, price: 10.00 });
+      renderItemsEditor();
+      updateInvoice();
+    }
+
+    function removeItemRow(index) {
+      if (invoiceItems.length <= 1) {
+        if (window.App && window.App.showToast) {
+          window.App.showToast('يجب أن تحتوي الفاتورة على بند واحد على الأقل.', 'warning');
+        } else {
+          alert('يجب أن تحتوي الفاتورة على بند واحد على الأقل.');
+        }
+        return;
+      }
+      invoiceItems.splice(index, 1);
+      renderItemsEditor();
+      updateInvoice();
+    }
+
+    function updateItemField(index, field, val) {
+      if (field === 'name') {
+        invoiceItems[index].name = val;
+      } else if (field === 'qty') {
+        invoiceItems[index].qty = Math.max(1, parseInt(val, 10) || 1);
+      } else if (field === 'price') {
+        invoiceItems[index].price = Math.max(0, parseFloat(val) || 0);
+      }
+      updateInvoice();
+    }
+
+    // Layout Switcher
+    function setLayoutMode(mode) {
+      currentLayout = mode;
+      const receipt = document.getElementById('printable-receipt');
+      const btn80 = document.getElementById('btn-layout-80mm');
+      const btnA4 = document.getElementById('btn-layout-a4');
+
+      if (mode === '80mm') {
+        receipt.className = 'receipt-container thermal-80mm';
+        btn80.className = 'btn btn-primary';
+        btnA4.className = 'btn btn-secondary';
+      } else {
+        receipt.className = 'receipt-container corporate-a4';
+        btnA4.className = 'btn btn-primary';
+        btn80.className = 'btn btn-secondary';
+      }
+    }
+
+    // TLV Base64 Generator
+    function generateZatcaTLV(seller, vatNo, dateIso, total, vat) {
       function toUtf8(str) {
         return new TextEncoder().encode(str);
       }
-
-      const fields = [
-        { tag: 1, val: seller },
-        { tag: 2, val: vat },
-        { tag: 3, val: dateTime },
-        { tag: 4, val: total.toFixed(2) },
-        { tag: 5, val: vatAmount.toFixed(2) }
+      const tags = [
+        { tag: 1, value: toUtf8(seller) },
+        { tag: 2, value: toUtf8(vatNo) },
+        { tag: 3, value: toUtf8(dateIso) },
+        { tag: 4, value: toUtf8(total) },
+        { tag: 5, value: toUtf8(vat) }
       ];
 
-      const parts = [];
-      for (const f of fields) {
-        let bytes = toUtf8(f.val);
-        if (bytes.length > 255) {
-          bytes = bytes.slice(0, 255);
-        }
-        parts.push(new Uint8Array([f.tag, bytes.length]));
-        parts.push(bytes);
+      let totalLength = 0;
+      for (const t of tags) {
+        const safeLength = Math.min(255, t.value.length);
+        totalLength += 2 + safeLength;
       }
 
-      let totalLen = 0;
-      for (const p of parts) totalLen += p.length;
-      const combined = new Uint8Array(totalLen);
+      const tlvBytes = new Uint8Array(totalLength);
       let offset = 0;
-      for (const p of parts) {
-        combined.set(p, offset);
-        offset += p.length;
+
+      for (const t of tags) {
+        const safeLength = Math.min(255, t.value.length);
+        tlvBytes[offset++] = t.tag;
+        tlvBytes[offset++] = safeLength;
+        tlvBytes.set(t.value.subarray(0, safeLength), offset);
+        offset += safeLength;
       }
 
       let binary = '';
-      const len = combined.byteLength;
-      for (let i = 0; i < len; i++) {
-        binary += String.fromCharCode(combined[i]);
+      for (let i = 0; i < tlvBytes.length; i++) {
+        binary += String.fromCharCode(tlvBytes[i]);
       }
       return btoa(binary);
     }
 
-    // Simple Tafqeet (Riyal and Halalas)
-    function tafqeetRiyal(amount) {
-      const ones = ['', 'واحد', 'اثنان', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة', 'عشرة', 'أحد عشر', 'اثنا عشر', 'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر', 'ستة عشر', 'سبعة عشر', 'ثمانية عشر', 'تسعة عشر'];
+    // Simple Tafqeet Helper
+    function tafqeetCurrency(amount) {
+      const units = ['', 'واحد', 'اثنان', 'ثلاثة', 'أربعة', 'خمسة', 'ستة', 'سبعة', 'ثمانية', 'تسعة', 'عشرة', 'أحد عشر', 'اثنا عشر', 'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر', 'ستة عشر', 'سبعة عشر', 'ثمانية عشر', 'تسعة عشر'];
       const tens = ['', '', 'عشرون', 'ثلاثون', 'أربعون', 'خمسون', 'ستون', 'سبعون', 'ثمانون', 'تسعون'];
       const hundreds = ['', 'مائة', 'مئتان', 'ثلاثمائة', 'أربعمائة', 'خمسمائة', 'ستمائة', 'سبعمائة', 'ثمانمائة', 'تسعمائة'];
 
-      function convertGroup(n) {
-        let res = '';
+      function convert999(n) {
+        let out = '';
         const h = Math.floor(n / 100);
         const rem = n % 100;
-        if (h > 0) res += hundreds[h];
+        if (h > 0) out += hundreds[h];
         if (rem > 0) {
-          if (res) res += ' و ';
+          if (out) out += ' و ';
           if (rem < 20) {
-            res += ones[rem];
+            out += units[rem];
           } else {
-            const o = rem % 10;
+            const u = rem % 10;
             const t = Math.floor(rem / 10);
-            if (o > 0) res += ones[o] + ' و ' + tens[t];
-            else res += tens[t];
+            if (u > 0) out += units[u] + ' و ' + tens[t];
+            else out += tens[t];
           }
         }
-        return res;
+        return out;
       }
 
       const intPart = Math.floor(amount);
@@ -596,247 +776,377 @@
 
       let text = '';
       if (intPart === 0) {
-        text = 'صفر ريال';
+        text = 'صفر ريال سعودي';
       } else if (intPart === 1) {
-        text = 'ريال واحد';
+        text = 'ريال سعودي واحد';
       } else if (intPart === 2) {
-        text = 'ريالان';
+        text = 'ريالان سعوديان';
       } else if (intPart >= 3 && intPart <= 10) {
-        text = convertGroup(intPart) + ' ريالات';
+        text = convert999(intPart) + ' ريالات سعودية';
       } else {
-        const thousands = Math.floor(intPart / 1000);
-        const rem = intPart % 1000;
+        const th = Math.floor(intPart / 1000);
+        const r = intPart % 1000;
         let p = '';
-        if (thousands === 1) p += 'ألف';
-        else if (thousands === 2) p += 'ألفان';
-        else if (thousands >= 3 && thousands <= 10) p += convertGroup(thousands) + ' آلاف';
-        else if (thousands > 10) p += convertGroup(thousands) + ' ألفاً';
+        if (th === 1) p += 'ألف';
+        else if (th === 2) p += 'ألفان';
+        else if (th >= 3 && th <= 10) p += convert999(th) + ' آلاف';
+        else if (th > 10) p += convert999(th) + ' ألفاً';
 
-        if (rem > 0) {
+        if (r > 0) {
           if (p) p += ' و ';
-          p += convertGroup(rem);
+          p += convert999(r);
         }
-        text = p + ' ريال';
+        text = p + ' ريال سعودي';
       }
 
       if (decPart > 0) {
-        text += ' و ' + convertGroup(decPart) + ' هللة';
+        let decText = convert999(decPart) + ' هللة';
+        text += ' و ' + decText;
       }
-      return 'فقط ' + text + ' لا غير';
+
+      return 'فقط ' + text + ' لا غير.';
     }
 
-    // UI Controller
-    document.addEventListener('DOMContentLoaded', () => {
-      const dateInp = document.getElementById('inp-inv-date');
-      const now = new Date();
-      now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-      dateInp.value = now.toISOString().slice(0, 16);
+    // Live Synchronizer
+    function updateInvoice() {
+      const seller = document.getElementById('inp-seller').value.trim() || 'اسم المنشأة';
+      const vatNo = document.getElementById('inp-vat').value.trim() || '300000000000003';
+      const address = document.getElementById('inp-address').value.trim();
+      const phone = document.getElementById('inp-phone').value.trim();
+      const invNum = document.getElementById('inp-inv-number').value.trim() || 'INV-001';
+      const rawDate = document.getElementById('inp-inv-date').value;
+      const custName = document.getElementById('inp-customer-name').value.trim();
+      const priceMode = document.getElementById('inp-price-mode').value;
+      const footerMsg = document.getElementById('inp-footer-note').value.trim();
 
-      function renderItemsTable() {
-        const tbody = document.getElementById('items-tbody-edit');
-        tbody.innerHTML = items.map((item, idx) => `
-          <tr style="border-bottom:1px solid var(--border-light);">
-            <td style="padding:0.4rem 0.2rem;">
-              <input type="text" class="form-control item-name" data-idx="${idx}" value="${item.name}" style="width:100%;">
-            </td>
-            <td style="padding:0.4rem 0.2rem;">
-              <input type="number" min="1" class="form-control item-qty" data-idx="${idx}" value="${item.qty}" style="text-align:center;">
-            </td>
-            <td style="padding:0.4rem 0.2rem;">
-              <input type="number" step="0.25" min="0" class="form-control item-price" data-idx="${idx}" value="${item.price.toFixed(2)}" style="text-align:center;">
-            </td>
-            <td style="padding:0.4rem 0.2rem; text-align:center; font-weight:700; font-size:0.9rem;">
-              ${(item.qty * item.price).toFixed(2)}
-            </td>
-            <td style="padding:0.4rem 0.2rem; text-align:center;">
-              <button type="button" class="btn-delete-item" data-idx="${idx}" style="color:var(--danger); cursor:pointer; padding:0.25rem;" aria-label="حذف الصنف">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
-              </button>
-            </td>
-          </tr>
-        `).join('');
+      // Update Store Info in Receipt
+      document.getElementById('rcp-store-name').textContent = seller;
+      document.getElementById('rcp-store-vat').textContent = vatNo;
+      document.getElementById('rcp-store-address').textContent = address;
+      document.getElementById('rcp-store-phone').textContent = phone;
+      document.getElementById('rcp-inv-number').textContent = invNum;
 
-        // Wire inputs
-        tbody.querySelectorAll('.item-name').forEach(inp => {
-          inp.addEventListener('input', e => {
-            items[e.target.dataset.idx].name = e.target.value;
-            updateInvoicePreview();
-          });
-        });
-        tbody.querySelectorAll('.item-qty').forEach(inp => {
-          inp.addEventListener('input', e => {
-            items[e.target.dataset.idx].qty = Math.max(1, parseInt(e.target.value, 10) || 1);
-            renderItemsTable();
-            updateInvoicePreview();
-          });
-        });
-        tbody.querySelectorAll('.item-price').forEach(inp => {
-          inp.addEventListener('input', e => {
-            items[e.target.dataset.idx].price = Math.max(0, parseFloat(e.target.value) || 0);
-            updateInvoicePreview();
-          });
-          inp.addEventListener('change', () => renderItemsTable());
-        });
-        tbody.querySelectorAll('.btn-delete-item').forEach(btn => {
-          btn.addEventListener('click', e => {
-            const idx = parseInt(e.currentTarget.dataset.idx, 10);
-            if (items.length > 1) {
-              items.splice(idx, 1);
-              renderItemsTable();
-              updateInvoicePreview();
-            } else {
-              alert('يجب أن تحتوي الفاتورة على صنف واحد على الأقل.');
-            }
-          });
-        });
+      // Date formatting with Riyadh local timezone (+03:00)
+      let isoZatcaDate = rawDate || new Date().toISOString().slice(0, 16);
+      if (isoZatcaDate.length === 16) isoZatcaDate += ':00';
+      if (!isoZatcaDate.includes('+') && !isoZatcaDate.endsWith('Z')) {
+        isoZatcaDate += '+03:00';
+      }
+      document.getElementById('rcp-inv-date').textContent = isoZatcaDate.replace('T', ' ');
+
+      // Customer
+      const custWrap = document.getElementById('rcp-customer-wrap');
+      if (custName) {
+        custWrap.style.display = 'flex';
+        document.getElementById('rcp-customer-name').textContent = custName;
+      } else {
+        custWrap.style.display = 'none';
       }
 
-      document.getElementById('btn-add-item').addEventListener('click', () => {
-        items.push({ name: 'صنف جديد', qty: 1, price: 10.00 });
-        renderItemsTable();
-        updateInvoicePreview();
-      });
+      // Calculations
+      let subtotal = 0;
+      let totalVat = 0;
+      let grandTotal = 0;
 
-      function updateInvoicePreview() {
-        const seller = document.getElementById('inp-seller').value || 'اسم المنشأة';
-        const vat = document.getElementById('inp-vat').value || '300000000000003';
-        const addr = document.getElementById('inp-address').value;
-        const phone = document.getElementById('inp-phone').value;
-        const invNum = document.getElementById('inp-inv-number').value || 'INV-001';
-        const rawDate = document.getElementById('inp-inv-date').value;
-        const customer = document.getElementById('inp-customer-name').value;
-        const priceMode = document.getElementById('inp-price-mode').value;
-        const footerNote = document.getElementById('inp-footer-note').value;
+      const rcpTbody = document.getElementById('rcp-items-tbody');
+      rcpTbody.innerHTML = invoiceItems.map(item => {
+        const itemQty = Math.max(1, item.qty);
+        const itemPrice = Math.max(0, item.price);
+        const lineTotal = itemQty * itemPrice;
 
-        // Render meta
-        document.getElementById('rcp-store-name').textContent = seller;
-        document.getElementById('rcp-vat-number').textContent = vat;
-        document.getElementById('rcp-store-address').textContent = addr;
-        document.getElementById('rcp-store-phone').textContent = phone ? `هاتف: ${phone}` : '';
-        document.getElementById('rcp-invoice-id').textContent = invNum;
-        document.getElementById('rcp-date-time').textContent = rawDate.replace('T', ' ');
-        document.getElementById('rcp-customer-name').textContent = customer || 'عميل نقدي';
-        document.getElementById('rcp-footer-note').textContent = footerNote;
+        let lineSubtotal = 0;
+        let lineVat = 0;
 
-        // Compute Totals
-        let subtotal = 0;
-        let grandTotal = 0;
-        let taxAmount = 0;
-
-        const rcpTbody = document.getElementById('rcp-items-tbody');
-        rcpTbody.innerHTML = items.map(it => {
-          let lineTotal = it.qty * it.price;
-          return `
-            <tr>
-              <td style="text-align:right;">${it.name}</td>
-              <td style="text-align:center;">${it.qty}</td>
-              <td style="text-align:left;">${it.price.toFixed(2)}</td>
-              <td style="text-align:left; font-weight:700;">${lineTotal.toFixed(2)}</td>
-            </tr>
-          `;
-        }).join('');
-
-        const rawSum = items.reduce((acc, it) => acc + (it.qty * it.price), 0);
-
-        if (priceMode === 'included') {
-          grandTotal = rawSum;
-          subtotal = grandTotal / 1.15;
-          taxAmount = grandTotal - subtotal;
+        if (priceMode === 'inclusive') {
+          lineSubtotal = lineTotal / 1.15;
+          lineVat = lineTotal - lineSubtotal;
+          subtotal += lineSubtotal;
+          totalVat += lineVat;
+          grandTotal += lineTotal;
         } else {
-          subtotal = rawSum;
-          taxAmount = subtotal * 0.15;
-          grandTotal = subtotal + taxAmount;
+          lineSubtotal = lineTotal;
+          lineVat = lineTotal * 0.15;
+          subtotal += lineSubtotal;
+          totalVat += lineVat;
+          grandTotal += lineTotal + lineVat;
         }
 
-        document.getElementById('rcp-subtotal').textContent = subtotal.toFixed(2);
-        document.getElementById('rcp-tax-amount').textContent = taxAmount.toFixed(2);
-        document.getElementById('rcp-grand-total').textContent = grandTotal.toFixed(2);
+        return `
+          <tr>
+            <td style="padding: 0.4rem 0.25rem; font-weight:600;">${escapeHtml(item.name)}</td>
+            <td style="padding: 0.4rem 0.25rem; text-align:center;">${itemQty}</td>
+            <td style="padding: 0.4rem 0.25rem; text-align:center;">${itemPrice.toFixed(2)}</td>
+            <td style="padding: 0.4rem 0.25rem; text-align:left; font-weight:700;">${lineTotal.toFixed(2)}</td>
+          </tr>
+        `;
+      }).join('');
 
-        // Update Tafqeet
-        document.getElementById('rcp-tafqeet-words').textContent = tafqeetRiyal(grandTotal);
+      document.getElementById('rcp-subtotal').textContent = subtotal.toFixed(2) + ' ر.س';
+      document.getElementById('rcp-vat').textContent = totalVat.toFixed(2) + ' ر.س';
+      document.getElementById('rcp-grand-total').textContent = grandTotal.toFixed(2) + ' ر.س';
 
-        // Generate ZATCA compliant ISO string with +03:00 timezone
-        let isoDateTime = rawDate;
-        if (isoDateTime.length === 16) isoDateTime += ':00';
-        if (!isoDateTime.includes('+') && !isoDateTime.endsWith('Z')) {
-          isoDateTime += '+03:00';
-        }
+      // Tafqeet
+      const tafqeetWords = tafqeetCurrency(grandTotal);
+      document.getElementById('rcp-tafqeet').textContent = tafqeetWords;
 
-        // Generate TLV Base64
-        const tlvBase64 = generateZatcaTlvBase64(seller, vat, isoDateTime, grandTotal, taxAmount);
+      // Footer
+      document.getElementById('rcp-footer-note').textContent = footerMsg;
 
-        // Render QR
-        const qrContainer = document.getElementById('rcp-qrcode-box');
-        qrContainer.innerHTML = '';
+      // ZATCA QR Code Generator
+      const totalStr = grandTotal.toFixed(2);
+      const vatStr = totalVat.toFixed(2);
+
+      const tlvBase64 = generateZatcaTLV(seller, vatNo, isoZatcaDate, totalStr, vatStr);
+      const qrEl = document.getElementById('rcp-qrcode');
+      if (qrEl) {
+        qrEl.innerHTML = '';
         if (typeof QRCode !== 'undefined') {
-          new QRCode(qrContainer, {
-            text: tlvBase64,
-            width: 130,
-            height: 130,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.M
-          });
+          try {
+            new QRCode('rcp-qrcode', tlvBase64, { size: 140 });
+          } catch(e) {
+            console.warn('QR Code generation error:', e);
+          }
         }
       }
+    }
 
-      // Input changes trigger preview update
-      ['inp-seller', 'inp-vat', 'inp-address', 'inp-phone', 'inp-inv-number', 'inp-inv-date', 'inp-customer-name', 'inp-price-mode', 'inp-footer-note'].forEach(id => {
-        document.getElementById(id).addEventListener('input', updateInvoicePreview);
-        document.getElementById(id).addEventListener('change', updateInvoicePreview);
+    // High-Resolution Receipt PNG Downloader
+    function downloadReceiptImage() {
+      const receipt = document.getElementById('printable-receipt');
+      if (!receipt) return;
+
+      const qrCanvas = receipt.querySelector('#rcp-qrcode canvas');
+      const storeName = document.getElementById('rcp-store-name').textContent.trim() || 'اسم المنشأة';
+      const address = document.getElementById('rcp-store-address').textContent.trim();
+      const phone = document.getElementById('rcp-store-phone').textContent.trim();
+      const vatNum = document.getElementById('rcp-store-vat').textContent.trim();
+      const invNum = document.getElementById('rcp-inv-number').textContent.trim();
+      const invDate = document.getElementById('rcp-inv-date').textContent.trim();
+      const custWrap = document.getElementById('rcp-customer-wrap');
+      const custName = (custWrap && custWrap.style.display !== 'none') ? document.getElementById('rcp-customer-name').textContent.trim() : '';
+      const subtotal = document.getElementById('rcp-subtotal').textContent.trim();
+      const tax = document.getElementById('rcp-vat').textContent.trim();
+      const grandTotal = document.getElementById('rcp-grand-total').textContent.trim();
+      const tafqeet = document.getElementById('rcp-tafqeet').textContent.trim();
+      const footerMsg = document.getElementById('rcp-footer-note').textContent.trim();
+
+      const width = 380;
+      const height = 480 + (invoiceItems.length * 30);
+      const scale = 2;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = width * scale;
+      canvas.height = height * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(scale, scale);
+
+      // Background
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, width, height);
+
+      // Border
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(8, 8, width - 16, height - 16);
+
+      // Store Title
+      ctx.textAlign = 'center';
+      ctx.direction = 'rtl';
+      ctx.fillStyle = '#0f172a';
+      ctx.font = 'bold 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", sans-serif';
+      ctx.fillText(storeName, width / 2, 40);
+
+      ctx.fillStyle = '#64748b';
+      ctx.font = '11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", sans-serif';
+      let curY = 58;
+      if (address) { ctx.fillText(address, width / 2, curY); curY += 16; }
+      if (phone) { ctx.fillText(phone, width / 2, curY); curY += 16; }
+
+      // Badge
+      ctx.fillStyle = '#ecfdf5';
+      ctx.strokeStyle = '#a7f3d0';
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(width / 2 - 100, curY, 200, 22, 11);
+      else ctx.rect(width / 2 - 100, curY, 200, 22);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = '#065f46';
+      ctx.font = 'bold 10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", sans-serif';
+      ctx.fillText('فاتورة ضريبية مبسطة', width / 2, curY + 15);
+      curY += 34;
+
+      // Divider
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(20, curY);
+      ctx.lineTo(width - 20, curY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      curY += 18;
+
+      // Meta
+      ctx.font = '11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", sans-serif';
+      const drawMetaRow = (lbl, val) => {
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#64748b';
+        ctx.fillText(lbl, width - 20, curY);
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#0f172a';
+        ctx.fillText(val, 20, curY);
+        curY += 18;
+      };
+
+      drawMetaRow('الرقم الضريبي:', vatNum);
+      drawMetaRow('رقم الفاتورة:', invNum);
+      drawMetaRow('تاريخ الإصدار:', invDate);
+      if (custName) drawMetaRow('العميل:', custName);
+
+      curY += 6;
+      // Table Header
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillRect(16, curY, width - 32, 24);
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.strokeRect(16, curY, width - 32, 24);
+      ctx.fillStyle = '#334155';
+      ctx.font = 'bold 10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", sans-serif';
+
+      ctx.textAlign = 'right';
+      ctx.fillText('الصنف', width - 26, curY + 16);
+      ctx.textAlign = 'center';
+      ctx.fillText('الكمية', width / 2 + 10, curY + 16);
+      ctx.textAlign = 'left';
+      ctx.fillText('السعر', width / 2 - 35, curY + 16);
+      ctx.fillText('الإجمالي', 26, curY + 16);
+      curY += 30;
+
+      // Items
+      ctx.font = '10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", sans-serif';
+      invoiceItems.forEach(it => {
+        ctx.fillStyle = '#0f172a';
+        ctx.textAlign = 'right';
+        ctx.fillText(it.name, width - 26, curY);
+        ctx.textAlign = 'center';
+        ctx.fillText(String(it.qty), width / 2 + 10, curY);
+        ctx.textAlign = 'left';
+        ctx.fillText(it.price.toFixed(2), width / 2 - 35, curY);
+        ctx.font = 'bold 10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", sans-serif';
+        ctx.fillText((it.qty * it.price).toFixed(2), 26, curY);
+        ctx.font = '10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", sans-serif';
+        curY += 22;
       });
 
-      // Handle Logo Upload
-      const logoInp = document.getElementById('inp-logo');
-      const rcpLogo = document.getElementById('rcp-logo');
-      const btnRemoveLogo = document.getElementById('btn-remove-logo');
+      // Divider
+      curY += 4;
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      ctx.moveTo(20, curY);
+      ctx.lineTo(width - 20, curY);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      curY += 18;
 
-      logoInp.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function(evt) {
-            rcpLogo.src = evt.target.result;
-            rcpLogo.style.display = 'block';
-            btnRemoveLogo.style.display = 'inline-flex';
-          };
-          reader.readAsDataURL(file);
-        }
-      });
+      // Totals
+      const drawTotalRow = (lbl, val, bold = false) => {
+        ctx.textAlign = 'right';
+        ctx.fillStyle = bold ? '#065f46' : '#64748b';
+        ctx.font = bold ? 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", sans-serif' : '11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", sans-serif';
+        ctx.fillText(lbl, width - 20, curY);
+        ctx.textAlign = 'left';
+        ctx.fillStyle = bold ? '#065f46' : '#0f172a';
+        ctx.fillText(val, 20, curY);
+        curY += 20;
+      };
 
-      btnRemoveLogo.addEventListener('click', () => {
-        logoInp.value = '';
-        rcpLogo.src = '';
-        rcpLogo.style.display = 'none';
-        btnRemoveLogo.style.display = 'none';
-      });
+      drawTotalRow('المجموع الخاضع للضريبة:', subtotal);
+      drawTotalRow('ضريبة القيمة المضافة (15%):', tax);
 
-      // Layout Switcher (80mm vs A4)
-      const btn80 = document.getElementById('btn-layout-80mm');
-      const btnA4 = document.getElementById('btn-layout-a4');
-      const receiptCard = document.getElementById('printable-receipt');
+      // Highlight Grand Total
+      ctx.fillStyle = '#f0fdf4';
+      ctx.strokeStyle = '#10b981';
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(16, curY - 14, width - 32, 26, 6);
+      else ctx.rect(16, curY - 14, width - 32, 26);
+      ctx.fill();
+      ctx.stroke();
+      drawTotalRow('الإجمالي المستحق:', grandTotal, true);
+      curY += 8;
 
-      btn80.addEventListener('click', () => {
-        receiptCard.className = 'receipt-container thermal-80mm';
-        btn80.classList.add('active');
-        btnA4.classList.remove('active');
-      });
+      // Tafqeet
+      ctx.fillStyle = '#f8fafc';
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(16, curY, width - 32, 22, 4);
+      else ctx.rect(16, curY, width - 32, 22);
+      ctx.fill();
+      ctx.stroke();
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#475569';
+      ctx.font = '10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", sans-serif';
+      ctx.fillText(tafqeet, width / 2, curY + 15);
+      curY += 32;
 
-      btnA4.addEventListener('click', () => {
-        receiptCard.className = 'receipt-container standard-a4';
-        btnA4.classList.add('active');
-        btn80.classList.remove('active');
-      });
+      // Draw QR Code from DOM
+      if (qrCanvas) {
+        const qrSize = 120;
+        ctx.drawImage(qrCanvas, width / 2 - qrSize / 2, curY, qrSize, qrSize);
+        curY += qrSize + 14;
+      }
 
-      // Print Trigger
-      document.getElementById('btn-print-receipt').addEventListener('click', () => {
-        window.print();
-      });
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#059669';
+      ctx.font = 'bold 9px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", sans-serif';
+      ctx.fillText('✓ مسجل في منصة فاتورة (ZATCA)', width / 2, curY);
+      curY += 15;
 
-      // Initial Render
-      renderItemsTable();
-      updateInvoicePreview();
+      if (footerMsg) {
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '9px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Cairo", sans-serif';
+        ctx.fillText(footerMsg, width / 2, curY);
+      }
+
+      const a = document.createElement('a');
+      a.download = `فاتورة_${invNum}.png`;
+      a.href = canvas.toDataURL('image/png');
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      if (window.App && window.App.showToast) {
+        window.App.showToast('تم تحميل الفاتورة كصورة بنجاح!', 'success');
+      }
+    }
+
+    function resetInvoice() {
+      invoiceItems = [
+        { name: "بند جديد", qty: 1, price: 10.00 }
+      ];
+      initDateTime();
+      renderItemsEditor();
+      updateInvoice();
+      if (window.App && window.App.showToast) {
+        window.App.showToast('تمت إعادة ضبط الفاتورة', 'info');
+      }
+    }
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', () => {
+      initDateTime();
+      loadStoreProfile();
+      renderItemsEditor();
+      updateInvoice();
     });
   </script>
+
+  <footer class="site-footer no-print" role="contentinfo">
+    <div class="container" style="text-align:center;">
+      <p>© 2026 سهّلها — جميع الحقوق محفوظة</p>
+    </div>
+  </footer>
+  <script src="/config/config.js"></script>
+  <script src="/assets/js/storage.js"></script>
+  <script src="/assets/js/navigation.js"></script>
+  <script src="/assets/js/share.js"></script>
 </body>
 </html>
