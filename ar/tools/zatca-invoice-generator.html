@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>صانع الفواتير الضريبية المبسطة ZATCA وطباعة كاشير 80mm و A4 | سهّلها</title>
+  <title>صانع الفاتورة الضريبية المبسطة ZATCA وطباعة كاشير 80mm و A4 | سهّلها</title>
   <meta name="description" content="أداة مجانية لإنشاء وتصميم وطباعة الفواتير الضريبية المبسطة المتوافقة مع هيئة الزكاة والضريبة والجمارك (ZATCA) في السعودية، تدعم توليد كود QR مشفر TLV، طباعة كاشير 80mm، طباعة A4، وتحميل صورة الفاتورة فورياً.">
   <link rel="canonical" href="https://sahhilha.pages.dev/ar/tools/zatca-invoice-generator.html">
 
@@ -85,9 +85,15 @@
     .receipt-meta-line {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       font-size: 0.8rem;
       margin-bottom: 0.25rem;
       color: #333;
+      gap: 0.5rem;
+    }
+    .receipt-meta-line span:first-child {
+      white-space: nowrap;
+      color: #555;
     }
     .receipt-table {
       width: 100%;
@@ -99,10 +105,13 @@
       border-top: 1px dashed #444;
       border-bottom: 1px dashed #444;
       padding: 0.4rem 0.25rem;
-      text-align: right;
       color: #000;
       font-weight: 700;
     }
+    .receipt-table th:nth-child(1), .receipt-table td:nth-child(1) { width: 44%; text-align: right; }
+    .receipt-table th:nth-child(2), .receipt-table td:nth-child(2) { width: 14%; text-align: center; }
+    .receipt-table th:nth-child(3), .receipt-table td:nth-child(3) { width: 20%; text-align: center; white-space: nowrap; }
+    .receipt-table th:nth-child(4), .receipt-table td:nth-child(4) { width: 22%; text-align: left; white-space: nowrap; font-weight: 700; }
     .receipt-table td {
       padding: 0.4rem 0.25rem;
       border-bottom: 1px dotted #ccc;
@@ -115,14 +124,24 @@
     .receipt-total-row {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin-bottom: 0.25rem;
       font-size: 0.85rem;
+      gap: 0.5rem;
+    }
+    .receipt-total-row span:first-child {
+      white-space: nowrap;
+    }
+    .receipt-total-row span:last-child {
+      white-space: nowrap;
+      font-weight: 700;
+      text-align: left;
     }
     .receipt-grand-total {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 800;
-      border-top: 1px solid #000;
-      border-bottom: 1px solid #000;
+      border-top: 1.5px solid #000;
+      border-bottom: 1.5px solid #000;
       padding: 0.4rem 0;
       margin-top: 0.35rem;
       color: #000;
@@ -190,29 +209,28 @@
       gap: 0.5rem;
     }
     @media print {
-      body * {
-        visibility: hidden !important;
+      @page {
+        size: auto;
+        margin: 6mm;
       }
-      #printable-receipt,
-      #printable-receipt * {
-        visibility: visible !important;
-      }
-      #printable-receipt {
-        position: absolute !important;
-        left: 0 !important;
-        top: 0 !important;
-        width: 100% !important;
+      html, body {
+        background: #ffffff !important;
+        color: #000000 !important;
         margin: 0 !important;
         padding: 0 !important;
-        border: none !important;
-        box-shadow: none !important;
-        background: transparent !important;
+        width: 100% !important;
+        min-height: auto !important;
+        height: auto !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
       }
       .no-print,
       .site-header,
       .site-footer,
       .breadcrumb-nav,
       .tool-header,
+      .editor-column,
+      .preview-header-bar,
       .info-article,
       .related-tools-section {
         display: none !important;
@@ -221,29 +239,40 @@
       .invoice-grid,
       .preview-sticky-wrap {
         display: block !important;
+        position: static !important;
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
         border: none !important;
         box-shadow: none !important;
+        background: transparent !important;
+        height: auto !important;
+        min-height: 0 !important;
       }
       .receipt-container {
         box-shadow: none !important;
-        border: none !important;
-        margin: 0 auto !important;
+        background: #ffffff !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
       }
       .receipt-container.thermal-80mm {
         width: 76mm !important;
         max-width: 76mm !important;
-        padding: 4mm !important;
+        margin: 4mm auto !important;
+        padding: 4mm 5mm !important;
+        border: 1px dashed #475569 !important;
+        border-radius: 6px !important;
+        box-sizing: border-box !important;
       }
       .receipt-container.corporate-a4 {
         width: 100% !important;
-        padding: 0 !important;
-      }
-      @page {
-        margin: 0;
+        max-width: 185mm !important;
+        margin: 4mm auto !important;
+        padding: 8mm 12mm !important;
+        border: 1px solid #94a3b8 !important;
+        border-radius: 6px !important;
+        box-sizing: border-box !important;
       }
     }
   </style>
@@ -451,20 +480,25 @@
           </div>
 
           <div class="receipt-meta-line">
-            <span>رقم الفاتورة: <strong id="rcp-inv-number">INV-1025</strong></span>
-            <span id="rcp-inv-date" style="direction:ltr; font-weight:600;">2026-09-20 09:40</span>
+            <span>رقم الفاتورة:</span>
+            <strong id="rcp-inv-number" style="direction:ltr; font-family:monospace; font-size:0.85rem;">INV-1025</strong>
+          </div>
+          <div class="receipt-meta-line">
+            <span>تاريخ ووقت الإصدار:</span>
+            <span id="rcp-inv-date" style="direction:ltr; font-family:monospace; font-size:0.85rem; font-weight:600;">2026-09-20 22:11</span>
           </div>
           <div id="rcp-customer-wrap" class="receipt-meta-line" style="display:none;">
-            <span>العميل: <span id="rcp-customer-name">عميل نقدي</span></span>
+            <span>العميل:</span>
+            <span id="rcp-customer-name">عميل نقدي</span>
           </div>
 
           <table class="receipt-table" aria-label="أصناف الفاتورة">
             <thead>
               <tr>
-                <th style="width:50%;">الصنف</th>
-                <th style="width:15%; text-align:center;">الكمية</th>
-                <th style="width:18%; text-align:center;">السعر</th>
-                <th style="width:17%; text-align:left;">المجموع</th>
+                <th style="width:44%; text-align:right;">الصنف</th>
+                <th style="width:14%; text-align:center;">الكمية</th>
+                <th style="width:20%; text-align:center;">السعر</th>
+                <th style="width:22%; text-align:left;">المجموع</th>
               </tr>
             </thead>
             <tbody id="rcp-items-tbody">
@@ -474,7 +508,7 @@
 
           <div class="receipt-totals-box">
             <div class="receipt-total-row">
-              <span>المجموع الخاضع للضريبة:</span>
+              <span>المجموع قبل الضريبة:</span>
               <span id="rcp-subtotal">0.00 ر.س</span>
             </div>
             <div class="receipt-total-row">
@@ -482,7 +516,7 @@
               <span id="rcp-vat">0.00 ر.س</span>
             </div>
             <div class="receipt-total-row receipt-grand-total">
-              <span>الإجمالي المستحق (شامل الضريبة):</span>
+              <span>الإجمالي شامل الضريبة:</span>
               <span id="rcp-grand-total">0.00 ر.س</span>
             </div>
           </div>
@@ -832,7 +866,9 @@
       if (!isoZatcaDate.includes('+') && !isoZatcaDate.endsWith('Z')) {
         isoZatcaDate += '+03:00';
       }
-      document.getElementById('rcp-inv-date').textContent = isoZatcaDate.replace('T', ' ');
+      // Display clean date YYYY-MM-DD HH:mm without offset clutter on the visual receipt
+      const displayDate = isoZatcaDate.replace('T', ' ').split('+')[0].trim();
+      document.getElementById('rcp-inv-date').textContent = displayDate;
 
       // Customer
       const custWrap = document.getElementById('rcp-customer-wrap');
@@ -1059,7 +1095,7 @@
         curY += 20;
       };
 
-      drawTotalRow('المجموع الخاضع للضريبة:', subtotal);
+      drawTotalRow('المجموع قبل الضريبة:', subtotal);
       drawTotalRow('ضريبة القيمة المضافة (15%):', tax);
 
       // Highlight Grand Total
@@ -1070,7 +1106,7 @@
       else ctx.rect(16, curY - 14, width - 32, 26);
       ctx.fill();
       ctx.stroke();
-      drawTotalRow('الإجمالي المستحق:', grandTotal, true);
+      drawTotalRow('الإجمالي شامل الضريبة:', grandTotal, true);
       curY += 8;
 
       // Tafqeet
