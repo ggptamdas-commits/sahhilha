@@ -12,7 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let activeCategory = null;
 
-  // Render Category Cards
+  // Handle Filter Buttons (.btn-filter)
+  const filterBtns = document.querySelectorAll('.btn-filter');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.getAttribute('data-filter');
+      activeCategory = (filter === 'all' || !filter) ? null : filter;
+      performSearch();
+    });
+  });
+
+  // Render Category Cards (if container exists)
   if (categoriesContainer && typeof CATEGORIES !== 'undefined') {
     categoriesContainer.innerHTML = CATEGORIES.map(cat => `
       <div class="category-card" data-category="${cat.id}" role="button" tabindex="0" aria-label="${cat.nameAr}">
@@ -33,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const handleCategorySelect = () => {
         const catId = card.getAttribute('data-category');
         if (activeCategory === catId) {
+          // Deselect category
           activeCategory = null;
           categoryCards.forEach(c => c.classList.remove('active'));
         } else {
@@ -81,6 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
           activeCategory = null;
           if (categoriesContainer) {
             categoriesContainer.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
+          }
+          if (filterBtns) {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            const allBtn = document.querySelector('.btn-filter[data-filter="all"]');
+            if (allBtn) allBtn.classList.add('active');
           }
           if (searchInput) searchInput.value = '';
           renderTools(TOOLS);
@@ -173,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Popular search chips click
   searchChips.forEach(chip => {
     chip.addEventListener('click', () => {
-      const term = chip.getAttribute('data-search') || chip.textContent.trim();
+      const term = chip.getAttribute('data-search') || chip.getAttribute('data-query') || chip.textContent.trim();
       if (searchInput) {
         searchInput.value = term;
         performSearch();
