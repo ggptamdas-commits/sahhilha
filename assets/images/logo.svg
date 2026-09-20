@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="leafGradTop" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+    <linearGradient id="leafGradBottom" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(10, 10)">
+    <!-- Leaves Emblem -->
+    <g transform="translate(370, 0)">
+      <path d="M 12 85 C 10 40, 48 10, 115 5 C 115 5, 108 50, 42 78 C 26 84, 18 85, 12 85 Z" 
+            fill="url(#leafGradTop)" />
+      <path d="M 28 88 C 50 75, 100 48, 115 5 C 105 45, 82 78, 38 94 C 32 94, 29 91, 28 88 Z" 
+            fill="url(#leafGradTop)" opacity="0.9" />
+      <path d="M 4 100 C 22 95, 78 85, 95 95 C 88 122, 55 148, 12 150 C 4 146, 2 120, 4 100 Z" 
+            fill="url(#leafGradBottom)" />
+    </g>
+
+    <!-- Arabic Typography: سهلها -->
+    <text x="350" y="75" 
+          font-family="-apple-system, BlinkMacSystemFont, 'Cairo', 'Tajawal', 'Segoe UI', sans-serif" 
+          font-size="64" 
+          font-weight="900" 
+          fill="#065f46" 
+          text-anchor="end" 
+          letter-spacing="1">سهلها</text>
+
+    <!-- 3 Signature Decorative Emerald Dots -->
+    <g fill="#10b981" transform="translate(236, 14)">
+      <circle cx="0" cy="0" r="4.5" />
+      <circle cx="12" cy="0" r="4.5" />
+      <circle cx="6" cy="-9" r="4.5" />
+    </g>
+
+    <!-- English Typography: Sahhilha -->
+    <text x="348" y="116" 
+          font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+          font-size="36" 
+          font-weight="800" 
+          fill="#065f46" 
+          text-anchor="end" 
+          letter-spacing="0.5">Sahhilha</text>
+
+    <!-- Tagline: أدوات مجانية تجعل حياتك أسهل -->
+    <text x="440" y="154" 
+          font-family="-apple-system, BlinkMacSystemFont, 'Cairo', 'Tajawal', 'Segoe UI', sans-serif" 
+          font-size="19" 
+          font-weight="700" 
+          fill="#047857" 
+          text-anchor="end">أدوات مجانية تجعل حياتك أسهل</text>
+  </g>
+</svg>

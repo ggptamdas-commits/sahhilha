@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="leafGradTopDark" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="50%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+    <linearGradient id="leafGradBottomDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="50%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <filter id="leafGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#10b981" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <g transform="translate(10, 10)">
+    <!-- Twin Leaves Emblem (Right Side) -->
+    <g transform="translate(370, 0)" filter="url(#leafGlow)">
+      <!-- Top Primary Leaf: Upper Section -->
+      <path d="M 12 85 C 10 40, 48 10, 115 5 C 115 5, 108 50, 42 78 C 26 84, 18 85, 12 85 Z" 
+            fill="url(#leafGradTopDark)" />
+      <!-- Top Primary Leaf: Lower Section with curved vein slit -->
+      <path d="M 28 88 C 50 75, 100 48, 115 5 C 105 45, 82 78, 38 94 C 32 94, 29 91, 28 88 Z" 
+            fill="url(#leafGradTopDark)" opacity="0.9" />
+      <!-- Bottom Secondary Curved Leaf -->
+      <path d="M 4 100 C 22 95, 78 85, 95 95 C 88 122, 55 148, 12 150 C 4 146, 2 120, 4 100 Z" 
+            fill="url(#leafGradBottomDark)" />
+    </g>
+
+    <!-- Arabic Brand Name: سهلها -->
+    <text x="350" y="75" 
+          font-family="-apple-system, BlinkMacSystemFont, 'Cairo', 'Tajawal', 'Segoe UI', sans-serif" 
+          font-size="64" 
+          font-weight="900" 
+          fill="#f8fafc" 
+          text-anchor="end" 
+          letter-spacing="1">سهلها</text>
+
+    <!-- 3 Signature Decorative Emerald Dots -->
+    <g fill="#10b981" transform="translate(236, 14)">
+      <circle cx="0" cy="0" r="4.5" />
+      <circle cx="12" cy="0" r="4.5" />
+      <circle cx="6" cy="-9" r="4.5" />
+    </g>
+
+    <!-- English Brand Name: Sahhilha -->
+    <text x="348" y="116" 
+          font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+          font-size="36" 
+          font-weight="800" 
+          fill="#10b981" 
+          text-anchor="end" 
+          letter-spacing="0.5">Sahhilha</text>
+
+    <!-- Tagline: أدوات مجانية تجعل حياتك أسهل -->
+    <text x="440" y="154" 
+          font-family="-apple-system, BlinkMacSystemFont, 'Cairo', 'Tajawal', 'Segoe UI', sans-serif" 
+          font-size="19" 
+          font-weight="700" 
+          fill="#94a3b8" 
+          text-anchor="end">أدوات مجانية تجعل حياتك أسهل</text>
+  </g>
+</svg>
