@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ar-SA" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>حاسبة هندسة المنيو وتكاليف الأطباق للمطاعم | سهّلها</title>
-  <meta name="description" content="حلل قائمة طعام مطعمك باستخدام مصفوفة هندسة المنيو لتصنيف الأصناف (نجوم، أحصنة عمل، ألغاز، أعباء) وتحسين الربحية وضبط تكلفة الطعام بدقة.">
-  <meta name="keywords" content="هندسة المنيو, تكلفة الطعام, مصفوفة المنيو, food cost, menu engineering, حساب ارباح المطاعم, تسعير الوجبات, مطاعم">
+  <title>حاسبة هندسة المنيو وتكاليف المطاعم (مصفوفة BCG) | سهّلها</title>
+  <meta name="description" content="أداة تفاعلية متخصصة في هندسة قوائم الطعام (Menu Engineering) لتحليل أرباح ومبيعات الأطباق وتصنيفها إلى نجوم، أحصنة عمل، ألغاز، وأعباء وفق نموذج كاسافانا وسميث.">
+  <meta name="keywords" content="هندسة المنيو, menu engineering, تكلفة الطعام, food cost, مصفوفة كاسافانا, تصنيف الأطباق, تسعير المنيو, مطاعم">
   <link rel="canonical" href="https://sahhilha.pages.dev/ar/tools/menu-engineering-calculator.html">
   <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
   <link rel="manifest" href="/manifest.json">
@@ -18,15 +18,15 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sahhilha.pages.dev/ar/tools/menu-engineering-calculator.html">
-  <meta property="og:title" content="حاسبة هندسة المنيو وتكاليف الأطباق للمطاعم | سهّلها">
-  <meta property="og:description" content="حلل قائمة طعام مطعمك بدقة علمية وصنف أصنافك لاتخاذ قرارات التسعير الصحيحة.">
+  <meta property="og:title" content="حاسبة هندسة المنيو وتكاليف المطاعم | سهّلها">
+  <meta property="og:description" content="حلل أرباح وشعبية أطباق مطعمك أو مقهاك وصنفها علمياً لتحسين هامش الربح واتخاذ قرارات تسعير دقيقة.">
   <meta property="og:site_name" content="سهّلها - Sahhilha">
   <meta property="og:locale" content="ar_SA">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="حاسبة هندسة المنيو للمطاعم | سهّلها">
-  <meta name="twitter:description" content="أداة تحليل مصفوفة بوسطن لقوائم طعام المطاعم والكافيهات.">
+  <meta name="twitter:title" content="حاسبة هندسة المنيو للمطاعم والكافيهات | سهّلها">
+  <meta name="twitter:description" content="أداة مجانية لتحليل أرباح وشعبية الأطباق وتصنيفها وفق مصفوفة هندسة المنيو.">
 
   <!-- Structured Data: WebApplication, BreadcrumbList, FAQPage -->
   <script type="application/ld+json">
@@ -35,7 +35,7 @@
     "@graph": [
       {
         "@type": "WebApplication",
-        "name": "حاسبة هندسة المنيو للمطاعم",
+        "name": "حاسبة هندسة المنيو وتكاليف المطاعم",
         "url": "https://sahhilha.pages.dev/ar/tools/menu-engineering-calculator.html",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "All",
@@ -44,7 +44,7 @@
           "price": "0",
           "priceCurrency": "SAR"
         },
-        "description": "أداة متخصصة لمديري المطاعم والشيفات لتحليل ربحية وشعبية أصناف قائمة الطعام."
+        "description": "أداة متقدمة لأصحاب المطاعم والمقاهي لتحليل مبيعات وتكاليف الأطباق وهندسة قائمة الطعام وفق المعايير العالمية."
       },
       {
         "@type": "BreadcrumbList",
@@ -74,18 +74,18 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "ما هي الفئات الأربع في مصفوفة هندسة المنيو؟",
+            "name": "ما هي الفئات الأربع في هندسة المنيو (نموذج كاسافانا وسميث)؟",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "النجوم (Stars): ربحية عالية وشعبية عالية. أحصنة العمل (Plowhorses): شعبية عالية وربحية منخفضة. الألغاز (Puzzles): ربحية عالية وشعبية منخفضة. الأعباء (Dogs): ربحية منخفضة وشعبية منخفضة."
+              "text": "1. النجوم (Stars): أطباق عالية الربح وعالية الشعبية، 2. أحصنة العمل (Plowhorses): أطباق منخفضة الربح ولكنها عالية الشعبية، 3. الألغاز (Puzzles): أطباق عالية الربح ولكنها منخفضة الشعبية، 4. الكلاب/الأعباء (Dogs): أطباق منخفضة الربح ومنخفضة الشعبية."
             }
           },
           {
             "@type": "Question",
-            "name": "كيف تُحسب نسبة تكلفة الطعام (Food Cost %)؟",
+            "name": "كيف يُحسب معيار الشعبية (Popularity Benchmark)؟",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "تُحسب بقسمة تكلفة إعداد الطبق على سعر بيعه مضروباً في 100، وتتراوح النسبة المثالية في أغلب المطاعم بين 28% إلى 35%."
+              "text": "المعيار القياسي المعتمد هو (100% مقسومة على عدد الأصناف N) مضروبة في 70%. فإذا كان الصنف يبيع نسبة تتجاوز هذا المعيار يُعتبر عالي الشعبية."
             }
           }
         ]
@@ -98,13 +98,11 @@
   <header class="site-header" role="banner">
     <div class="container header-container">
       <div class="brand-logo">
-        <a href="/" aria-label="سهّلها - الصفحة الرئيسية" style="display:flex; align-items:center; gap:0.75rem;">
-          <div class="brand-icon" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/></svg>
-          </div>
-          <div>
-            <span class="brand-title">سهّلها</span>
-            <span class="brand-subtitle">أدوات رقمية ذكية</span>
+        <a href="/" aria-label="سهّلها - الصفحة الرئيسية" style="display:flex; align-items:center; gap:0.75rem; text-decoration:none;">
+          <img src="/assets/images/logo-icon.svg" alt="شعار سهّلها" width="36" height="36" style="flex-shrink:0;">
+          <div style="display:flex; flex-direction:column; line-height:1.15;">
+            <span class="brand-name" style="font-weight:900; font-size:1.35rem; color:#f8fafc; letter-spacing:0.5px;">سهلها</span>
+            <span class="brand-tagline" style="font-weight:700; font-size:0.75rem; color:#10b981; letter-spacing:0.5px;">Sahhilha</span>
           </div>
         </a>
       </div>
@@ -115,12 +113,6 @@
         <a href="/#arabic" class="nav-link">أدوات اللغة</a>
         <a href="/#restaurant" class="nav-link active">المطاعم</a>
       </nav>
-
-      <div class="header-actions">
-        <button type="button" class="btn-icon" id="theme-toggle-btn" aria-label="التبديل بين الوضع الداكن والفاتح">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        </button>
-      </div>
     </div>
   </header>
 
@@ -136,295 +128,271 @@
 
       <div class="tool-header">
         <div class="tool-badge-wrap">
-          <span class="badge badge-restaurant">حلول المطاعم والكافيهات</span>
-          <span class="badge badge-featured">مصفوفة Kasavana & Smith</span>
+          <span class="badge badge-restaurant">إدارة المطاعم والكافيهات</span>
+          <span class="badge badge-featured">نموذج كاسافانا وسميث القياسي</span>
         </div>
         <h1 class="tool-title">حاسبة هندسة المنيو وتكاليف الأطباق</h1>
         <p class="tool-description">
-          حلل أداء أطباق ومشروبات مطعمك من حيث الربحية والشعبية لتصنيفها بدقة إلى: نجوم، أحصنة عمل، ألغاز، وأعباء، واكتشف القرارات الصحيحة لزيادة الأرباح وضبط تكلفة الغذاء (Food Cost).
+          حلل قائمة طعامك بطريقة علمية تعتمد على معادلات هامش المساهمة ومعدل شعبية المبيعات لتصنيف كل صنف (نجم، حصان عمل، لغز، أو عبء) ومعرفة كيفية تحسين الأرباح.
         </p>
       </div>
 
       <div class="calculator-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
-          <h2 style="font-size: 1.25rem; font-weight: 700; margin: 0;">بيانات الأصناف المسجلة</h2>
-          <div style="display: flex; gap: 0.75rem;">
-            <button type="button" class="btn btn-secondary btn-sm" onclick="addMenuItemRow()">+ إضافة طبق جديد</button>
-            <button type="button" class="btn btn-secondary btn-sm" onclick="loadDemoMenu()">تحميل مثال توضيحي</button>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; flex-wrap:wrap; gap:0.5rem;">
+          <h2 style="font-size:1.15rem; font-weight:700; margin:0; color:var(--text);">جدول أصناف القائمة (تكلفة وسعر وكمية)</h2>
+          <div style="display:flex; gap:0.5rem;">
+            <button type="button" class="btn btn-secondary" onclick="addNewRow()" style="padding:0.4rem 0.85rem; font-size:0.875rem;">+ إضافة طبق</button>
+            <button type="button" class="btn btn-secondary" onclick="resetToDefaultItems()" style="padding:0.4rem 0.85rem; font-size:0.875rem;">استعادة الافتراضي</button>
           </div>
         </div>
 
-        <div style="overflow-x: auto;">
-          <table class="table" style="width: 100%; border-collapse: collapse;" id="menu-items-table">
+        <div style="overflow-x:auto; margin-bottom:1.5rem;">
+          <table style="width:100%; border-collapse:collapse; min-width:600px; font-size:0.95rem;">
             <thead>
-              <tr style="border-bottom: 2px solid var(--border); text-align: right; background: var(--bg-alt);">
-                <th style="padding: 0.75rem;">اسم الطبق</th>
-                <th style="padding: 0.75rem;">التكلفة (ر.س)</th>
-                <th style="padding: 0.75rem;">سعر البيع (ر.س)</th>
-                <th style="padding: 0.75rem;">الكمية المباعة</th>
-                <th style="padding: 0.75rem; text-align: center;">إجراء</th>
+              <tr style="background-color:var(--surface-alt); text-align:right; border-bottom:1px solid var(--border);">
+                <th style="padding:0.75rem; width:35%;">اسم الطبق أو المشروب</th>
+                <th style="padding:0.75rem; width:18%;">تكلفة الصنف (ر.س)</th>
+                <th style="padding:0.75rem; width:18%;">سعر البيع (ر.س)</th>
+                <th style="padding:0.75rem; width:18%;">الكمية المباعة</th>
+                <th style="padding:0.75rem; width:11%; text-align:center;">إجراء</th>
               </tr>
             </thead>
-            <tbody id="menu-tbody">
-              <!-- Dynamically populated rows -->
+            <tbody id="items-tbody">
+              <!-- Rendered via script -->
             </tbody>
           </table>
         </div>
 
-        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-          <button type="button" class="btn btn-primary" onclick="analyzeMenu()" style="flex: 1; min-width: 200px; font-size: 1.05rem; padding: 0.85rem;">
-            تحليل هندسة المنيو الآن
-          </button>
-          <button type="button" class="btn btn-secondary" onclick="resetMenu()" style="padding: 0.85rem 1.5rem;">
-            إعادة تعيين
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <button type="button" class="btn btn-primary" onclick="analyzeMenu()" style="flex:1; min-width:200px; font-size:1.05rem; padding:0.85rem;">
+            تحليل وهندسة المنيو الآن
           </button>
         </div>
 
         <div id="menu-analysis-result" class="result-box" aria-live="polite">
-          <div class="result-title">نتائج تحليل قائمة الطعام والتوصيات الاستراتيجية</div>
+          <div class="result-title">نتائج التحليل الشامل لهندسة المنيو</div>
 
-          <div class="stat-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
-            <div style="background: var(--bg-surface); padding: 1rem; border-radius: 8px; border: 1px solid var(--border);">
-              <div style="font-size: 0.85rem; color: var(--text-muted);">إجمالي الإيرادات</div>
-              <div id="stat-revenue" style="font-size: 1.3rem; font-weight: 800; color: var(--text);">0.00 ر.س</div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin:1.5rem 0;">
+            <div style="background:var(--surface); padding:1rem; border-radius:8px; border:1px solid var(--border); text-align:center;">
+              <span style="font-size:0.85rem; color:var(--text-muted); display:block;">إجمالي الإيرادات</span>
+              <strong id="stat-revenue" style="font-size:1.4rem; color:var(--primary);">0.00 ر.س</strong>
             </div>
-            <div style="background: var(--bg-surface); padding: 1rem; border-radius: 8px; border: 1px solid var(--border);">
-              <div style="font-size: 0.85rem; color: var(--text-muted);">إجمالي إجمالي الربح (الهامش)</div>
-              <div id="stat-profit" style="font-size: 1.3rem; font-weight: 800; color: var(--primary);">0.00 ر.س</div>
+            <div style="background:var(--surface); padding:1rem; border-radius:8px; border:1px solid var(--border); text-align:center;">
+              <span style="font-size:0.85rem; color:var(--text-muted); display:block;">إجمالي الأرباح الإجمالية</span>
+              <strong id="stat-profit" style="font-size:1.4rem; color:var(--primary);">0.00 ر.س</strong>
             </div>
-            <div style="background: var(--bg-surface); padding: 1rem; border-radius: 8px; border: 1px solid var(--border);">
-              <div style="font-size: 0.85rem; color: var(--text-muted);">متوسط نسبة تكلفة الطعام (Food Cost %)</div>
-              <div id="stat-food-cost-pct" style="font-size: 1.3rem; font-weight: 800; color: var(--text);">0.0%</div>
-            </div>
-            <div style="background: var(--bg-surface); padding: 1rem; border-radius: 8px; border: 1px solid var(--border);">
-              <div style="font-size: 0.85rem; color: var(--text-muted);">إجمالي الأطباق المباعة</div>
-              <div id="stat-total-units" style="font-size: 1.3rem; font-weight: 800; color: var(--text);">0</div>
+            <div style="background:var(--surface); padding:1rem; border-radius:8px; border:1px solid var(--border); text-align:center;">
+              <span style="font-size:0.85rem; color:var(--text-muted); display:block;">متوسط نسبة تكلفة الطعام</span>
+              <strong id="stat-foodcost" style="font-size:1.4rem; color:var(--text);">0.0%</strong>
             </div>
           </div>
 
-          <div style="overflow-x: auto;">
-            <table class="table" style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+          <h3 style="font-size:1.1rem; margin-top:1.5rem; margin-bottom:0.75rem; color:var(--text);">تصنيف وتوصيات كل طبق:</h3>
+          <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; min-width:650px; font-size:0.9rem; background:var(--surface); border-radius:8px; overflow:hidden;">
               <thead>
-                <tr style="border-bottom: 2px solid var(--border); background: var(--bg-alt); text-align: right;">
-                  <th style="padding: 0.65rem;">الطبق</th>
-                  <th style="padding: 0.65rem;">هامش الربح للطبق</th>
-                  <th style="padding: 0.65rem;">نسبة التكلفة %</th>
-                  <th style="padding: 0.65rem;">التصنيف</th>
-                  <th style="padding: 0.65rem;">التوصية الإدارية المقترحة</th>
+                <tr style="background-color:var(--surface-alt); text-align:right; border-bottom:1px solid var(--border);">
+                  <th style="padding:0.75rem;">الطبق</th>
+                  <th style="padding:0.75rem;">هامش الربح</th>
+                  <th style="padding:0.75rem;">تكلفة الطعام %</th>
+                  <th style="padding:0.75rem;">التصنيف</th>
+                  <th style="padding:0.75rem; width:40%;">التوصية الإدارية والتسعيرية</th>
                 </tr>
               </thead>
               <tbody id="analysis-tbody">
-                <!-- Dynamically populated analysis -->
+                <!-- Rendered Dynamically -->
               </tbody>
             </table>
           </div>
 
-          <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
-            <button type="button" class="btn btn-secondary no-print" onclick="window.print()">طباعة التقرير</button>
-            <button type="button" class="btn btn-secondary no-print" onclick="copyMenuAnalysis()">نسخ التقرير</button>
+          <div style="margin-top: 1.5rem; display:flex; gap:0.75rem; justify-content:center; flex-wrap:wrap;">
+            <button type="button" class="btn btn-secondary no-print" onclick="window.print()">طباعة تقرير التحليل</button>
           </div>
         </div>
       </div>
 
       <article class="info-article">
-        <h2>كيف تطبق استراتيجية هندسة المنيو لزيادة أرباح مطعمك؟</h2>
+        <h2>ما هي مصفوفة هندسة المنيو (Menu Engineering Matrix)؟</h2>
         <p>
-          هندسة المنيو (Menu Engineering) هي منهجية علمية وضعها البروفيسوران مايكل كاسافانا ودونالد سميث في جامعة ولاية ميشيغان، وتركز على دراسة ربحية وشعبية كل صنف لتوجيه العملاء نحو الأصناف الأكثر ربحاً.
+          تعتمد هندسة قوائم الطعام على دراسة كاسافانا وسميث (جامعة ميشيغان) لتقييم كل صنف في القائمة بناءً على مقياسين رئيسيين:
         </p>
-
-        <h3>تصنيفات مصفوفة المنيو وتوصياتها:</h3>
         <ul>
-          <li><strong>⭐ النجوم (Stars):</strong> ربحية عالية وشعبية عالية. حافظ على جودتها، وثبت مكانها في أكثر المناطق جذباً في المنيو (Golden Triangle).</li>
-          <li><strong>🐎 أحصنة العمل (Plowhorses):</strong> شعبية عالية لكن ربحيتها متدنية. ارفع سعرها بنسبة طفيفة، أو أعد هندسة حجم الحصة وتكلفتها لزيادة الهامش.</li>
-          <li><strong>🧩 الألغاز (Puzzles):</strong> ربحية عالية جداً لكن مبيعاتها قليلة. حسّن مسمى الطبق، أضف صوراً مغرية، ودرب طاقم الخدمة على ترشيحه للعملاء.</li>
-          <li><strong>⚠️ الأعباء (Dogs):</strong> ربحية منخفضة وشعبية منخفضة. فكر في إزالتها من القائمة أو استبدالها بصنف جديد لتقليل الهدر وتعقيد المطبخ.</li>
+          <li><strong>هامش المساهمة (الربحية):</strong> سعر البيع ناقصاً تكلفة إعداد الطبق، مقارنة بمتوسط ربحية القائمة.</li>
+          <li><strong>معدل الشعبية (حجم المبيعات):</strong> نسبة بيع الصنف مقارنة بحجم مبيعات باقي الأصناف (بمعيار 70% القياسي).</li>
+        </ul>
+
+        <h3>كيف تتعامل مع تصنيفات الأصناف؟</h3>
+        <ul>
+          <li><strong>النجوم (⭐ Stars):</strong> الأطباق المثالية (ربح عالي وطلب عالي). حافظ على ثبات وصفتها، وضعها في أبرز أماكن القائمة.</li>
+          <li><strong>أحصنة العمل (🐎 Plowhorses):</strong> أطباق مفضلة للزبائن لكن ربحها قليل. ارفع سعرها تدريجياً أو أعد هندسة حجم الحصة لتقليل التكلفة دون التأثير على الجودة.</li>
+          <li><strong>الألغاز (🧩 Puzzles):</strong> أطباق ربحها ممتاز لكن زبائنها قليلون. أعد تسميتها، حسن طريقة تقديمها، أو درّب طاقم الخدمة على ترشيحها (Upselling).</li>
+          <li><strong>الأعباء (🐕 Dogs):</strong> أطباق تكلف جهداً ولا تحقق ربحاً أو طلباً. يُفضّل استبدالها بأطباق جديدة أو حذفها من القائمة.</li>
         </ul>
       </article>
     </div>
   </main>
 
   <footer class="site-footer" role="contentinfo">
-    <div class="container footer-container">
-      <div class="footer-brand">
-        <div class="footer-brand-logo">
-          <div class="brand-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/></svg>
-          </div>
-          <span class="brand-title">سهّلها</span>
-        </div>
-        <p class="footer-tagline">أدوات رقمية سريعة ومجانية للمستخدم والأنشطة التجارية في العالم العربي.</p>
+    <div class="container" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <img src="/assets/images/logo-icon.svg" alt="شعار سهّلها" width="24" height="24">
+        <span style="font-weight:800; font-size:1.1rem; color:#f8fafc;">سهلها</span>
+        <span style="font-weight:700; font-size:0.75rem; color:#10b981;">Sahhilha</span>
       </div>
-
-      <div class="footer-nav">
-        <h4 class="footer-nav-title">روابط هامة</h4>
-        <ul class="footer-nav-list">
-          <li><a href="/about.html">عن المنصة</a></li>
-          <li><a href="/contact.html">اتصل بنا</a></li>
-          <li><a href="/privacy.html">سياسة الخصوصية</a></li>
-          <li><a href="/terms.html">شروط الاستخدام</a></li>
-          <li><a href="/disclaimer.html">إخلاء المسؤولية</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <p>© 2026 سهّلها (Sahhilha). جميع الحقوق محفوظة.</p>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin:0;">أدوات مجانية تجعل حياتك أسهل • جميع الحقوق محفوظة © 2026</p>
     </div>
   </footer>
 
   <script>
     let currentItems = [
-      { name: "برجر لحم كلاسيك", cost: 12.00, price: 34.00, sold: 180 },
-      { name: "بيتزا مارجريتا", cost: 9.50, price: 28.00, sold: 140 },
-      { name: "ستيك ريب آي أنجوس", cost: 45.00, price: 95.00, sold: 40 },
-      { name: "سلطة كينوا دايت", cost: 11.00, price: 22.00, sold: 25 }
+      { name: "برجر لحم كلاسيك", cost: 12, price: 34, sold: 180 },
+      { name: "بطاطس مقلية بالجبن", cost: 4, price: 16, sold: 240 },
+      { name: "ستيك ريب آي مشوي", cost: 45, price: 95, sold: 40 },
+      { name: "سلطة كينوا دايت", cost: 18, price: 26, sold: 25 }
     ];
 
-    window.addEventListener('DOMContentLoaded', () => {
-      renderTableRows();
-    });
-
-    function renderTableRows() {
-      const tbody = document.getElementById('menu-tbody');
-      tbody.innerHTML = currentItems.map((item, idx) => `
-        <tr style="border-bottom: 1px solid var(--border-light);">
-          <td style="padding: 0.5rem;">
-            <input type="text" class="form-control item-name" value="${escapeHtml(item.name)}" placeholder="اسم الطبق">
-          </td>
-          <td style="padding: 0.5rem;">
-            <input type="number" class="form-control item-cost" step="0.5" min="0" value="${item.cost}">
-          </td>
-          <td style="padding: 0.5rem;">
-            <input type="number" class="form-control item-price" step="0.5" min="0" value="${item.price}">
-          </td>
-          <td style="padding: 0.5rem;">
-            <input type="number" class="form-control item-sold" min="0" value="${item.sold}">
-          </td>
-          <td style="padding: 0.5rem; text-align: center;">
-            <button type="button" class="btn-icon" onclick="removeMenuItemRow(${idx})" style="color: var(--danger);" title="حذف الطبق">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-            </button>
-          </td>
-        </tr>
-      `).join('');
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
     }
 
-    function addMenuItemRow() {
-      syncInputsFromDOM();
-      currentItems.push({ name: "طبق جديد", cost: 10, price: 25, sold: 50 });
-      renderTableRows();
-    }
-
-    function removeMenuItemRow(idx) {
-      syncInputsFromDOM();
-      if (currentItems.length <= 1) {
-        if (window.App && window.App.showToast) {
-          window.App.showToast('يجب أن تحتوي القائمة على طبق واحد على الأقل', 'warning');
-        }
-        return;
-      }
-      currentItems.splice(idx, 1);
-      renderTableRows();
-    }
-
-    function syncInputsFromDOM() {
+    function saveDomState() {
       const names = document.querySelectorAll('.item-name');
       const costs = document.querySelectorAll('.item-cost');
       const prices = document.querySelectorAll('.item-price');
       const solds = document.querySelectorAll('.item-sold');
 
-      const synced = [];
+      currentItems = [];
       for (let i = 0; i < names.length; i++) {
-        synced.push({
-          name: names[i].value,
+        currentItems.push({
+          name: names[i].value.trim(),
           cost: Math.max(0, parseFloat(costs[i].value) || 0),
           price: Math.max(0, parseFloat(prices[i].value) || 0),
-          sold: Math.max(0, parseInt(solds[i].value, 10) || 0)
+          sold: parseInt(solds[i].value) || 0
         });
       }
-      if (synced.length > 0) {
-        currentItems = synced;
-      }
     }
 
-    function loadDemoMenu() {
-      currentItems = [
-        { name: "برجر لحم كلاسيك", cost: 12.00, price: 34.00, sold: 180 },
-        { name: "بيتزا مارجريتا", cost: 9.50, price: 28.00, sold: 140 },
-        { name: "ستيك ريب آي أنجوس", cost: 45.00, price: 95.00, sold: 40 },
-        { name: "سلطة كينوا دايت", cost: 11.00, price: 22.00, sold: 25 }
-      ];
-      renderTableRows();
-      if (window.App && window.App.showToast) {
-        window.App.showToast('تم تحميل قائمة توضيحية بنجاح', 'info');
-      }
+    function renderRows() {
+      const tbody = document.getElementById('items-tbody');
+      tbody.innerHTML = currentItems.map((item, idx) => `
+        <tr style="border-bottom: 1px solid var(--border-light);">
+          <td style="padding: 0.65rem;">
+            <input type="text" class="form-control item-name" value="${escapeHtml(item.name)}" placeholder="اسم الطبق" required>
+          </td>
+          <td style="padding: 0.65rem;">
+            <input type="number" class="form-control item-cost" value="${item.cost}" step="0.5" min="0" required>
+          </td>
+          <td style="padding: 0.65rem;">
+            <input type="number" class="form-control item-price" value="${item.price}" step="0.5" min="0" required>
+          </td>
+          <td style="padding: 0.65rem;">
+            <input type="number" class="form-control item-sold" value="${item.sold}" min="0" required>
+          </td>
+          <td style="padding: 0.65rem; text-align: center;">
+            <button type="button" class="btn-icon" onclick="deleteRow(${idx})" aria-label="حذف الطبق" style="color:var(--danger); border-color:var(--border);">✕</button>
+          </td>
+        </tr>
+      `).join('');
     }
 
-    function resetMenu() {
+    function addNewRow() {
+      saveDomState();
+      currentItems.push({ name: "طبق جديد", cost: 10, price: 25, sold: 50 });
+      renderRows();
+    }
+
+    function deleteRow(idx) {
+      saveDomState();
+      if (currentItems.length <= 1) {
+        if (window.App && window.App.showToast) {
+          window.App.showToast('يجب الاحتفاظ بصنف واحد على الأقل في القائمة', 'warning');
+        }
+        return;
+      }
+      currentItems.splice(idx, 1);
+      renderRows();
+    }
+
+    function resetToDefaultItems() {
       currentItems = [
-        { name: "", cost: 0, price: 0, sold: 0 }
+        { name: "برجر لحم كلاسيك", cost: 12, price: 34, sold: 180 },
+        { name: "بطاطس مقلية بالجبن", cost: 4, price: 16, sold: 240 },
+        { name: "ستيك ريب آي مشوي", cost: 45, price: 95, sold: 40 },
+        { name: "سلطة كينوا دايت", cost: 18, price: 26, sold: 25 }
       ];
-      renderTableRows();
+      renderRows();
       document.getElementById('menu-analysis-result').classList.remove('show');
       if (window.App && window.App.showToast) {
-        window.App.showToast('تمت إعادة ضبط القائمة', 'info');
+        window.App.showToast('تمت استعادة الأصناف الافتراضية بنجاح', 'info');
       }
     }
 
     function analyzeMenu() {
-      syncInputsFromDOM();
+      saveDomState();
 
-      const items = [];
+      if (currentItems.length === 0) return;
+
       let totalRevenue = 0;
-      let totalCost = 0;
+      let totalProfit = 0;
       let totalUnits = 0;
+      let totalFoodCost = 0;
 
-      for (let i = 0; i < currentItems.length; i++) {
-        const name = currentItems[i].name.trim() || `صنف ${i + 1}`;
-        const cost = currentItems[i].cost;
-        const price = currentItems[i].price;
-        const sold = currentItems[i].sold;
-
+      const items = currentItems.map(item => {
+        const cost = Math.max(0, item.cost);
+        const price = Math.max(0, item.price);
+        const sold = Math.max(0, item.sold);
         const margin = price - cost;
         const rev = price * sold;
-        const totalItemCost = cost * sold;
+        const prof = margin * sold;
+        const fCost = cost * sold;
         const foodCostPct = price > 0 ? (cost / price) * 100 : 0;
 
         totalRevenue += rev;
-        totalCost += totalItemCost;
+        totalProfit += prof;
         totalUnits += sold;
+        totalFoodCost += fCost;
 
-        items.push({ name, cost, price, sold, margin, foodCostPct, rev });
-      }
+        return {
+          name: item.name || 'طبق بدون اسم',
+          cost,
+          price,
+          sold,
+          margin,
+          foodCostPct,
+          prof,
+          rev
+        };
+      });
 
-      // Validation for total units
-      if (totalUnits <= 0) {
-        const msg = 'يرجى إدخال كميات مبيعات صحيحة (أكبر من صفر) لإجراء تحليل هندسة المنيو.';
+      if (totalUnits === 0) {
         if (window.App && window.App.showToast) {
-          window.App.showToast(msg, 'warning');
-        } else {
-          alert(msg);
+          window.App.showToast('يرجى إدخال كميات مباعة لأصناف القائمة لإجراء التحليل', 'warning');
         }
         return;
       }
 
-      const totalProfit = totalRevenue - totalCost;
-      const overallFoodCostPct = totalRevenue > 0 ? (totalCost / totalRevenue) * 100 : 0;
+      // Standard Kasavana & Smith weighted average contribution margin:
+      const avgMargin = totalProfit / totalUnits;
+      
+      // Standard popularity benchmark: (1 / N) * 70% of total units
+      const avgUnitsBenchmark = (totalUnits / items.length) * 0.70;
 
-      // Kasavana & Smith Benchmarks:
-      // 1. Average Contribution Margin benchmark (Weighted: total profits / total units sold)
-      const avgMargin = totalUnits > 0 ? totalProfit / totalUnits : 0;
-      // 2. Average Popularity Hurdle (70% standard rule: (1/N) * 0.70 * total sales)
-      const avgUnits = items.length > 0 ? (totalUnits / items.length) * 0.70 : 0;
+      const overallFoodCostPct = totalRevenue > 0 ? (totalFoodCost / totalRevenue) * 100 : 0;
 
       document.getElementById('stat-revenue').textContent = totalRevenue.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ر.س';
       document.getElementById('stat-profit').textContent = totalProfit.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ر.س';
-      document.getElementById('stat-food-cost-pct').textContent = overallFoodCostPct.toFixed(1) + '%';
-      document.getElementById('stat-total-units').textContent = totalUnits.toLocaleString('en-US');
+      document.getElementById('stat-foodcost').textContent = overallFoodCostPct.toFixed(1) + '%';
 
       const analysisTbody = document.getElementById('analysis-tbody');
       analysisTbody.innerHTML = items.map(item => {
         const isHighMargin = item.margin >= avgMargin;
-        const isHighPop = item.sold >= avgUnits;
+        const isHighPop = item.sold >= avgUnitsBenchmark;
 
         let category = "";
         let rec = "";
@@ -432,65 +400,42 @@
 
         if (isHighMargin && isHighPop) {
           category = "⭐ نجم (Star)";
-          rec = "حافظ على معايير الجودة وثبت موقعه الاستراتيجي في القائمة";
+          rec = "عالي الربح وعالي الطلب. حافظ على جودة التحضير وثبات السعر، وامنحه موضع الصدارة في قائمة الطعام.";
           color = "var(--primary)";
         } else if (!isHighMargin && isHighPop) {
           category = "🐎 حصان عمل (Plowhorse)";
-          rec = "أعد النظر بالتسعير بزيادة طفيفة أو خفض تكلفة المواد لتعديل الربحية";
-          color = "var(--accent)";
+          rec = "شعبية عالية لكن ربحيته منخفضة. فكر في رفع السعر بحذر أو تقليل تكلفة المكونات دون المساس بالطعم.";
+          color = "#eab308";
         } else if (isHighMargin && !isHighPop) {
           category = "🧩 لغز (Puzzle)";
-          rec = "أعد تسمية الطبق، حسّن موقعه البصري، ودرب فريق الخدمة على ترشيحه";
-          color = "var(--warning)";
+          rec = "ربحه ممتاز لكن مبيعاته قليلة. حسّن طريقة عرضه، درّب العاملين على ترشيحه، أو أعد تسميته بجاذبية أكبر.";
+          color = "#3b82f6";
         } else {
-          category = "⚠️ عبء (Dog)";
-          rec = "فكر في إعادة هيكلته أو استبداله بصنف أكثر طلباً لتقليل الهدر";
+          category = "🐕 عبء (Dog)";
+          rec = "منخفض الربح وقليل الطلب. أعد النظر في استمراره أو استبدله بصنف عصري أكثر قبولاً وربحية.";
           color = "var(--danger)";
         }
 
         return `
-          <tr style="border-bottom: 1px solid var(--border-light); font-size: 0.9rem;">
-            <td style="padding: 0.65rem; font-weight: 600;">${escapeHtml(item.name)}</td>
-            <td style="padding: 0.65rem;">${item.margin.toFixed(2)} ر.س</td>
-            <td style="padding: 0.65rem;">${item.foodCostPct.toFixed(1)}%</td>
-            <td style="padding: 0.65rem; font-weight: 700; color: ${color};">${category}</td>
-            <td style="padding: 0.65rem; font-size: 0.85rem;">${rec}</td>
+          <tr style="border-bottom: 1px solid var(--border-light);">
+            <td style="padding: 0.75rem; font-weight: 700;">${escapeHtml(item.name)}</td>
+            <td style="padding: 0.75rem;">${item.margin.toFixed(2)} ر.س</td>
+            <td style="padding: 0.75rem;">${item.foodCostPct.toFixed(1)}%</td>
+            <td style="padding: 0.75rem; font-weight: 700; color: ${color};">${category}</td>
+            <td style="padding: 0.75rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">${rec}</td>
           </tr>
         `;
       }).join('');
 
-      const resultBox = document.getElementById('menu-analysis-result');
-      resultBox.classList.add('show');
-      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      const resBox = document.getElementById('menu-analysis-result');
+      resBox.classList.add('show');
+      resBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    function copyMenuAnalysis() {
-      const rev = document.getElementById('stat-revenue').textContent;
-      const profit = document.getElementById('stat-profit').textContent;
-      const text = `تقرير تحليل هندسة المنيو عبر منصة سهّلها:\nإجمالي الإيرادات: ${rev}\nإجمالي الأرباح: ${profit}\nالرابط: https://sahhilha.pages.dev/ar/tools/menu-engineering-calculator.html`;
-
-      if (typeof ShareUtils !== 'undefined') {
-        ShareUtils.copyToClipboard(text, 'تم نسخ ملخص التحليل بنجاح');
-      } else {
-        navigator.clipboard.writeText(text).then(() => {
-          if (window.App && window.App.showToast) {
-            window.App.showToast('تم نسخ التقرير بنجاح', 'success');
-          } else {
-            alert('تم النسخ بنجاح!');
-          }
-        });
-      }
-    }
-
-    function escapeHtml(str) {
-      return (str || '').replace(/[&<>"']/g, m => ({
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#39;'
-      }[m]));
-    }
+    // Initial render
+    window.addEventListener('DOMContentLoaded', () => {
+      renderRows();
+    });
   </script>
   <script src="/config/config.js"></script>
   <script src="/assets/js/storage.js"></script>

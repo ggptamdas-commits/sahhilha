@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar-SA" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,13 +98,11 @@
   <header class="site-header" role="banner">
     <div class="container header-container">
       <div class="brand-logo">
-        <a href="/" aria-label="سهّلها - الصفحة الرئيسية" style="display:flex; align-items:center; gap:0.75rem;">
-          <div class="brand-icon" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="12" y1="7" x2="12" y2="13"/></svg>
-          </div>
-          <div>
-            <span class="brand-title">سهّلها</span>
-            <span class="brand-subtitle">أدوات رقمية ذكية</span>
+        <a href="/" aria-label="سهّلها - الصفحة الرئيسية" style="display:flex; align-items:center; gap:0.75rem; text-decoration:none;">
+          <img src="/assets/images/logo-icon.svg" alt="شعار سهّلها" width="36" height="36" style="flex-shrink:0;">
+          <div style="display:flex; flex-direction:column; line-height:1.15;">
+            <span class="brand-name" style="font-weight:900; font-size:1.35rem; color:#f8fafc; letter-spacing:0.5px;">سهلها</span>
+            <span class="brand-tagline" style="font-weight:700; font-size:0.75rem; color:#10b981; letter-spacing:0.5px;">Sahhilha</span>
           </div>
         </a>
       </div>
@@ -115,12 +113,6 @@
         <a href="/#arabic" class="nav-link active">أدوات اللغة</a>
         <a href="/#restaurant" class="nav-link">المطاعم</a>
       </nav>
-
-      <div class="header-actions">
-        <button type="button" class="btn-icon" id="theme-toggle-btn" aria-label="التبديل بين الوضع الداكن والفاتح">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        </button>
-      </div>
     </div>
   </header>
 
@@ -141,7 +133,7 @@
         </div>
         <h1 class="tool-title">مُنسّق ومُنقّح النصوص والبرومبت العربي</h1>
         <p class="tool-description">
-          تخلص من الكشيدة، التشكيل الزائد، والمسافات العشوائية، وحوّل أفكارك إلى أوامر ذكاء اصطناعي (Prompts) احترافية ومهيكلة تناسب ChatGPT وClaude وGemini بأعلى جودة ودون إهدار للت Tokens.
+          تخلص من الكشيدة، التشكيل الزائد، والمسافات العشوائية، وحوّل أفكارك إلى أوامر ذكاء اصطناعي (Prompts) احترافية ومهيكلة تناسب ChatGPT وClaude وGemini بأعلى جودة ودون إهدار للـ Tokens.
         </p>
       </div>
 
@@ -248,30 +240,13 @@
   </main>
 
   <footer class="site-footer" role="contentinfo">
-    <div class="container footer-container">
-      <div class="footer-brand">
-        <div class="footer-brand-logo">
-          <div class="brand-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          </div>
-          <span class="brand-title">سهّلها</span>
-        </div>
-        <p class="footer-tagline">أدوات رقمية سريعة ومجانية للمستخدم والأنشطة التجارية في العالم العربي.</p>
+    <div class="container" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <img src="/assets/images/logo-icon.svg" alt="شعار سهّلها" width="24" height="24">
+        <span style="font-weight:800; font-size:1.1rem; color:#f8fafc;">سهلها</span>
+        <span style="font-weight:700; font-size:0.75rem; color:#10b981;">Sahhilha</span>
       </div>
-
-      <div class="footer-nav">
-        <h4 class="footer-nav-title">روابط هامة</h4>
-        <ul class="footer-nav-list">
-          <li><a href="/about.html">عن المنصة</a></li>
-          <li><a href="/contact.html">اتصل بنا</a></li>
-          <li><a href="/privacy.html">سياسة الخصوصية</a></li>
-          <li><a href="/terms.html">شروط الاستخدام</a></li>
-          <li><a href="/disclaimer.html">إخلاء المسؤولية</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <p>© 2026 سهّلها (Sahhilha). جميع الحقوق محفوظة.</p>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin:0;">أدوات مجانية تجعل حياتك أسهل • جميع الحقوق محفوظة © 2026</p>
     </div>
   </footer>
 
@@ -362,85 +337,35 @@
       let output = '';
 
       if (type === 'expert') {
-        output = `### الدور المحدد (Role):
-أنت خبير واستشاري متخصص باللغة العربية يتميز بالدقة والاحترافية.
-
-### المهمة المطلوبة (Task):
-${cleaned}
-
-### شروط الصياغة والمخرجات (Guidelines):
-1. الالتزام باللغة العربية الفصحى السليمة وتجنب الركاكة والترجمة الحرفية.
-2. استخدام التنسيق الهيكلي (عناوين فرعية، نقاط رئيسية، جداول مقارنة عند الحاجة).
-3. تقديم أمثلة وتطبيقات عملية واقعية قابلة للتنفيذ المباشر.
-4. تجنب الحشو والمقدمات الإنشائية الطويلة والدخول في صلب الموضوع فوراً.`;
+        output = `### الدور المحدد (Role):\nأنت خبير واستشاري متخصص باللغة العربية يتميز بالدقة والاحترافية.\n\n### المهمة المطلوبة (Task):\n${cleaned}\n\n### شروط الصياغة والمخرجات (Guidelines):\n1. الالتزام باللغة العربية الفصحى السليمة وتجنب الركاكة والترجمة الحرفية.\n2. استخدام التنسيق الهيكلي (عناوين فرعية، نقاط رئيسية، جداول مقارنة عند الحاجة).\n3. تقديم أمثلة وتطبيقات عملية واقعية قابلة للتنفيذ المباشر.\n4. تجنب الحشو والمقدمات الإنشائية الطويلة والدخول في صلب الموضوع فوراً.`;
       } else if (type === 'step_by_step') {
-        output = `### المهمة التحليلية (Analytical Task):
-${cleaned}
-
-### منهجية العمل المطلوبة (Chain of Thought):
-1. قم بتحليل المسألة خطوة بخطوة موضحاً الأسباب والحيثيات.
-2. اذكر الافتراضات الأساسية والبدائل الممكنة.
-3. قدّم الخلاصة والتوصية النهائية الحاسمة في نهاية الرد في فقرة موجزة.`;
+        output = `### التفكير التسلسلي المنطقي (Chain-of-Thought):\nيرجى التفكير خطوة بخطوة في المسألة التالية قبل صياغة الحل النهائي:\n\n### نص المسألة أو التحدي:\n${cleaned}\n\n### خطوات الإجابة المطلوبة:\n1. تحليل المعطيات والعناصر الأساسية وتحديد المشكلة بدقة.\n2. سرد الفرضيات والبدائل الممكنة.\n3. تقييم كل بديل وتحديد الأنسب مدعوماً بالأسباب المنطقية.\n4. تلخيص القرار النهائي في قائمة إجراءات تنفيذية موجزة.`;
       } else if (type === 'proofread') {
-        output = `### النص المراد تدقيقه وصياغته (Source Text):
-${cleaned}
-
-### المطلوب (Task):
-1. تدقيق النص لغوياً ونحوياً وإملائياً.
-2. إعادة صياغة الجمل الركيكة لتصبح بأسلوب عربي فصيح، متين، وجذاب.
-3. توضيح أهم التعديلات والتحسينات التي تمت في جدول مقارنة قبل/بعد.`;
+        output = `### الدور:\nأنت مدقق لغوي خبير في النحو والصرف والأسلوب العربي الرصين.\n\n### النص المطلوب تدقيقه وتحسينه:\n\"\"\"\n${cleaned}\n\"\"\"\n\n### المطلوب بدقة:\n1. تصحيح أي أخطاء إملائية أو نحوية أو علامات ترقيم.\n2. إعادة صياغة العبارات الركيكة لتصبح أكثر فصاحة وجزالة.\n3. توضيح أهم التعديلات التي تم إجراؤها في جدول مقارنة (قبل / بعد) مع ذكر سبب التعديل.`;
       } else if (type === 'claude') {
-        output = `<role>
-أنت خبير واستشاري متخصص باللغة العربية الفصحى.
-</role>
-
-<context>
-المهمة تتطلب صياغة دقيقة، خالية من الحشو، ومنظمة منطقياً وفق أعلى المعايير الاحترافية.
-</context>
-
-<task>
-${cleaned}
-</task>
-
-<constraints>
-- تقديم إجابة مباشرة بدون مقدمات مكررة.
-- تنظيم الأفكار في نقاط وجداول للمقارنة عند الحاجة.
-</constraints>`;
+        output = `<instructions>\nأنت مساعد ذكي فائق الدقة. مهمتك تنفيذ التعليمات التالية باللغة العربية الفصحى.\n</instructions>\n\n<task>\n${cleaned}\n</task>\n\n<guidelines>\n- تحدث بنبرة مهنية واضحة ومباشرة.\n- قدم النتيجة داخل وسوم منسقة ونقاط واضحة.\n- لا تكرر سياق السؤال أو تضيف مقدمات ترحيبية غير لازمة.\n</guidelines>`;
       } else if (type === 'gemini') {
-        output = `## التعليمات والتوجيهات (System Instructions)
-أنت مساعد ذكي محترف وموجز. قدّم حلولاً عملية مدعومة بالخطوات الواقعية.
-
-## المهمة الأساسية:
-${cleaned}
-
-## شروط الصياغة:
-- اعتمد لغة عربية سليمة وتنسيق Markdown واضح.
-- ركز على الدقة والخطوات التنفيذية المباشرة.`;
+        output = `**الهدف:** إنجاز المهمة التالية بأعلى درجات الدقة والوضوح باللغة العربية:\n\n**المهمة:**\n${cleaned}\n\n**الشروط والقيود:**\n* استخدام التنسيق الغني بنقاط وجداول ملخصة.\n* الدخول في الإجابة مباشرة بدون مقدمات.\n* ذكر التوصيات العملية والأمثلة الواقعية.`;
       }
 
       document.getElementById('cleaned-text').value = output;
       if (window.App && window.App.showToast) {
-        window.App.showToast('تمت صياغة البرومبت بتنسيق احترافي جاهز', 'success');
+        window.App.showToast('تم تطبيق قالب البرومبت وتجهيزه للنسخ', 'success');
       }
     }
 
     function copyCleaned() {
       const text = document.getElementById('cleaned-text').value;
-      if (!text) {
+      if (!text.trim()) {
         if (window.App && window.App.showToast) {
-          window.App.showToast('لا توجد نتيجة منسقة للنسخ', 'warning');
+          window.App.showToast('لا توجد نتيجة منسقة لنسخها حالياً', 'warning');
         }
         return;
       }
-
-      if (typeof ShareUtils !== 'undefined') {
-        ShareUtils.copyToClipboard(text, 'تم نسخ النص المنسق إلى الحافظة بنجاح');
-      } else {
+      if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(() => {
           if (window.App && window.App.showToast) {
-            window.App.showToast('تم نسخ النص المنسق بنجاح', 'success');
-          } else {
-            alert('تم النسخ بنجاح!');
+            window.App.showToast('تم نسخ النتيجة إلى الحافظة بنجاح', 'success');
           }
         });
       }
@@ -450,9 +375,6 @@ ${cleaned}
       document.getElementById('raw-text').value = '';
       document.getElementById('cleaned-text').value = '';
       updateStats();
-      if (window.App && window.App.showToast) {
-        window.App.showToast('تم إفراغ الحقول', 'info');
-      }
     }
   </script>
   <script src="/config/config.js"></script>

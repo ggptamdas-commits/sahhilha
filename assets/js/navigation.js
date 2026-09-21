@@ -1,6 +1,6 @@
 /**
  * SAHHILHA (سهّلها) - Navigation & Menu Interaction
- * Manages Mobile Drawer, Bottom Bar, Accessibility Controls, and Global Toasts.
+ * Manages Mobile Drawer, Accessibility Controls, and Global Toasts.
  */
 
 window.App = window.App || {};
@@ -55,10 +55,12 @@ window.App.showToast = function(message, type = 'info', duration = 3000) {
   }
 };
 
+// Expose on window for backwards compatibility
+window.showToast = window.App.showToast;
+
 const NavigationManager = {
   init() {
     this.bindDrawerEvents();
-    this.bindThemeToggle();
     this.highlightActivePage();
   },
 
@@ -99,24 +101,6 @@ const NavigationManager = {
         closeDrawer();
       }
     });
-  },
-
-  bindThemeToggle() {
-    const themeBtn = document.getElementById('theme-toggle-btn');
-    const themeBtnDrawer = document.getElementById('theme-toggle-drawer');
-
-    const handleToggle = () => {
-      if (typeof StorageManager !== 'undefined') {
-        StorageManager.toggleTheme();
-      }
-    };
-
-    if (themeBtn) {
-      themeBtn.addEventListener('click', handleToggle);
-    }
-    if (themeBtnDrawer) {
-      themeBtnDrawer.addEventListener('click', handleToggle);
-    }
   },
 
   highlightActivePage() {

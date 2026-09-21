@@ -1,69 +1,116 @@
 /**
- * SAHHILHA (سهّلها) - Search & Filtering Engine
- * Client-side search and category filtering for tools catalog.
+ * SAHHILHA (سهّلها) - Search Engine
+ * Arabic-aware client-side search engine.
+ * Handles text normalization (Tashkeel, Tatweel, Hamzas, Taa Marbuta, Alef Maksura).
  */
 
-const SearchEngine = {
+const SearchEngine = (() => {
   /**
-   * Search tools by text query and optional category filter.
-   * @param {string} query - Free-text search input
-   * @param {string} categoryId - Optional category ID filter
-   * @returns {Array} Matching tool objects
+   * Normalize Arabic text for robust fuzzy search
    */
-  search(query, categoryId = null) {
-    if (typeof TOOLS === 'undefined' || !Array.isArray(TOOLS)) {
-      console.warn('TOOLS registry not loaded.');
-      return [];
+  const normalizeArabic = (text) => {
+    if (!text || typeof text !== "string") return "";
+
+    return text
+      // Normalize to lowercase for English
+      .toLowerCase()
+      // Remove Arabic diacritics (Tashkeel)
+      .replace(/[\u064B-\u065F\u0670]/g, "")
+      // Remove Arabic Tatweel (Kashida)
+      .replace(/\u0640/g, "")
+      // Normalize Hamza and Alef variants to bare Alef
+      .replace(/[إأآٱ]/g, "ا")
+      // Normalize Alef Maksura to Ya
+      .replace(/ى/g, "ي")
+      // Normalize Taa Marbuta to Haa
+      .replace(/ة/g, "ه")
+      // Normalize variant forms of Kaf and Ya
+      .replace(/ك/g, "ك")
+      .replace(/ی/g, "ي")
+      // Clean multiple whitespace
+      .replace(/\s+/g, " ")
+      .trim();
+  };
+
+  /**
+   * Search through tool list
+   * Supports both signatures:
+   *   search(query, tools, categoryFilter)
+   *   search(query, categoryFilter)
+   * @param {string} query - Raw search query
+   * @param {Array|string} tools - Array of tool objects or categoryFilter if omitted
+   * @param {string} categoryFilter - Optional category id to scope results
+   * @returns {Array} Filtered and ranked array of tool objects
+   */
+  const search = (query, tools, categoryFilter = "all") => {
+    // Polymorphic signature check
+    if (typeof tools === "string" || tools === null || tools === undefined) {
+      categoryFilter = tools || "all";
+      tools = (typeof TOOLS !== "undefined" && Array.isArray(TOOLS)) ? TOOLS : [];
+    } else if (!Array.isArray(tools)) {
+      tools = (typeof TOOLS !== "undefined" && Array.isArray(TOOLS)) ? TOOLS : [];
     }
 
-    const cleanQuery = this.normalizeArabic(query.trim().toLowerCase());
+    let pool = tools;
+    if (categoryFilter && categoryFilter !== "all") {
+      pool = tools.filter(tool => tool.category === categoryFilter);
+    }
 
-    return TOOLS.filter(tool => {
-      // Category matching
-      if (categoryId && categoryId !== 'all' && tool.category !== categoryId) {
-        return false;
+    const cleanQuery = normalizeArabic(query);
+    if (!cleanQuery) {
+      return pool;
+    }
+
+    const queryTokens = cleanQuery.split(" ").filter(t => t.length > 0);
+
+    const scored = pool.map(tool => {
+      let score = 0;
+      const normNameAr = normalizeArabic(tool.nameAr);
+      const normNameEn = (tool.nameEn || "").toLowerCase();
+      const normDesc = normalizeArabic(tool.description);
+      const normKeywords = (tool.keywords || []).map(k => normalizeArabic(k));
+      const normCategory = normalizeArabic(tool.category);
+
+      // Check for exact full phrase match in name
+      if (normNameAr.includes(cleanQuery) || normNameEn.includes(cleanQuery)) {
+        score += 100;
       }
 
-      // Empty query returns all tools in selected category
-      if (!cleanQuery) return true;
+      // Check query tokens
+      for (const token of queryTokens) {
+        if (normNameAr.includes(token)) score += 40;
+        if (normNameEn.includes(token)) score += 30;
 
-      // Multi-term token matching (all tokens must match at least one field)
-      const tokens = cleanQuery.split(/\s+/).filter(t => t.length > 0);
+        // Keywords match
+        for (const kw of normKeywords) {
+          if (kw.includes(token)) {
+            score += 25;
+            if (kw === token) score += 20; // Exact keyword hit
+          }
+        }
 
-      const nameArNorm = this.normalizeArabic(tool.nameAr || '');
-      const nameEnNorm = (tool.nameEn || '').toLowerCase();
-      const descNorm = this.normalizeArabic(tool.description || '');
-      const keywordsNorm = (tool.keywords || []).map(k => this.normalizeArabic(k)).join(' ');
+        // Description match
+        if (normDesc.includes(token)) score += 10;
 
-      const combinedText = `${nameArNorm} ${nameEnNorm} ${descNorm} ${keywordsNorm}`;
+        // Category match
+        if (normCategory.includes(token)) score += 15;
+      }
 
-      return tokens.every(token => combinedText.includes(token));
+      return { tool, score };
     });
-  },
 
-  /**
-   * Normalize Arabic text for search matching.
-   * Strips tashkeel (diacritics), tatweel (kashida), and normalizes hamzas.
-   * @param {string} text 
-   * @returns {string} Normalized text
-   */
-  normalizeArabic(text) {
-    if (!text) return '';
-    return text
-      // Remove diacritics
-      .replace(/[\u064B-\u065F\u0670]/g, '')
-      // Remove tatweel (kashida)
-      .replace(/\u0640/g, '')
-      // Normalize alef variants
-      .replace(/[إأآ]/g, 'ا')
-      // Normalize teh marbuta
-      .replace(/ة/g, 'ه')
-      // Normalize alif maqsura
-      .replace(/ى/g, 'ي')
-      .toLowerCase();
-  }
-};
+    return scored
+      .filter(item => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map(item => item.tool);
+  };
+
+  return {
+    normalizeArabic,
+    search
+  };
+})();
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { SearchEngine };
+  module.exports = SearchEngine;
 }

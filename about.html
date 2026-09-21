@@ -1,88 +1,120 @@
 <!DOCTYPE html>
-<html lang="ar-SA" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>عن المنصة | سهّلها</title>
-  <meta name="description" content="تعرف على منصة سهّلها، رسالتنا ورؤيتنا في تقديم أدوات رقمية وحاسبات مجانية لخدمة الأفراد والشركات ورواد الأعمال في العالم العربي.">
+  <title>عن المنصة | سهّلها - منصة الأدوات الرقمية والحاسبات الذكية</title>
+  <meta name="description" content="تعرف على منصة سهّلها ورسالتها في توفير أدوات وحاسبات رقمية مجانية ومفتوحة للأفراد ورواد الأعمال والمطاعم في العالم العربي بدون تسجيل وبخصوصية تامة.">
   <link rel="canonical" href="https://sahhilha.pages.dev/about.html">
   <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg">
+  <link rel="manifest" href="/manifest.json">
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/responsive.css">
+
   <meta name="robots" content="index, follow">
   <meta property="og:image" content="https://sahhilha.pages.dev/assets/icons/favicon.svg">
   <meta name="twitter:image" content="https://sahhilha.pages.dev/assets/icons/favicon.svg">
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://sahhilha.pages.dev/about.html">
   <meta property="og:title" content="عن المنصة | سهّلها">
-  <meta property="og:description" content="تعرف على منصة سهّلها ورسالتنا في تقديم أدوات مجانية للمستخدم العربي.">
+  <meta property="og:description" content="تعرف على منصة سهّلها ورسالتها في تقديم أدوات رقمية مجانية تخدم المستخدم العربي ورواد الأعمال.">
   <meta property="og:site_name" content="سهّلها - Sahhilha">
+  <meta property="og:locale" content="ar_SA">
+  <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
   <header class="site-header" role="banner">
     <div class="container header-container">
       <div class="brand-logo">
-        <a href="/" aria-label="سهّلها - الصفحة الرئيسية" style="display:flex; align-items:center; gap:0.75rem;">
-          <div class="brand-icon" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <div>
-            <span class="brand-title">سهّلها</span>
-            <span class="brand-subtitle">أدوات رقمية ذكية</span>
+        <a href="/" aria-label="سهّلها - الصفحة الرئيسية" style="display:flex; align-items:center; gap:0.75rem; text-decoration:none;">
+          <img src="/assets/images/logo-icon.svg" alt="شعار سهّلها" width="36" height="36" style="flex-shrink:0;">
+          <div style="display:flex; flex-direction:column; line-height:1.15;">
+            <span class="brand-name" style="font-weight:900; font-size:1.35rem; color:#f8fafc; letter-spacing:0.5px;">سهلها</span>
+            <span class="brand-tagline" style="font-weight:700; font-size:0.75rem; color:#10b981; letter-spacing:0.5px;">Sahhilha</span>
           </div>
         </a>
       </div>
+
       <nav class="nav-links" aria-label="التنقل الرئيسي">
         <a href="/#saudi" class="nav-link">أدوات السعودية</a>
         <a href="/#calculators" class="nav-link">الحاسبات</a>
         <a href="/#arabic" class="nav-link">أدوات اللغة</a>
         <a href="/#restaurant" class="nav-link">المطاعم</a>
       </nav>
-      <div class="header-actions">
-        <button type="button" class="btn-icon" id="theme-toggle-btn" aria-label="التبديل بين الوضع الداكن والفاتح">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        </button>
-      </div>
     </div>
   </header>
-  <main class="main-content">
+
+  <main class="main-content" id="main-content">
     <div class="container">
-      <article class="info-article">
-        <h1>عن منصة سهّلها</h1>
-        <p><strong>سهّلها (Sahhilha)</strong> هي منصة أدوات رقمية عربية رائدة ومجانية، تأسست بهدف تزويد الأفراد والشركات ورواد الأعمال بحلول عملية وفورية تسهم في تبسيط المهام اليومية وزيادة الإنتاجية.</p>
+      <div class="info-article" style="max-width:850px; margin:2rem auto;">
+        <h1>عن منصة سهّلها (Sahhilha)</h1>
+        <p class="lead" style="font-size:1.15rem; color:var(--text); line-height:1.8;">
+          <strong>سهّلها</strong> هي منصة رقمية عربية مستقلة تهدف إلى توفير أدوات عملية، حاسبات متخصصة، ومولدات رموز رقمية مجانية تسهم في تيسير الأعمال اليومية للمستخدمين الأفراد، الموظفين، وأصحاب الأنشطة التجارية في العالم العربي، وبشكل خاص في المملكة العربية السعودية.
+        </p>
+
         <h2>رؤيتنا</h2>
-        <p>أن نكون الوجهة العربية الأولى للأدوات الخفيفة والآمنة التي تعمل مباشرة على المتصفح دون الحاجة إلى تثبيت برامج خارجية أو تسجيل حسابات، مع الالتزام التام بأعلى معايير الخصوصية والدقة النظامية.</p>
-        <h2>قيمنا الأساسية</h2>
+        <p>
+          تمكين كل مستخدم عربي من الوصول إلى أدوات تقنية وحسابية موثوقة ومطابقة للأنظمة الرسمية مجاناً بالكامل، دون اشتراطات تسجيل، ودون إعلانات مزعجة، مع الحفاظ المطلق على خصوصية البيانات وسرعة المعالجة على جهاز المستخدم مباشرة.
+        </p>
+
+        <h2>قيمنا ومبادئنا</h2>
         <ul>
-          <li><strong>المجانية والوصول الحر:</strong> جميع أدواتنا متاحة مجاناً بدون قيود.</li>
-          <li><strong>الخصوصية التامة:</strong> تتم معالجة بياناتك وحساباتك على جهازك مباشرة (Client-side) دون إرسالها إلى أي خوادم خارجية.</li>
-          <li><strong>الدقة والامتثال:</strong> حاسباتنا مبنية وفق أحدث الأنظمة الرسمية مثل نظام العمل السعودي واشتراطات هيئة الزكاة والضريبة والجمارك (ZATCA).</li>
+          <li><strong>الخصوصية أولاً (Local-First):</strong> تجري كافة العمليات الحسابية وتوليد الباركود وتنسيق النصوص داخل متصفحك مباشرة دون حفظ أي بيانات سرية أو مالية على خوادمنا.</li>
+          <li><strong>الدقة والامتثال:</strong> نحرص على مطابقة حاسباتنا وأدواتنا للأنظمة والمعايير الرسمية المعتمدة (مثل لوائح وزارة الموارد البشرية، ومتطلبات هيئة الزكاة والضريبة والجمارك ZATCA).</li>
+          <li><strong>البساطة وسهولة الاستخدام:</strong> واجهات مصممة بعناية فائقة لتوفير أفضل تجربة تصفح واستخدام على الهواتف الذكية والأجهزة اللوحية وأجهزة الكمبيوتر.</li>
         </ul>
-      </article>
+      </div>
     </div>
   </main>
+
   <footer class="site-footer" role="contentinfo">
-    <div class="container footer-container">
+    <div class="container footer-grid">
       <div class="footer-brand">
-        <div class="footer-brand-logo"><span class="brand-title">سهّلها</span></div>
-        <p class="footer-tagline">أدوات رقمية سريعة ومجانية بدون تسجيل أو قيود.</p>
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
+          <img src="/assets/images/logo-icon.svg" alt="شعار سهّلها" width="32" height="32">
+          <div>
+            <span class="brand-title" style="font-weight:900; font-size:1.35rem; color:#f8fafc;">سهلها</span>
+            <span style="font-weight:700; font-size:0.8rem; color:#10b981; margin-right:0.35rem;">Sahhilha</span>
+          </div>
+        </div>
+        <p style="color:#10b981; font-weight:700; font-size:0.85rem; margin-bottom:0.5rem;">أدوات مجانية تجعل حياتك أسهل</p>
+        <p>منصة عربية تجمع أدوات وحاسبات رقمية متخصصة ومجانية بدون تسجيل لخدمة رواد الأعمال والمستخدم العربي.</p>
       </div>
-      <div class="footer-nav">
-        <h4 class="footer-nav-title">روابط هامة</h4>
-        <ul class="footer-nav-list">
+
+      <div class="footer-col">
+        <h4>روابط سريعة</h4>
+        <ul class="footer-links">
+          <li><a href="/#saudi">أدوات السعودية</a></li>
+          <li><a href="/#calculators">الحاسبات المتخصصة</a></li>
+          <li><a href="/#arabic">أدوات اللغة العربية</a></li>
+          <li><a href="/#restaurant">أدوات المطاعم</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>منصة سهّلها</h4>
+        <ul class="footer-links">
           <li><a href="/about.html">عن المنصة</a></li>
           <li><a href="/contact.html">اتصل بنا</a></li>
+          <li><a href="/sitemap.xml">خريطة الموقع</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>الشروط والخصوصية</h4>
+        <ul class="footer-links">
           <li><a href="/privacy.html">سياسة الخصوصية</a></li>
           <li><a href="/terms.html">شروط الاستخدام</a></li>
           <li><a href="/disclaimer.html">إخلاء المسؤولية</a></li>
         </ul>
       </div>
     </div>
+
     <div class="container footer-bottom">
-      <p>© 2026 سهّلها (Sahhilha). جميع الحقوق محفوظة.</p>
+      <p>© 2026 سهّلها (Sahhilha) — جميع الحقوق محفوظة.</p>
     </div>
   </footer>
+  <script src="/config/config.js"></script>
   <script src="/assets/js/storage.js"></script>
   <script src="/assets/js/navigation.js"></script>
 </body>

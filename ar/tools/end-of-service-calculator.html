@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar-SA" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,13 +98,11 @@
   <header class="site-header" role="banner">
     <div class="container header-container">
       <div class="brand-logo">
-        <a href="/" aria-label="سهّلها - الصفحة الرئيسية" style="display:flex; align-items:center; gap:0.75rem;">
-          <div class="brand-icon" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <div>
-            <span class="brand-title">سهّلها</span>
-            <span class="brand-subtitle">أدوات رقمية ذكية</span>
+        <a href="/" aria-label="سهّلها - الصفحة الرئيسية" style="display:flex; align-items:center; gap:0.75rem; text-decoration:none;">
+          <img src="/assets/images/logo-icon.svg" alt="شعار سهّلها" width="36" height="36" style="flex-shrink:0;">
+          <div style="display:flex; flex-direction:column; line-height:1.15;">
+            <span class="brand-name" style="font-weight:900; font-size:1.35rem; color:#f8fafc; letter-spacing:0.5px;">سهلها</span>
+            <span class="brand-tagline" style="font-weight:700; font-size:0.75rem; color:#10b981; letter-spacing:0.5px;">Sahhilha</span>
           </div>
         </a>
       </div>
@@ -115,12 +113,6 @@
         <a href="/#arabic" class="nav-link">أدوات اللغة</a>
         <a href="/#restaurant" class="nav-link">المطاعم</a>
       </nav>
-
-      <div class="header-actions">
-        <button type="button" class="btn-icon" id="theme-toggle-btn" aria-label="التبديل بين الوضع الداكن والفاتح">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        </button>
-      </div>
     </div>
   </header>
 
@@ -240,48 +232,30 @@
           <li><strong>10 سنوات فأكثر:</strong> يستحق العامل المكافأة كاملة بنسبة (100%).</li>
         </ul>
 
-        <h3>3. الحالات الاستثنائية التي تستحق فيها المكافأة كاملة بغض النظر عن المدة:</h3>
-        <ul>
-          <li>ترك العامل للعمل نتيجة قوة قاهرة خارجة عن إرادته (المادة 84).</li>
-          <li>إنهاء العقد باتفاق الطرفين كتابياً (المادة 74 فقرة 1).</li>
-          <li>إنهاء العاملة لعقد عملها خلال ستة أشهر من عقد زواجها، أو خلال ثلاثة أشهر من تاريخ وضعها لمولودها (المادة 87).</li>
-          <li>ترك العامل العمل لأحد الأسباب المنصوص عليها في المادة 81 من نظام العمل (مثل إخلال صاحب العمل بالتزاماته الجوهرية).</li>
-        </ul>
+        <h3>3. الحالات الاستثنائية التي تستحق فيها المكافأة كاملة عند الاستقالة (المادة 87):</h3>
+        <p>
+          تستحق العاملة المكافأة كاملة إذا أنهت عقدها خلال 6 أشهر من تاريخ عقد زواجها أو خلال 3 أشهر من تاريخ وضع حملها. كما يستحق العامل المكافأة كاملة إذا ترك العمل نتيجة قوة قاهرة أو ظرف طارئ خارج عن إرادته.
+        </p>
       </article>
     </div>
   </main>
 
   <footer class="site-footer" role="contentinfo">
-    <div class="container footer-container">
-      <div class="footer-brand">
-        <div class="footer-brand-logo">
-          <div class="brand-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          </div>
-          <span class="brand-title">سهّلها</span>
-        </div>
-        <p class="footer-tagline">أدوات رقمية سريعة ومجانية للمستخدم والأنشطة التجارية في العالم العربي.</p>
+    <div class="container" style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.5rem;">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <img src="/assets/images/logo-icon.svg" alt="شعار سهّلها" width="24" height="24">
+        <span style="font-weight:800; font-size:1.1rem; color:#f8fafc;">سهلها</span>
+        <span style="font-weight:700; font-size:0.75rem; color:#10b981;">Sahhilha</span>
       </div>
-
-      <div class="footer-nav">
-        <h4 class="footer-nav-title">روابط هامة</h4>
-        <ul class="footer-nav-list">
-          <li><a href="/about.html">عن المنصة</a></li>
-          <li><a href="/contact.html">اتصل بنا</a></li>
-          <li><a href="/privacy.html">سياسة الخصوصية</a></li>
-          <li><a href="/terms.html">شروط الاستخدام</a></li>
-          <li><a href="/disclaimer.html">إخلاء المسؤولية</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <p>© 2026 سهّلها (Sahhilha). جميع الحقوق محفوظة.</p>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin:0;">أدوات مجانية تجعل حياتك أسهل • جميع الحقوق محفوظة © 2026</p>
     </div>
   </footer>
 
   <script>
     function handleContractChange() {
-      // Future hook for contract-specific validation
+      const type = document.getElementById('contract-type').value;
+      const reasonSelect = document.getElementById('reason');
+      // If contract is fixed, resignation rules can be customized or cautioned
     }
 
     function calculateEOS() {
@@ -309,10 +283,10 @@
       let after5Amount = 0;
 
       if (totalYears <= 5) {
-        first5Amount = totalYears * (wage / 2);
+        first5Amount = totalYears * 0.5 * wage;
       } else {
-        first5Amount = 5 * (wage / 2);
-        after5Amount = (totalYears - 5) * wage;
+        first5Amount = 5 * 0.5 * wage;
+        after5Amount = (totalYears - 5) * 1.0 * wage;
       }
 
       const baseGratuity = first5Amount + after5Amount;
@@ -323,88 +297,72 @@
 
       if (reason === "resignation") {
         if (contractType === "fixed") {
-          if (totalYears < 2) {
-            factor = 0;
-            ratioText = "مدة الخدمة أقل من سنتين (0%).";
-          } else if (totalYears <= 5) {
-            factor = 1 / 3;
-            ratioText = "استحقاق ثلث المكافأة (33.33%) مع مراعاة بنود العقد المحدد.";
-          } else if (totalYears < 10) {
-            factor = 2 / 3;
-            ratioText = "استحقاق ثلثي المكافأة (66.67%) مع مراعاة بنود العقد المحدد.";
-          } else {
-            factor = 1.0;
-            ratioText = "استحقاق كامل (100%) لبلوغ الخدمة 10 سنوات فأكثر.";
-          }
-        } else {
-          // Indefinite contract Article 85
-          if (totalYears < 2) {
-            factor = 0;
-            ratioText = "لا يستحق العامل مكافأة نهاية خدمة لأن مدة الخدمة بالاستقالة أقل من سنتين (المادة 85).";
-          } else if (totalYears <= 5) {
-            factor = 1 / 3;
-            ratioText = "يستحق العامل ثلث المكافأة (33.33%) لأن مدة خدمته بين سنتين ولا تزيد عن خمس سنوات (المادة 85).";
-          } else if (totalYears < 10) {
-            factor = 2 / 3;
-            ratioText = "يستحق العامل ثلثي المكافأة (66.67%) لأن مدة خدمته زادت عن خمس سنوات ولم تبلغ عشر سنوات (المادة 85).";
-          } else {
-            factor = 1.0;
-            ratioText = "يستحق العامل المكافأة كاملة بنسبة 100% لأن مدة خدمته بلغت عشر سنوات فأكثر (المادة 85).";
-          }
+          ratioText = "في العقد محدد المدة، تترتب الاستقالة قبل نهاية المدة على اتفاق الطرفين أو شروط العقد المبرم، ولأغراض الاحتساب تم تطبيق نسب المادة 85:";
         }
-      } else if (reason === "mutual_agreement") {
-        factor = 1.0;
-        ratioText = "استحقاق كامل للمكافأة (100%) لإنهاء العقد باتفاق الطرفين كتابياً وفقاً للمادة (74 فقرة 1).";
+
+        if (totalYears < 2) {
+          factor = 0.0;
+          ratioText = "مدة الخدمة أقل من سنتين بالاستقالة: لا يستحق العامل مكافأة نهاية خدمة (0%) وفق المادة 85.";
+        } else if (totalYears <= 5) {
+          factor = 1.0 / 3.0;
+          ratioText = "مدة الخدمة من سنتين حتى 5 سنوات بالاستقالة: يستحق العامل ثلث المكافأة (33.33%) وفق المادة 85.";
+        } else if (totalYears < 10) {
+          factor = 2.0 / 3.0;
+          ratioText = "مدة الخدمة أكثر من 5 سنوات وأقل من 10 سنوات بالاستقالة: يستحق العامل ثلثي المكافأة (66.67%) وفق المادة 85.";
+        } else {
+          factor = 1.0;
+          ratioText = "مدة الخدمة 10 سنوات فأكثر بالاستقالة: يستحق العامل المكافأة كاملة (100%) وفق المادة 85.";
+        }
       } else if (reason === "female_leave") {
         factor = 1.0;
-        ratioText = "استحقاق كامل للمكافأة (100%) طبقاً للاستثناء الخاص بالمادة (87) من نظام العمل السعودي.";
+        ratioText = "استحقاق كامل للمكافأة (100%) وفق استثناءات المادة 87 (إنهاء العاملة للعقد خلال مهلة الزواج أو الوضع).";
       } else if (reason === "force_majeure") {
         factor = 1.0;
-        ratioText = "استحقاق كامل للمكافأة (100%) لانتهاء العقد بسبب ظرف قاهر (المادة 84).";
+        ratioText = "استحقاق كامل للمكافأة (100%) وفق المادة 87 لفسخ العقد نتيجة قوة قاهرة.";
+      } else if (reason === "mutual_agreement") {
+        factor = 1.0;
+        ratioText = "استحقاق كامل للمكافأة (100%) لإنهاء العقد باتفاق الطرفين كتابياً وفق المادة 74.";
       }
 
       const finalAmount = baseGratuity * factor;
 
+      // Render Results
       document.getElementById('eos-total').textContent = finalAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ر.س';
 
-      document.getElementById('eos-notes').innerHTML = `
-        <div style="font-weight:700; color:var(--text); margin-bottom:0.5rem;">تفاصيل واحتساب المكافأة:</div>
-        <div>• إجمالي مدة الخدمة: <strong>${years}</strong> سنة، و <strong>${months}</strong> شهر، و <strong>${days}</strong> يوم (${totalYears.toFixed(2)} سنة).</div>
-        <div>• مكافأة السنوات الخمس الأولى: <strong>${first5Amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ر.س</strong>.</div>
-        ${after5Amount > 0 ? `<div>• مكافأة ما بعد الخمس سنوات: <strong>${after5Amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ر.س</strong>.</div>` : ''}
-        <div>• إجمالي المكافأة قبل نسبة الاستحقاق: <strong>${baseGratuity.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ر.س</strong>.</div>
-        <div>• نسبة الاستحقاق المطبقة: <strong>${(factor * 100).toFixed(1)}%</strong>.</div>
-        <div style="margin-top:0.5rem; color:var(--text); font-size:0.875rem;"><strong>السند النظامي:</strong> ${ratioText}</div>
+      let breakdownHtml = `
+        <div class="breakdown-item"><span>الأجر الفعلي المعتمد:</span> <strong>${wage.toLocaleString('en-US')} ر.س</strong></div>
+        <div class="breakdown-item"><span>مدة الخدمة الإجمالية:</span> <strong>${years} سنوات، و${months} أشهر، و${days} أيام (${totalYears.toFixed(2)} سنة)</strong></div>
+        <div class="breakdown-item"><span>المكافأة الأساسية قبل تطبيق نسب الاستقالة:</span> <strong>${baseGratuity.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ر.س</strong></div>
+        <div class="breakdown-item" style="border-top: 1px dashed var(--border); padding-top: 0.5rem; margin-top: 0.5rem;">
+          <span>السند النظامي ونسبة الاستحقاق:</span>
+          <p style="color:var(--text); margin-top:0.25rem; font-size:0.9rem;">${ratioText}</p>
+        </div>
       `;
 
-      const resultEl = document.getElementById('eos-result');
-      resultEl.classList.add('show');
-      resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      document.getElementById('eos-notes').innerHTML = breakdownHtml;
+
+      const resultBox = document.getElementById('eos-result');
+      resultBox.classList.add('show');
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     function resetEOSForm() {
       document.getElementById('eos-form').reset();
-      document.getElementById('years').value = '3';
-      document.getElementById('months').value = '0';
-      document.getElementById('days').value = '0';
+      document.getElementById('years').value = 3;
+      document.getElementById('months').value = 0;
+      document.getElementById('days').value = 0;
       document.getElementById('eos-result').classList.remove('show');
-      if (window.App && window.App.showToast) {
-        window.App.showToast('تمت إعادة ضبط الحاسبة', 'info');
-      }
     }
 
     function copyEOSSummary() {
       const total = document.getElementById('eos-total').textContent;
-      const text = `ملخص مكافأة نهاية الخدمة عبر منصة سهّلها:\nالمكافأة المستحقة: ${total}\nالموقع: https://sahhilha.pages.dev/ar/tools/end-of-service-calculator.html`;
+      const notes = document.getElementById('eos-notes').innerText;
+      const textToCopy = `حاسبة نهاية الخدمة (سهّلها):\nالمستحق النهائي: ${total}\n\nالتفاصيل:\n${notes}\nرابط الأداة: https://sahhilha.pages.dev/ar/tools/end-of-service-calculator.html`;
 
-      if (typeof ShareUtils !== 'undefined') {
-        ShareUtils.copyToClipboard(text, 'تم نسخ ملخص المكافأة بنجاح');
-      } else {
-        navigator.clipboard.writeText(text).then(() => {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
           if (window.App && window.App.showToast) {
             window.App.showToast('تم نسخ ملخص المكافأة بنجاح', 'success');
-          } else {
-            alert('تم نسخ الملخص بنجاح!');
           }
         });
       }

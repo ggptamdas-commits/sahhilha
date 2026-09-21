@@ -1,6 +1,6 @@
 /**
  * SAHHILHA (سهّلها) - Homepage Application Controller
- * Handles Tool Card rendering, Search Chips, Category Filtering, and Favorites.
+ * Handles Tool Card rendering, Search Chips, Category Filtering, URL Hash, and Favorites.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -8,9 +8,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('search-input');
   const searchForm = document.getElementById('search-form');
   const searchChips = document.querySelectorAll('.search-chip');
-  const categoriesContainer = document.getElementById('categories-container');
+  const noResultsEl = document.getElementById('no-results-message');
 
   let activeCategory = null;
+
+  // Global Reset Function for Fallback button
+  window.resetSearch = function() {
+    if (searchInput) searchInput.value = '';
+    activeCategory = null;
+    const filterBtns = document.querySelectorAll('.btn-filter');
+    filterBtns.forEach(b => b.classList.remove('active'));
+    const allBtn = document.querySelector('.btn-filter[data-filter="all"]');
+    if (allBtn) allBtn.classList.add('active');
+    if (noResultsEl) noResultsEl.style.display = 'none';
+    if (typeof TOOLS !== 'undefined') {
+      renderTools(TOOLS);
+    }
+  };
 
   // Handle Filter Buttons (.btn-filter)
   const filterBtns = document.querySelectorAll('.btn-filter');
@@ -24,87 +38,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Render Category Cards (if container exists)
-  if (categoriesContainer && typeof CATEGORIES !== 'undefined') {
-    categoriesContainer.innerHTML = CATEGORIES.map(cat => `
-      <div class="category-card" data-category="${cat.id}" role="button" tabindex="0" aria-label="${cat.nameAr}">
-        <div class="category-icon" aria-hidden="true">${cat.icon}</div>
-        <div class="category-info">
-          <h3 class="category-title">${cat.nameAr}</h3>
-          <span class="category-badge">${cat.badge || 'متاح'}</span>
-        </div>
-        <div class="category-arrow" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </div>
-      </div>
-    `).join('');
-
-    // Attach click and keyboard listeners to category cards
-    const categoryCards = categoriesContainer.querySelectorAll('.category-card');
-    categoryCards.forEach(card => {
-      const handleCategorySelect = () => {
-        const catId = card.getAttribute('data-category');
-        if (activeCategory === catId) {
-          // Deselect category
-          activeCategory = null;
-          categoryCards.forEach(c => c.classList.remove('active'));
-        } else {
-          activeCategory = catId;
-          categoryCards.forEach(c => c.classList.remove('active'));
-          card.classList.add('active');
-        }
-        performSearch();
-
-        const toolsHeading = document.getElementById('featured-tools');
-        if (toolsHeading) {
-          toolsHeading.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      };
-
-      card.addEventListener('click', handleCategorySelect);
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          handleCategorySelect();
-        }
-      });
-    });
+  // URL Hash Handler (e.g. #saudi, #calculators, #arabic, #restaurant)
+  function handleUrlHash() {
+    const hash = (window.location.hash || '').replace('#', '').trim();
+    if (!hash) return;
+    const matchingBtn = document.querySelector(`.btn-filter[data-filter="${hash}"]`);
+    if (matchingBtn) {
+      matchingBtn.click();
+    }
   }
+  handleUrlHash();
+  window.addEventListener('hashchange', handleUrlHash);
 
   // Render Tool Cards
   function renderTools(toolsList) {
     if (!toolsContainer) return;
 
     if (!toolsList || toolsList.length === 0) {
-      toolsContainer.innerHTML = `
-        <div class="no-results" role="status" style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem;">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin:0 auto 1rem; color:var(--text-muted);">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            <line x1="8" y1="11" x2="14" y2="11"></line>
-          </svg>
-          <h3 style="font-size:1.25rem; margin-bottom:0.5rem; color:var(--text);">لم يتم العثور على أدوات مطابقة</h3>
-          <p style="color:var(--text-muted); margin-bottom:1.5rem;">جرّب البحث بكلمة أخرى أو إلغاء تحديد الفئة الحالية.</p>
-          <button type="button" class="btn btn-secondary" id="btn-reset-filters" style="padding:0.5rem 1.25rem;">عرض جميع الأدوات</button>
-        </div>
-      `;
-      const resetBtn = document.getElementById('btn-reset-filters');
-      if (resetBtn) {
-        resetBtn.addEventListener('click', () => {
-          activeCategory = null;
-          if (categoriesContainer) {
-            categoriesContainer.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
-          }
-          if (filterBtns) {
-            filterBtns.forEach(b => b.classList.remove('active'));
-            const allBtn = document.querySelector('.btn-filter[data-filter="all"]');
-            if (allBtn) allBtn.classList.add('active');
-          }
-          if (searchInput) searchInput.value = '';
-          renderTools(TOOLS);
-        });
+      toolsContainer.innerHTML = '';
+      if (noResultsEl) {
+        noResultsEl.style.display = 'block';
+      } else {
+        toolsContainer.innerHTML = `
+          <div class="no-results" role="status" style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin:0 auto 1rem; color:var(--text-muted);">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+            <h3 style="font-size:1.25rem; margin-bottom:0.5rem; color:var(--text);">لم يتم العثور على أدوات مطابقة</h3>
+            <p style="color:var(--text-muted); margin-bottom:1.5rem;">جرّب البحث بكلمة أخرى أو تصفح التصنيفات في الأعلى.</p>
+            <button type="button" class="btn btn-secondary" onclick="resetSearch()" style="padding:0.5rem 1.25rem;">عرض جميع الأدوات</button>
+          </div>
+        `;
       }
       return;
+    }
+
+    if (noResultsEl) {
+      noResultsEl.style.display = 'none';
     }
 
     toolsContainer.innerHTML = toolsList.map(tool => {
@@ -167,10 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
   function performSearch() {
     const query = searchInput ? searchInput.value : '';
     let results = [];
+    const pool = (typeof TOOLS !== 'undefined' && Array.isArray(TOOLS)) ? TOOLS : [];
     if (typeof SearchEngine !== 'undefined') {
-      results = SearchEngine.search(query, activeCategory);
-    } else if (typeof TOOLS !== 'undefined') {
-      results = TOOLS;
+      results = SearchEngine.search(query, pool, activeCategory);
+    } else {
+      results = pool;
     }
     renderTools(results);
   }
@@ -188,10 +161,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Popular search chips click
+  // Popular search chips click (support data-query, data-search, or text)
   searchChips.forEach(chip => {
     chip.addEventListener('click', () => {
-      const term = chip.getAttribute('data-search') || chip.getAttribute('data-query') || chip.textContent.trim();
+      const term = chip.getAttribute('data-query') || chip.getAttribute('data-search') || chip.textContent.trim();
       if (searchInput) {
         searchInput.value = term;
         performSearch();
